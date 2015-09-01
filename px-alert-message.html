@@ -98,6 +98,15 @@ Element providing solution to no problem in particular. As a simple, increments 
             }
         },
         attached: function () {
+            this.listen(this, 'animationend', '_hide');
+            var anim = document.getElementById("alert");
+            var _this = this;
+            this.$.alert.addEventListener("webkitAnimationEnd", function(event) {
+                if(event.animationName === 'fadeout') {
+                    // remove the alert after fade out
+                    _this.$.alert.classList.add('hidden');
+                }
+            }, false);
         },
         detached: function () {
         },
@@ -121,7 +130,8 @@ Element providing solution to no problem in particular. As a simple, increments 
             return action !== 'dismiss';
         },
         _dismiss: function () {
-            this.$.alert.classList.add('hidden');
+            //this.$.alert.classList.add('hidden');
+            this.$.alert.classList.add('fade-out');
         },
         _action: function () {
             if(this.action.indexOf('http') != -1) {
@@ -131,24 +141,13 @@ Element providing solution to no problem in particular. As a simple, increments 
             }
         },
         _setActionText: function (action) {
-            console.log('set text: ' + action);
-            if(action === 'dismiss' || action === '') {
-                return  '';
-            } else if (action === 'acknowledge') {
+            if (action === 'acknowledge') {
                 return 'Ok';
             } else if (action.indexOf('http') != -1) {
                 return 'Open';
             } else {
-                // future custom button actions
+                return  ''; // future custom button actions
             }
-        },
-        /**
-         * Increments the counter
-         *
-         * @method increment
-         */
-        increment: function () {
-            this.counterValue++;
         }
 
     });

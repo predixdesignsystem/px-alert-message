@@ -42,9 +42,26 @@ $alert-message-background: $gray3;
     display: none;
 }
 
+/** these should be more abstract that residing within this component */
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
 // Component
 .alert-message {
     background-color: $alert-message-background;
+    opacity: 1;
+    animation: fadein 2s;
+    &.fade-out {
+        animation: fadeout 2s;
+    }
     #icon {
         &.important {
             color: $white;

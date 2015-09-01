@@ -3314,8 +3314,38 @@ button.btn {
 .svg-canvas {
   display: none; }
 
+/** these should be more abstract that residing within this component */
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@-webkit-keyframes fadeout {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
+@keyframes fadeout {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+
 .alert-message {
-  background-color: #e4e4ea; }
+  background-color: #e4e4ea;
+  opacity: 1;
+  -webkit-animation: fadein 2s;
+          animation: fadein 2s; }
+  .alert-message.fade-out {
+    -webkit-animation: fadeout 2s;
+            animation: fadeout 2s; }
   .alert-message #icon.important {
     color: white;
     text-align: center;
