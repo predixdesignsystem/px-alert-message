@@ -2773,7 +2773,8 @@ button.btn {
       padding: 0;
       margin: 0; }
   .alert-message .action {
-    width: auto; }
+    width: auto;
+    cursor: pointer; }
 
 /*------------------------------------*    #CLEARFIX
 \*------------------------------------*/

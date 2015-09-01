@@ -23,7 +23,7 @@ Element providing solution to no problem in particular. As a simple, increments 
 <dom-module id="px-alert-message">
     <link rel="import" type="css" href="css/px-alert-message.css"/>
     <template>
-        <div class="alert-message flex flex--left flex--middle ">
+        <div id="alert" class="alert-message flex flex--left flex--middle">
             <div class="severity">
                     <div id="icon" class="icon">
                         <div class="svg-canvas">
@@ -42,10 +42,10 @@ Element providing solution to no problem in particular. As a simple, increments 
             <template is="dom-if" if="{{ action }}">
                 <div class="action">
                     <template is="dom-if" if="{{ _showDismiss }}">
-                        <a class="dismiss"><i class="fa fa-times"></i></a>
+                        <a class="dismiss" on-click="_dismiss"><i class="fa fa-times"></i></a>
                     </template>
                     <template is="dom-if" if="{{ _showButton }}">
-                        <a class="btn">{{ action }}</a>
+                        <a class="btn" on-click="_action">{{ actionText }}</a>
                     </template>
                 </div>
             </template>
@@ -78,9 +78,17 @@ Element providing solution to no problem in particular. As a simple, increments 
                 type: String,
                 reflect: true
             },
+            autoDismiss: {
+                type: String,
+                reflect: true
+            },
             action: {
                 type: String,
                 reflect: true
+            },
+            actionText: {
+                type: String,
+                computed: '_setActionText(action)'
             },
             _showDismiss: {
                 computed: '_dismissDisplay(action)'
@@ -89,8 +97,18 @@ Element providing solution to no problem in particular. As a simple, increments 
                 computed: '_buttonDisplay(action)'
             }
         },
+        attached: function () {
+        },
+        detached: function () {
+        },
         ready: function () {
+            var _this = this;
             this._setAlertClass();
+            if(this.autoDismiss) {
+                setTimeout( function () {
+                    _this._dismiss();
+                }, this.autoDismiss);
+            }
         },
         _setAlertClass: function () {
             this.$.icon.classList.remove('important', 'warning', 'error', 'information');
@@ -103,17 +121,27 @@ Element providing solution to no problem in particular. As a simple, increments 
             return action !== 'dismiss';
         },
         _dismiss: function () {
-
+            this.$.alert.classList.add('hidden');
         },
-        /**
-         * Handles click on the element defined in 'on-click' on the template
-         *
-         * @method handleClick
-         */
-        handleClick: function(event, detail, sender) {
-            this.increment();
+        _action: function () {
+            if(this.action.indexOf('http') != -1) {
+                window.open(this.action);
+            } else if (this.action === 'dismiss' || this.action === 'acknowledge') {
+                this.$.alert.classList.add('hidden');
+            }
         },
-
+        _setActionText: function (action) {
+            console.log('set text: ' + action);
+            if(action === 'dismiss' || action === '') {
+                return  '';
+            } else if (action === 'acknowledge') {
+                return 'Ok';
+            } else if (action.indexOf('http') != -1) {
+                return 'Open';
+            } else {
+                // future custom button actions
+            }
+        },
         /**
          * Increments the counter
          *
