@@ -1,0 +1,128 @@
+/*
+ * Copyright (c) 2014 GE Global Research. All rights reserved.
+ *
+ * The copyright to the computer software herein is the property of
+ * GE Global Research. The software may be used and/or copied only
+ * with the written permission of GE Global Research or in accordance
+ * with the terms and conditions stipulated in the agreement/contract
+ * under which the software has been supplied.
+ */
+
+//
+// Sass for the Predix notion of the px-alert-message component
+//
+// @author
+//
+
+/*
+THIS FILE SHOULD CONTAIN ONLY RULES SPECIFIC TO PREDIX BRANDING
+common/abstract rules go in px-alert-message-sketch.scss, not in this file.
+*/
+
+// Settings
+@import "px-colors-design/_settings.colors.scss";
+
+@import 'px-alert-message-sketch.scss';
+
+$alert-message-background: $gray3;
+
+.svg-triangle{
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
+
+.svg-triangle polygon {
+  fill: $alert-red;
+  stroke: $white;
+  stroke-width: 1;
+}
+
+.svg-canvas {
+    display: none;
+}
+
+// Component
+.alert-message {
+    background-color: $alert-message-background;
+    #icon {
+        &.important {
+            color: $white;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 30px;
+            font-weight: bold;
+            span {
+
+            }
+            span:before {
+                content: '1';
+                position: absolute;
+                top: 3px;
+                left: 10px;
+            }
+            .svg-canvas {
+                display: block !important;
+                position: absolute;
+                top: 0px;
+            }
+        }
+        &.warning {
+            height: 25px;
+            width: 25px;
+            margin-left: 4px;
+            background-color: $alert-orange;
+            border: 1px solid $white;
+            color: $white;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 30px;
+            font-weight: bold;
+            transform: rotate(45deg);
+            span {
+                display: block;
+                margin-left: 2px;
+                line-height: 25px;
+                transform: rotate(-45deg);
+            }
+            span:before {
+                content: '2';
+            }
+        }
+        &.error {
+            background-color: $alert-yellow;
+            border: 1px solid $white;
+            color: $white;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 30px;
+            font-weight: bold;
+            span:before {
+                content: '3';
+            }
+        }
+        &.information {
+            background-color: $alert-blue;
+            border: 1px solid $white;
+            border-radius: 40px;
+            color: $white;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 30px;
+            font-weight: bold;
+            span:before {
+                content: '4';
+            }
+        }
+    }
+    .message {
+        span:first-child {
+            font-weight: bold;
+        }
+    }
+    .action {
+        .dismiss {
+            color: $gray6;
+        }
+    }
+}

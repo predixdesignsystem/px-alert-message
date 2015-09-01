@@ -1,0 +1,27 @@
+{
+  "name": "px-alert-message",
+  "version": "0.0.1",
+  "main": [
+    "px-alert-message.html"
+  ],
+  "ignore": [
+    ".*",
+    "npm-debug.log",
+    "Gruntfile.js",
+    "sass",
+    "bower_components",
+    "node_modules",
+    "test"
+  ],
+  "dependencies": {
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
+    "polymer": "~1.0.0",
+    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#~v1.0.0",
+    "px-meta-buttons-design": "https://github.build.ge.com/PXd/px-meta-buttons-design.git#~0.4.0",
+    "px-starter-kit-design": "https://github.build.ge.com/PXd/px-starter-kit-design.git#~0.4.0",
+    "px-iconography-design": "https://github.build.ge.com/PXd/px-iconography-design.git"
+  }
+}

@@ -1,0 +1,127 @@
+
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+    See https://github.sw.ge.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+
+<!--
+Element providing solution to no problem in particular. As a simple, increments a counter when clicked.
+
+##### Usage
+
+    <px-alert-message counter-value="1">Hi</px-alert-message>
+
+@element px-alert-message
+@blurb Element providing solution to no problem in particular.
+@homepage index.html
+@demo demo.html
+-->
+<dom-module id="px-alert-message">
+    <link rel="import" type="css" href="css/px-alert-message.css"/>
+    <template>
+        <div class="alert-message flex flex--left flex--middle ">
+            <div class="severity">
+                    <div id="icon" class="icon">
+                        <div class="svg-canvas">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-triangle">
+                              <polygon points="0,27 15,0 30,27"/>
+                            </svg>
+                        </div>
+                        <span class="number"></span>
+                </div>
+            </div>
+            <div class="message">
+                <p>
+                    <span>{{ title }}</span> <span>{{ message }}</span>
+                </p>
+            </div>
+            <template is="dom-if" if="{{ action }}">
+                <div class="action">
+                    <template is="dom-if" if="{{ _showDismiss }}">
+                        <a class="dismiss"><i class="fa fa-times"></i></a>
+                    </template>
+                    <template is="dom-if" if="{{ _showButton }}">
+                        <a class="btn">{{ action }}</a>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+
+        is: 'px-alert-message',
+
+        /**
+         * Properties block, expose attribute values to the DOM via 'reflect'
+         *
+         * @property properties
+         * @type Object
+         */
+        properties: {
+            type: {
+                type: String,
+                reflect: true,
+                value: 'info'
+            },
+            title: {
+                type: String,
+                reflect: true
+            },
+            message: {
+                type: String,
+                reflect: true
+            },
+            action: {
+                type: String,
+                reflect: true
+            },
+            _showDismiss: {
+                computed: '_dismissDisplay(action)'
+            },
+            _showButton: {
+                computed: '_buttonDisplay(action)'
+            }
+        },
+        ready: function () {
+            this._setAlertClass();
+        },
+        _setAlertClass: function () {
+            this.$.icon.classList.remove('important', 'warning', 'error', 'information');
+            this.$.icon.classList.add(this.type);
+        },
+        _dismissDisplay: function (action) {
+            return action === 'dismiss';
+        },
+        _buttonDisplay: function (action) {
+            return action !== 'dismiss';
+        },
+        _dismiss: function () {
+
+        },
+        /**
+         * Handles click on the element defined in 'on-click' on the template
+         *
+         * @method handleClick
+         */
+        handleClick: function(event, detail, sender) {
+            this.increment();
+        },
+
+        /**
+         * Increments the counter
+         *
+         * @method increment
+         */
+        increment: function () {
+            this.counterValue++;
+        }
+
+    });
+</script>
