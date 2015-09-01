@@ -101,14 +101,17 @@ Element providing solution to no problem in particular. As a simple, increments 
             this.listen(this, 'animationend', '_hide');
             var anim = document.getElementById("alert");
             var _this = this;
-            this.$.alert.addEventListener("webkitAnimationEnd", function(event) {
-                if(event.animationName === 'fadeout') {
-                    // remove the alert after fade out
-                    _this.$.alert.classList.add('hidden');
-                }
-            }, false);
+
+            this.$.alert.addEventListener('animationend', this._hide, true);
+            this.$.alert.addEventListener('mozAnimationEnd', this._hide, true);
+            this.$.alert.addEventListener('webkitAnimationEnd', this._hide, true);
+            this.$.alert.addEventListener('msAnimationEnd', this._hide, true);
         },
         detached: function () {
+            this.$.alert.removeEventListener('animationend', this._hide, true);
+            this.$.alert.removeEventListener('mozAnimationEnd', this._hide, true);
+            this.$.alert.removeEventListener('webkitAnimationEnd', this._hide, true);
+            this.$.alert.removeEventListener('msAnimationEnd', this._hide, true);
         },
         ready: function () {
             var _this = this;
@@ -132,6 +135,11 @@ Element providing solution to no problem in particular. As a simple, increments 
         _dismiss: function () {
             //this.$.alert.classList.add('hidden');
             this.$.alert.classList.add('fade-out');
+        },
+        _hide: function (event) {
+            if(event.animationName === 'fadeout') {
+                event.target.classList.add('hidden');
+            }
         },
         _action: function () {
             if(this.action.indexOf('http') != -1) {
