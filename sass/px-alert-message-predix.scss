@@ -68,9 +68,9 @@ $alert-message-background: $gray3;
             }
         }
         &.warning {
-            height: 25px;
-            width: 25px;
-            margin-left: 4px;
+            height: 24px !important;
+            width: 24px !important;
+            margin-left: 2px;
             background-color: $alert-orange;
             border: 1px solid $white;
             color: $white;
@@ -81,7 +81,9 @@ $alert-message-background: $gray3;
             transform: rotate(45deg);
             span {
                 display: block;
-                margin-left: 2px;
+                position: relative;
+                top: 0px;
+                left: 2px;
                 line-height: 25px;
                 transform: rotate(-45deg);
             }
