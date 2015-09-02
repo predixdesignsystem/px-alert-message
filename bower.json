@@ -16,7 +16,8 @@
   "dependencies": {
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
     "polymer": "~1.0.0",
-    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.0"
+    "px-theme": "https://github.build.ge.com/PXc/px-theme.git#~0.2.0",
+    "web-component-tester": "~3.3.17"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~v1.0.0",
