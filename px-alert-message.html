@@ -30,23 +30,25 @@ Element providing solution to no problem in particular. As a simple, increments 
     <link rel="import" type="css" href="css/px-alert-message.css"/>
     <template>
         <div id="alert" class="alert-message flex flex--left flex--middle">
-            <div class="severity">
-                <div id="icon" class="icon">
-                    <template is="dom-if" if="{{ _isNotCustom }}">
-                        <div class="svg-canvas">
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-triangle">
-                              <polygon points="0,27 15,0 30,27"/>
-                            </svg>
-                        </div>
-                        <span class="number"></span>
-                    </template>
-                    <template is="dom-if" if="{{ _isCustom }}">
-                        <content></content>
-                    </template>
+            <template is="dom-if" if="{{ _isNotMore }}">
+                <div class="severity">
+                    <div id="icon" class$="{{ type }}">
+                        <template is="dom-if" if="{{ _isNotCustom }}">
+                            <div class="svg-canvas">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-triangle">
+                                  <polygon points="0,27 15,0 30,27"/>
+                                </svg>
+                            </div>
+                            <span class="number"></span>
+                        </template>
+                        <template is="dom-if" if="{{ _isCustom }}">
+                            <content></content>
+                        </template>
+                    </div>
                 </div>
-            </div>
+            </template>
             <div class="message">
-                <p>
+                <p class$="{{ type }}">
                     <span>{{ title }}</span> <span>{{ message }}</span>
                 </p>
             </div>
@@ -120,6 +122,9 @@ Element providing solution to no problem in particular. As a simple, increments 
             },
             _isNotCustom: {
                 computed: '_isNotCustomType(type)'
+            },
+            _isNotMore: {
+                computed: '_isNotMoreType(type)'
             }
         },
         attached: function () {
@@ -139,16 +144,11 @@ Element providing solution to no problem in particular. As a simple, increments 
         },
         ready: function () {
             var _this = this;
-            _this._setAlertClass();
             if(this.autoDismiss) {
                 setTimeout( function () {
                     _this._dismiss();
                 }, this.autoDismiss);
             }
-        },
-        _setAlertClass: function () {
-            this.$.icon.classList.remove('important', 'warning', 'error', 'information', 'custom');
-            this.$.icon.classList.add(this.type);
         },
         _dismissDisplay: function (action) {
             return action === 'dismiss';
@@ -161,6 +161,9 @@ Element providing solution to no problem in particular. As a simple, increments 
         },
         _isNotCustomType: function (type) {
             return (type !== 'custom');
+        },
+        _isNotMoreType: function (type) {
+            return (type !== 'more');
         },
         _dismiss: function () {
             //this.$.alert.classList.add('hidden');

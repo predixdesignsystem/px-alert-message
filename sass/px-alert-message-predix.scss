@@ -155,6 +155,11 @@ $alert-message-background: $gray3;
         }
     }
     .message {
+        p.more {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-left: 20px;
+        }
         span:first-child {
             font-weight: bold;
         }

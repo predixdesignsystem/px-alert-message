@@ -3424,6 +3424,10 @@ button.btn {
     font-weight: bold; }
     .alert-message #icon.information span:before {
       content: '4'; }
+  .alert-message .message p.more {
+    text-align: center;
+    font-size: 1.4rem;
+    margin-left: 20px; }
   .alert-message .message span:first-child {
     font-weight: bold; }
   .alert-message .action .dismiss {

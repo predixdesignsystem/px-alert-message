@@ -63,7 +63,7 @@
                 id="testAlert"
                 type="information"
                 title="Heads up!"
-                message="This definitely needs our attention."
+                message="This definitely needs your attention."
                 action="https://www.gesoftware.com/predix"
                 auto-dismiss="8000">
             </px-alert-message>
@@ -74,10 +74,24 @@
                 message="This definitely needs our attention. Lorem Ipsum dolor sit amet consectetur"
                 action="https://www.gesoftware.com/predix">
             </px-alert-message>
+
+            <px-alert-message
+                type="custom"
+                title="Custom Alert"
+                message="The icon to the left is defined by placing content withing the inner/outer px-alert-message tags."
+                action="https://www.gesoftware.com/predix">
+                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+            </px-alert-message>
+
+            <px-alert-message
+                type="more"
+                message="15"
+                action="dismiss">
+            </px-alert-message>
         </div>
 
         <script>
-            suite('<px-tooltip>', function() {
+            suite('<px-alert-message>', function() {
                 var testAlert = document.getElementById('testAlert');
 
                 test('reflects the "type" property', function() {
