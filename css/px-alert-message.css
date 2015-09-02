@@ -3353,14 +3353,14 @@ button.btn {
 .alert-message {
   background-color: #e4e4ea;
   opacity: 1;
-  -webkit-animation: fadein 2s;
-          animation: fadein 2s;
+  -webkit-animation: fadein 0.5s;
+          animation: fadein 0.5s;
   max-height: 100px;
   overflow: hidden;
   transition: max-height 1; }
   .alert-message.fade-out {
-    -webkit-animation: fadeout 1s;
-            animation: fadeout 1s;
+    -webkit-animation: fadeout 0.5s;
+            animation: fadeout 0.5s;
     max-height: 0px; }
   .alert-message #icon.custom ::content img {
     width: 100%;

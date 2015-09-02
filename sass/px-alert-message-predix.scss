@@ -68,12 +68,12 @@ $alert-message-background: $gray3;
 .alert-message {
     background-color: $alert-message-background;
     opacity: 1;
-    animation: fadein 2s;
+    animation: fadein .5s;
     max-height: 100px;
     overflow: hidden;
     transition: max-height 1;
     &.fade-out {
-        animation: fadeout 1s;
+        animation: fadeout .5s;
         max-height: 0px;
     }
     #icon {
