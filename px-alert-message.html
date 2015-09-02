@@ -84,25 +84,41 @@ Element providing solution to no problem in particular. As a simple, increments 
              * - 'warning'
              * - 'error'
              * - 'information'
-             * - 'custom'
+             * - 'custom' - allows a developer to speficiy HTML incluing images in place of the icon.
+             * - 'more' - allows for a message that shows that there are more messages.
              */
             type: {
                 type: String,
                 reflect: true,
                 value: 'information'
             },
+            /**
+             * The title that is displayed in the message area of the alert box.
+             */
             title: {
                 type: String,
                 reflect: true
             },
+            /**
+             * The message body that is displayed in the message area of the alert box.
+             */
             message: {
                 type: String,
                 reflect: true
             },
+            /**
+             * A delay in MS before a message is dismissed automatically.
+             */
             autoDismiss: {
-                type: String,
+                type: Number,
                 reflect: true
             },
+            /**
+             * User interaction on the right hand side of the message box.
+             * - 'dismiss' - displays the (x) control to dismiss
+             * - 'acknowledge' - displays the (OK) button to dismiss
+             * - 'URL' - string containing http url to be opened, displays the (Open) button.
+             */
             action: {
                 type: String,
                 reflect: true
