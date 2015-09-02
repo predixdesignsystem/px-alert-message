@@ -33,28 +33,24 @@
             Also see the <a href="../index.html">documentation</a> and the <a href="../demo.html">UI demo</a>.
         </p>
 
-        <p>
-            Click on the counter to make it increment:
-        </p>
-
         <div class="alert-message-container">
             <!-- instance 1, "predix" theme -->
             <px-alert-message
                 type="error"
-                title="Well done!"
+                message-title="Well done!"
                 message="You succesfully read this.">
             </px-alert-message>
 
             <px-alert-message
                 type="warning"
-                title="Oh snap!"
+                message-title="Oh snap!"
                 message="Change a few things up."
                 action="dismiss">
             </px-alert-message>
 
             <px-alert-message
                 type="important"
-                title="Warning!"
+                message-title="Warning!"
                 message="Best check yourself."
                 action="acknowledge">
             </px-alert-message>
@@ -62,7 +58,7 @@
             <px-alert-message
                 id="testAlert"
                 type="information"
-                title="Heads up!"
+                message-title="Heads up!"
                 message="This definitely needs your attention."
                 action="https://www.gesoftware.com/predix"
                 auto-dismiss="8000">
@@ -70,14 +66,14 @@
 
             <px-alert-message
                 type="information"
-                title="Heads up!"
+                message-title="Heads up!"
                 message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
                 action="https://www.gesoftware.com/predix">
             </px-alert-message>
 
             <px-alert-message
                 type="custom"
-                title="Custom Alert"
+                message-title="Custom Alert"
                 message="The icon to the left is defined by placing content withing the inner/outer px-alert-message tags."
                 action="https://www.gesoftware.com/predix">
                 <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
@@ -99,7 +95,7 @@
                 });
 
                 test('reflects the "title" property', function() {
-                    assert.equal(testAlert.title, "Heads up!");
+                    assert.equal(testAlert.messageTitle, "Heads up!");
                 });
 
                 test('reflects the "message" property', function() {

@@ -15,7 +15,7 @@ Element providing solution to no problem in particular. As a simple, increments 
 
     <px-alert-message
         type="information"
-        title="Heads up!"
+        message-title="Heads up!"
         message="This definitely needs our attention."
         action="https://www.gesoftware.com/predix"
         auto-dismiss="8000">
@@ -49,7 +49,7 @@ Element providing solution to no problem in particular. As a simple, increments 
             </template>
             <div class="message">
                 <p class$="{{ type }}">
-                    <span>{{ title }}</span> <span>{{ message }}</span>
+                    <span>{{ messageTitle }}</span> <span>{{ message }}</span>
                 </p>
             </div>
             <template is="dom-if" if="{{ action }}">
@@ -95,7 +95,7 @@ Element providing solution to no problem in particular. As a simple, increments 
             /**
              * The title that is displayed in the message area of the alert box.
              */
-            title: {
+            messageTitle: {
                 type: String,
                 reflect: true
             },
