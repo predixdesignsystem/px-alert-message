@@ -167,6 +167,7 @@ $alert-message-background: $gray3;
     .action {
         .dismiss {
             color: $gray6;
+            outline: none;
         }
     }
 }

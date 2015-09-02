@@ -3431,4 +3431,5 @@ button.btn {
   .alert-message .message span:first-child {
     font-weight: bold; }
   .alert-message .action .dismiss {
-    color: #9999a3; }
+    color: #9999a3;
+    outline: none; }
