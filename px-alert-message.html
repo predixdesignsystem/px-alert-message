@@ -13,7 +13,13 @@ Element providing solution to no problem in particular. As a simple, increments 
 
 ##### Usage
 
-    <px-alert-message counter-value="1">Hi</px-alert-message>
+    <px-alert-message
+        type="information"
+        title="Heads up!"
+        message="This definitely needs our attention."
+        action="https://www.gesoftware.com/predix"
+        auto-dismiss="8000">
+    </px-alert-message>
 
 @element px-alert-message
 @blurb Element providing solution to no problem in particular.
@@ -65,10 +71,17 @@ Element providing solution to no problem in particular. As a simple, increments 
          * @type Object
          */
         properties: {
+            /**
+             * Establishes the alert level
+             * - 'important'
+             * - 'warning'
+             * - 'error'
+             * - 'information'
+             */
             type: {
                 type: String,
                 reflect: true,
-                value: 'info'
+                value: 'information'
             },
             title: {
                 type: String,
@@ -101,7 +114,6 @@ Element providing solution to no problem in particular. As a simple, increments 
             this.listen(this, 'animationend', '_hide');
             var anim = document.getElementById("alert");
             var _this = this;
-
             this.$.alert.addEventListener('animationend', this._hide, true);
             this.$.alert.addEventListener('mozAnimationEnd', this._hide, true);
             this.$.alert.addEventListener('webkitAnimationEnd', this._hide, true);
@@ -145,7 +157,7 @@ Element providing solution to no problem in particular. As a simple, increments 
             if(this.action.indexOf('http') != -1) {
                 window.open(this.action);
             } else if (this.action === 'dismiss' || this.action === 'acknowledge') {
-                this.$.alert.classList.add('hidden');
+                this._dismiss();
             }
         },
         _setActionText: function (action) {

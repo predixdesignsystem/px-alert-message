@@ -42,7 +42,7 @@ $alert-message-background: $gray3;
     display: none;
 }
 
-/** these should be more abstract that residing within this component */
+/** these should be more abstract than residing within this component */
 
 @keyframes fadein {
     from { opacity: 0; }
@@ -50,8 +50,18 @@ $alert-message-background: $gray3;
 }
 
 @keyframes fadeout {
-    from { opacity: 1; }
-    to   { opacity: 0; }
+    from {
+        opacity: 1;
+        max-height: 100px;
+        min-height: 0px;
+    }
+    to   {
+        opacity: 0;
+        max-height: 0px;
+        min-height: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
 }
 
 // Component
@@ -59,8 +69,12 @@ $alert-message-background: $gray3;
     background-color: $alert-message-background;
     opacity: 1;
     animation: fadein 2s;
+    max-height: 100px;
+    overflow: hidden;
+    transition: max-height 1;
     &.fade-out {
-        animation: fadeout 2s;
+        animation: fadeout 1s;
+        max-height: 0px;
     }
     #icon {
         &.important {
