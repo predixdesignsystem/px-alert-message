@@ -17,8 +17,6 @@ $ bower install
 $ grunt sass
 ```
 
-### API and examples
-
 From the component's directory
 
 ```
@@ -71,23 +69,6 @@ watch: {
     }
 }
 ```
-
-**We hope `grunt devmode` puts your development into *#beastmode*.**
-
-<img src="http://imgc.allpostersimages.com/images/P-488-488-90/71/7108/JJUV100Z/posters/teen-wolf-beast-mode.jpg" alt="Slam Dunks for Days" width=
-"250" />
-
-### Options
-
-Does this component have runtime configuration options?  If so, they should be able to be passed as attributes on the element with examples shown below.
-
-### Function calls
-
-What is the public API of this component?
-
-### Extending styles
-
-Documented CSS extension points?
 
 ### Extending behavior
 
