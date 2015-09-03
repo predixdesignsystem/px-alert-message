@@ -3384,6 +3384,8 @@ button.btn {
     position: absolute;
     height: 24px !important;
     width: 24px !important;
+    left: 2px;
+    margin-right: 5px;
     background-color: #dd6b1f;
     border: 1px solid white;
     color: white;

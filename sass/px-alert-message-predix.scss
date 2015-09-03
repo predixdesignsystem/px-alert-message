@@ -108,6 +108,8 @@ $alert-message-background: $gray3;
             position: absolute;
             height: 24px !important;
             width: 24px !important;
+            left: 2px;
+            margin-right: 5px;
             background-color: $alert-orange;
             border: 1px solid $white;
             color: $white;
