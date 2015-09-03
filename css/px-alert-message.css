@@ -3358,6 +3358,8 @@ button.btn {
   max-height: 100px;
   overflow: hidden;
   transition: max-height 1; }
+  .alert-message button, .alert-message a {
+    outline: none; }
   .alert-message.fade-out {
     -webkit-animation: fadeout 0.5s;
             animation: fadeout 0.5s;

@@ -72,6 +72,9 @@ $alert-message-background: $gray3;
     max-height: 100px;
     overflow: hidden;
     transition: max-height 1;
+    button, a {
+        outline: none;
+    }
     &.fade-out {
         animation: fadeout .5s;
         max-height: 0px;
