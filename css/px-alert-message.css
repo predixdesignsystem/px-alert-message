@@ -3381,9 +3381,9 @@ button.btn {
       position: absolute;
       top: 0px; }
   .alert-message #icon.warning {
+    position: absolute;
     height: 24px !important;
     width: 24px !important;
-    margin-left: 2px;
     background-color: #dd6b1f;
     border: 1px solid white;
     color: white;
@@ -3396,9 +3396,8 @@ button.btn {
     .alert-message #icon.warning span {
       display: block;
       position: relative;
-      top: 0px;
-      left: 2px;
-      line-height: 25px;
+      padding-left: 2px;
+      line-height: 24px;
       -webkit-transform: rotate(-45deg);
               transform: rotate(-45deg); }
     .alert-message #icon.warning span:before {

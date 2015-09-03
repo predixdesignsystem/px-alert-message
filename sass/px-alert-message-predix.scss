@@ -105,9 +105,9 @@ $alert-message-background: $gray3;
             }
         }
         &.warning {
+            position: absolute;
             height: 24px !important;
             width: 24px !important;
-            margin-left: 2px;
             background-color: $alert-orange;
             border: 1px solid $white;
             color: $white;
@@ -119,9 +119,8 @@ $alert-message-background: $gray3;
             span {
                 display: block;
                 position: relative;
-                top: 0px;
-                left: 2px;
-                line-height: 25px;
+                padding-left: 2px;
+                line-height: 24px;
                 transform: rotate(-45deg);
             }
             span:before {
