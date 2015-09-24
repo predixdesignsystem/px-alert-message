@@ -1,0 +1,211 @@
+
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
+    See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
+-->
+<link rel="import" href="../polymer/polymer.html"/>
+
+
+<!--
+Element providing message notifications.
+
+##### Usage
+
+    <px-alert-message
+        type="information"
+        message-title="Heads up!"
+        message="This definitely needs our attention."
+        action="https://www.gesoftware.com/predix"
+        auto-dismiss="8000">
+    </px-alert-message>
+
+@element px-alert-message
+@blurb Element providing solution to no problem in particular.
+@homepage index.html
+@demo demo.html
+-->
+<dom-module id="px-alert-message">
+    <link rel="import" type="css" href="css/px-alert-message.css"/>
+    <template>
+        <div id="alert" class="alert-message flex flex--left flex--middle">
+            <template is="dom-if" if="{{ _isNotMore }}">
+                <div class="severity">
+                    <div id="icon" class$="{{ type }}">
+                        <template is="dom-if" if="{{ _isNotCustom }}">
+                            <div class="svg-canvas">
+                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-triangle">
+                                  <polygon points="0,27 15,0 30,27"/>
+                                </svg>
+                            </div>
+                            <span class="number"></span>
+                        </template>
+                        <template is="dom-if" if="{{ _isCustom }}">
+                            <content></content>
+                        </template>
+                    </div>
+                </div>
+            </template>
+            <div class="message">
+                <p class$="{{ type }}">
+                    <span>{{ messageTitle }}</span> <span>{{ message }}</span>
+                </p>
+            </div>
+            <template is="dom-if" if="{{ action }}">
+                <div class="action">
+                    <template is="dom-if" if="{{ _showDismiss }}">
+                        <a class="dismiss" on-click="_dismiss"><i class="fa fa-times"></i></a>
+                    </template>
+                    <template is="dom-if" if="{{ _showButton }}">
+                        <a class="btn" on-click="_action">{{ actionText }}</a>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+    Polymer({
+
+        is: 'px-alert-message',
+
+        /**
+         * Properties block, expose attribute values to the DOM via 'reflect'
+         *
+         * @property properties
+         * @type Object
+         */
+        properties: {
+            /**
+             * Establishes the alert level
+             * - 'important'
+             * - 'warning'
+             * - 'error'
+             * - 'information'
+             * - 'custom' - allows a developer to specify HTML incluing images in place of the icon.
+             * - 'more' - allows for a message that shows that there are more messages.
+             */
+            type: {
+                type: String,
+                reflect: true,
+                value: 'information'
+            },
+            /**
+             * The title that is displayed in the message area of the alert box.
+             */
+            messageTitle: {
+                type: String,
+                reflect: true
+            },
+            /**
+             * The message body that is displayed in the message area of the alert box.
+             */
+            message: {
+                type: String,
+                reflect: true
+            },
+            /**
+             * A delay in MS before a message is dismissed automatically.
+             */
+            autoDismiss: {
+                type: Number,
+                reflect: true
+            },
+            /**
+             * User interaction on the right hand side of the message box.
+             * - 'dismiss' - displays the (x) control to dismiss
+             * - 'acknowledge' - displays the (OK) button to dismiss
+             * - 'URL' - string containing http url to be opened, displays the (Open) button.
+             */
+            action: {
+                type: String,
+                reflect: true
+            },
+            actionText: {
+                type: String,
+                computed: '_setActionText(action)'
+            },
+            _showDismiss: {
+                computed: '_dismissDisplay(action)'
+            },
+            _showButton: {
+                computed: '_buttonDisplay(action)'
+            },
+            _isCustom: {
+                computed: '_isCustomType(type)'
+            },
+            _isNotCustom: {
+                computed: '_isNotCustomType(type)'
+            },
+            _isNotMore: {
+                computed: '_isNotMoreType(type)'
+            }
+        },
+        attached: function () {
+            this.listen(this, 'animationend', '_hide');
+            var anim = document.getElementById("alert");
+            var _this = this;
+            this.$.alert.addEventListener('animationend', this._hide, true);
+            this.$.alert.addEventListener('mozAnimationEnd', this._hide, true);
+            this.$.alert.addEventListener('webkitAnimationEnd', this._hide, true);
+            this.$.alert.addEventListener('msAnimationEnd', this._hide, true);
+        },
+        detached: function () {
+            this.$.alert.removeEventListener('animationend', this._hide, true);
+            this.$.alert.removeEventListener('mozAnimationEnd', this._hide, true);
+            this.$.alert.removeEventListener('webkitAnimationEnd', this._hide, true);
+            this.$.alert.removeEventListener('msAnimationEnd', this._hide, true);
+        },
+        ready: function () {
+            var _this = this;
+            if(this.autoDismiss) {
+                setTimeout( function () {
+                    _this._dismiss();
+                }, this.autoDismiss);
+            }
+        },
+        _dismissDisplay: function (action) {
+            return action === 'dismiss';
+        },
+        _buttonDisplay: function (action) {
+            return action !== 'dismiss';
+        },
+        _isCustomType: function (type) {
+            return (type === 'custom');
+        },
+        _isNotCustomType: function (type) {
+            return (type !== 'custom');
+        },
+        _isNotMoreType: function (type) {
+            return (type !== 'more');
+        },
+        _dismiss: function () {
+            //this.$.alert.classList.add('hidden');
+            this.$.alert.classList.add('fade-out');
+        },
+        _hide: function (event) {
+            if(event.animationName === 'fadeout') {
+                event.target.classList.add('hidden');
+            }
+        },
+        _action: function () {
+            if(this.action.indexOf('http') != -1) {
+                window.open(this.action);
+            } else if (this.action === 'dismiss' || this.action === 'acknowledge') {
+                this._dismiss();
+            }
+        },
+        _setActionText: function (action) {
+            if (action === 'acknowledge') {
+                return 'OK';
+            } else if (action.indexOf('http') != -1) {
+                return 'Open';
+            } else {
+                return  ''; // future custom button actions
+            }
+        }
+
+    });
+</script>

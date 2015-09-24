@@ -1,0 +1,121 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>px-alert-message Demo</title>
+        <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+        <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+        <script src="../bower_components/web-component-tester/browser.js"></script>
+        <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+        <link rel="import" href="../px-alert-message.html"/>
+        <style media="screen">
+            .alert-message-container {
+                position: fixed;
+                top: 15px;
+                right: 15px;
+                z-index: 1020;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <h3>Demo</h3>
+
+        <p>
+            Although related, examples are /not/ the same as the test fixtures.
+            Tests are tests, examples are examples.
+        </p>
+
+        <p>
+            Also see the <a href="../index.html">documentation</a> and the <a href="../demo.html">UI demo</a>.
+        </p>
+
+        <div class="alert-message-container">
+            <!-- instance 1, "predix" theme -->
+            <px-alert-message
+                type="error"
+                message-title="Well done!"
+                message="You successfully read this.">
+            </px-alert-message>
+
+            <px-alert-message
+                type="warning"
+                message-title="Oh snap!"
+                message="Change a few things up."
+                action="dismiss">
+            </px-alert-message>
+
+            <px-alert-message
+                type="important"
+                message-title="Warning!"
+                message="Best check yourself."
+                action="acknowledge">
+            </px-alert-message>
+
+            <px-alert-message
+                id="testAlert"
+                type="information"
+                message-title="Heads up!"
+                message="This definitely needs your attention."
+                action="https://www.gesoftware.com/predix"
+                auto-dismiss="8000">
+            </px-alert-message>
+
+            <px-alert-message
+                type="information"
+                message-title="Heads up!"
+                message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
+                action="https://www.gesoftware.com/predix">
+            </px-alert-message>
+
+            <px-alert-message
+                type="custom"
+                message-title="Custom Alert"
+                message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags."
+                action="https://www.gesoftware.com/predix">
+                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+            </px-alert-message>
+
+            <px-alert-message
+                type="more"
+                message="15"
+                action="dismiss">
+            </px-alert-message>
+        </div>
+
+        <script>
+            suite('<px-alert-message>', function() {
+                var testAlert = document.getElementById('testAlert');
+
+                test('reflects the "type" property', function() {
+                    assert.equal(testAlert.type, "information");
+                });
+
+                test('reflects the "title" property', function() {
+                    assert.equal(testAlert.messageTitle, "Heads up!");
+                });
+
+                test('reflects the "message" property', function() {
+                    assert.equal(testAlert.message, "This definitely needs your attention.");
+                });
+
+                test('reflects the "action" property', function() {
+                    assert.equal(testAlert.action, "https://www.gesoftware.com/predix");
+                });
+
+                test('reflects the "auto-dismiss" property and its a number', function() {
+                    assert.equal(testAlert.autoDismiss, 8000);
+                });
+
+                test('alert is not hidden', function() {
+                    var wrapper = document.querySelector('#alert');
+                    expect(wrapper.classList.contains('hidden')).to.equal(false);
+                });
+
+            });
+        </script>
+    </body>
+</html>
