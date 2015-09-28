@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~v1.0.0",
-    "px-meta-buttons-design": "https://github.com/PredixDev/px-meta-buttons-design.git#~0.4.0",
+    "px-meta-buttons-design": "https://github.com/PredixDev/px-meta-buttons-design.git#~0.5.1",
     "px-starter-kit-design": "https://github.com/PredixDev/px-starter-kit-design.git#~0.4.0"
   }
 }
