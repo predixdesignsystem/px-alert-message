@@ -123,6 +123,10 @@ Element providing message notifications.
                 type: String,
                 reflect: true
             },
+            timeouts: {
+                type: Array,
+                value: function (){ return [];}
+            },
             actionText: {
                 type: String,
                 computed: '_setActionText(action)'
@@ -145,12 +149,13 @@ Element providing message notifications.
         },
         attached: function () {
             this.listen(this, 'animationend', '_hide');
-            var anim = document.getElementById("alert");
-            var _this = this;
             this.$.alert.addEventListener('animationend', this._hide, true);
             this.$.alert.addEventListener('mozAnimationEnd', this._hide, true);
             this.$.alert.addEventListener('webkitAnimationEnd', this._hide, true);
             this.$.alert.addEventListener('msAnimationEnd', this._hide, true);
+            if(this.autoDismiss && this.autoDismiss > 0)  {
+                this.setAutoDismiss(this.autoDismiss);
+            }
         },
         detached: function () {
             this.$.alert.removeEventListener('animationend', this._hide, true);
@@ -158,12 +163,21 @@ Element providing message notifications.
             this.$.alert.removeEventListener('webkitAnimationEnd', this._hide, true);
             this.$.alert.removeEventListener('msAnimationEnd', this._hide, true);
         },
-        ready: function () {
+        setAutoDismiss: function (dismissAfter) {
             var _this = this;
-            if(this.autoDismiss) {
-                setTimeout( function () {
-                    _this._dismiss();
-                }, this.autoDismiss);
+            if(dismissAfter > 0)  {
+                // if timeout sets already, clear and reset it
+                if (this.timeouts.length > 0) {
+                    for (var i = 0; i < this.timeouts.length; i++) {
+                            clearTimeout(this.timeouts[i]);
+                    };
+                    this.timeouts = [];
+                }
+                this.timeouts.push( 
+                    setTimeout( function () {
+                                    _this._dismiss();
+                                }, dismissAfter));
+                this._show();
             }
         },
         _dismissDisplay: function (action) {
@@ -189,6 +203,10 @@ Element providing message notifications.
             if(event.animationName === 'fadeout') {
                 event.target.classList.add('hidden');
             }
+        },
+        _show: function () {
+            this.$.alert.classList.remove('fade-out');
+            this.$.alert.classList.remove('hidden');
         },
         _action: function () {
             if(this.action.indexOf('http') != -1) {
