@@ -123,7 +123,10 @@ Element providing message notifications.
                 type: String,
                 reflect: true
             },
-            timeouts: {
+            /**
+             * An array to store ID values of timer in order to clear all timer once.
+             */
+            _timeouts: {
                 type: Array,
                 value: function (){ return [];}
             },
@@ -166,14 +169,16 @@ Element providing message notifications.
         setAutoDismiss: function (dismissAfter) {
             var _this = this;
             if(dismissAfter > 0)  {
-                // if timeout sets already, clear and reset it
-                if (this.timeouts.length > 0) {
-                    for (var i = 0; i < this.timeouts.length; i++) {
-                            clearTimeout(this.timeouts[i]);
+                // if timer sets already, clear it
+                if (this._timeouts.length > 0) {
+                    for (var i = 0; i < this._timeouts.length; i++) {
+                            clearTimeout(this._timeouts[i]);
                     };
-                    this.timeouts = [];
+                    this._timeouts = [];
                 }
-                this.timeouts.push( 
+
+                // store ID value of timer to clear once later 
+                this._timeouts.push( 
                     setTimeout( function () {
                                     _this._dismiss();
                                 }, dismissAfter));
