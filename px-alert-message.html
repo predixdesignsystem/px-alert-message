@@ -35,6 +35,7 @@ Element providing message notifications.
                     <div id="icon" class$="{{ type }}">
                         <template is="dom-if" if="{{ _isNotCustom }}">
                             <div class="svg-canvas">
+                                <!-- Adding "important" icon, it is the only svg icon-->
                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-triangle">
                                   <polygon points="0,27 15,0 30,27"/>
                                 </svg>
@@ -47,21 +48,25 @@ Element providing message notifications.
                     </div>
                 </div>
             </template>
-            <div class="message">
-                <p class$="{{ type }}">
-                    <span>{{ messageTitle }}</span> <span>{{ message }}</span>
+            <div class="message collapse" id="fullMessage">
+                <p class$="{{ type }}" id="message">
+                    <span>{{ messageTitle }}</span>
+                    <span>{{ message }}</span>
+                    <span id="showMoreButton" class="actionable visuallyhidden">{{_showBtnText}}</span>
                 </p>
+
             </div>
             <template is="dom-if" if="{{ action }}">
                 <div class="action">
                     <template is="dom-if" if="{{ _showDismiss }}">
-                        <a class="dismiss" on-click="_dismiss"><i class="fa fa-times"></i></a>
+                        <button class="btn btn--bare dismiss" on-click="_dismiss"><i class="fa fa-times"></i></button>
                     </template>
                     <template is="dom-if" if="{{ _showButton }}">
-                        <a class="btn" on-click="_action">{{ actionText }}</a>
+                        <button class="btn" on-click="_action">{{ actionText }}</button>
                     </template>
                 </div>
             </template>
+
         </div>
     </template>
 </dom-module>
@@ -80,11 +85,11 @@ Element providing message notifications.
         properties: {
             /**
              * Establishes the alert level
-             * - 'important'
-             * - 'warning'
-             * - 'error'
-             * - 'information'
-             * - 'custom' - allows a developer to specify HTML incluing images in place of the icon.
+             * - 'important' - red triangle labeled 1
+             * - 'warning'- orange diamond labeled 2
+             * - 'error' - yellow square labeled 3
+             * - 'information' - blue circle labeled 4
+             * - 'custom' - allows a developer to specify HTML including images in place of the icon.
              * - 'more' - allows for a message that shows that there are more messages.
              */
             type: {
@@ -93,7 +98,7 @@ Element providing message notifications.
                 value: 'information'
             },
             /**
-             * The title that is displayed in the message area of the alert box.
+             * The title that is displayed bold in the message area of the alert box.
              */
             messageTitle: {
                 type: String,
@@ -103,8 +108,7 @@ Element providing message notifications.
              * The message body that is displayed in the message area of the alert box.
              */
             message: {
-                type: String,
-                reflect: true
+                type: String
             },
             /**
              * A delay in MS before a message is dismissed automatically.
@@ -148,23 +152,35 @@ Element providing message notifications.
             },
             _isNotMore: {
                 computed: '_isNotMoreType(type)'
+            },
+            _showBtnText: {
+              type: String,
+              value: "Show More"
+            },
+            _expandText: {
+              type: Boolean,
+              value: false
             }
         },
         attached: function () {
+
             this.listen(this, 'animationend', '_hide');
-            this.$.alert.addEventListener('animationend', this._hide, true);
-            this.$.alert.addEventListener('mozAnimationEnd', this._hide, true);
-            this.$.alert.addEventListener('webkitAnimationEnd', this._hide, true);
-            this.$.alert.addEventListener('msAnimationEnd', this._hide, true);
             if(this.autoDismiss && this.autoDismiss > 0)  {
                 this.setAutoDismiss(this.autoDismiss);
             }
+            //for IE10 only: the attach callback is still too early for all text styles to have been applied
+            //this workaround allows for those styles to get applied, and then calling the message truncation function
+            //but, dom-change is too early for other browsers?
+            this.listen(this,'dom-change','_checkMessageLength');
+            //for all browsers except ie10, attach callback is sufficient
+            this._checkMessageLength();
+            this.listen(this.$.showMoreButton,'tap','_isTextExpanded');
+
         },
         detached: function () {
-            this.$.alert.removeEventListener('animationend', this._hide, true);
-            this.$.alert.removeEventListener('mozAnimationEnd', this._hide, true);
-            this.$.alert.removeEventListener('webkitAnimationEnd', this._hide, true);
-            this.$.alert.removeEventListener('msAnimationEnd', this._hide, true);
+          this.unlisten(this, 'animationend', '_hide');
+          this.unlisten(this,'dom-change','_checkMessageLength');
+          this.unlisten(this.$.showMoreButton,'tap','_isTextExpanded');
         },
         setAutoDismiss: function (dismissAfter) {
             var _this = this;
@@ -176,9 +192,8 @@ Element providing message notifications.
                     };
                     this._timeouts = [];
                 }
-
-                // store ID value of timer to clear once later 
-                this._timeouts.push( 
+                // store ID value of timer to clear once later
+                this._timeouts.push(
                     setTimeout( function () {
                                     _this._dismiss();
                                 }, dismissAfter));
@@ -201,7 +216,6 @@ Element providing message notifications.
             return (type !== 'more');
         },
         _dismiss: function () {
-            //this.$.alert.classList.add('hidden');
             this.$.alert.classList.add('fade-out');
         },
         _hide: function (event) {
@@ -212,6 +226,91 @@ Element providing message notifications.
         _show: function () {
             this.$.alert.classList.remove('fade-out');
             this.$.alert.classList.remove('hidden');
+        },
+        _isTextExpanded: function () {
+            this._expandText = !this._expandText;
+            if (this._expandText) {
+              this._showMore();
+            }
+            else {
+              this._showLess();
+            }
+        },
+        /**
+         * Checking to see if the combined message length of title and message exceed the max height of the parent div.
+         */
+        _checkMessageLength: function () {
+          var messageDiv = this.$.fullMessage,
+              messageTextTitle,
+              messageText;
+
+          // if the text fits, do nothing
+          if(this.type === "more" || messageDiv.scrollHeight <= messageDiv.offsetHeight){
+            return;
+          }
+
+          //Unhide button
+          this.toggleClass('visuallyhidden',false,this.$.showMoreButton);
+
+          //save original message and title as a var for expanding the message
+          //in IE10, we have to run checkMessageLength multiple times for all styles to load. We don't want to overwrite the original message.
+          this._messageTitleOriginal = this._messageTitleOriginal || this.messageTitle;
+          this._messageOriginal = this._messageOriginal || this.message;
+
+          //split message into an array
+          messageTextTitle = this.messageTitle.split(' ');
+          messageText = this.message.split(' ');
+
+          //Run while message is too long and truncate it.
+          while(messageDiv.scrollHeight > messageDiv.offsetHeight) {
+
+            //first truncate the message, then truncate the title
+            if(messageText.length > 0){
+              messageText.pop();
+              this.message = messageText.join(' ') + '...';
+            } else {
+              messageTextTitle.pop();
+              this.messageTitle = messageTextTitle.join(' ') + '...';
+              this.message = '';
+            }
+          }
+          //save short Message for shortening the message after it has been expanded
+          this.shortMessageTitle = this.messageTitle;
+          this.shortMessage = this.message;
+        },
+        /**
+         * run when 'show more' button is clicked to show full message
+         */
+        _showMore: function () {
+          this.messsageTruncatedHeight = this.$.fullMessage.offsetHeight;
+          //Safari draws from 0 therefore we need to create a min height to avoid jumping
+          this.$.fullMessage.style.minHeight = this.messsageTruncatedHeight + 'px';
+          this.$.fullMessage.style.height = this.messsageTruncatedHeight + 'px';
+          this.$.fullMessage.style.overflow = 'hidden';
+
+          this.toggleClass('collapse',false,this.$.fullMessage);
+          this.messageTitle = this._messageTitleOriginal;
+          this.message = this._messageOriginal;
+          this._showBtnText = 'Show Less';
+
+          this.$.fullMessage.style.height = this.$.message.offsetHeight + 'px';
+        },
+        /**
+         * run when 'show less' button is clicked to truncate message again
+         */
+         _showLess: function(){
+           this.$.fullMessage.style.height = this.messsageTruncatedHeight + 'px';
+           // Didnt include specfic brower transitionend events due to our brower support
+           this._showBtnText = 'Show More';
+           this.listen(this.$.fullMessage,'transitionend','_showLessAfterTransition');
+         },
+        /**
+         * helper function for _showLess, runs after css transition is completed
+         */
+        _showLessAfterTransition: function(){
+          this.toggleClass('collapse',true,this.$.fullMessage);
+          this._checkMessageLength();
+          this.unlisten(this.$.fullMessage,'transitionend','_showLessAfterTransition');
         },
         _action: function () {
             if(this.action.indexOf('http') != -1) {
@@ -226,7 +325,7 @@ Element providing message notifications.
             } else if (action.indexOf('http') != -1) {
                 return 'Open';
             } else {
-                return  ''; // future custom button actions
+                return ''; // future custom button actions
             }
         }
 

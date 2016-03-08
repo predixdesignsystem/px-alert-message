@@ -21,63 +21,41 @@ common/abstract rules go in px-alert-message-sketch.scss, not in this file.
 
 // Settings
 @import "px-colors-design/_settings.colors.scss";
-
 @import 'px-alert-message-sketch.scss';
 
 $alert-message-background: $gray3;
 
-.svg-triangle{
-  margin: 0 auto;
-  width: 100px;
-  height: 100px;
-}
-
+//part of the icons
 .svg-triangle polygon {
   fill: $alert-red;
   stroke: $white;
   stroke-width: 1;
 }
-
+.svg-triangle{
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+}
 .svg-canvas {
     display: none;
 }
 
-/** these should be more abstract than residing within this component */
-
-@keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-@keyframes fadeout {
-    from {
-        opacity: 1;
-        max-height: 100px;
-        min-height: 0px;
-    }
-    to   {
-        opacity: 0;
-        max-height: 0px;
-        min-height: 0px;
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
+//Extend
+%icon {
+  color: $white;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  font-weight: bold;
+  border: 1px solid $white;
 }
 
 // Component
 .alert-message {
     background-color: $alert-message-background;
     opacity: 1;
-    animation: fadein .5s;
-    max-height: 100px;
-    overflow: hidden;
-    transition: max-height 1;
     button, a {
         outline: none;
-    }
-    &.fade-out {
-        animation: fadeout .5s;
-        max-height: 0px;
     }
     #icon {
         &.custom {
@@ -86,20 +64,15 @@ $alert-message-background: $gray3;
                 max-width: 100%;
             }
         }
-        &.important {
-            color: $white;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 30px;
-            font-weight: bold;
-            span {
-
-            }
+        &.important,
+        %&.important {
+            border: none;
+            @extend %icon;
             span:before {
                 content: '1';
                 position: absolute;
-                top: 3px;
-                left: 10px;
+                top: 4px;
+                left: 11px;
             }
             .svg-canvas {
                 display: block !important;
@@ -114,13 +87,8 @@ $alert-message-background: $gray3;
             left: 2px;
             margin-right: 5px;
             background-color: $alert-orange;
-            border: 1px solid $white;
-            color: $white;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 30px;
-            font-weight: bold;
             transform: rotate(45deg);
+            @extend %icon;
             span {
                 display: block;
                 position: relative;
@@ -134,40 +102,22 @@ $alert-message-background: $gray3;
         }
         &.error {
             background-color: $alert-yellow;
-            border: 1px solid $white;
-            color: $white;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 30px;
-            font-weight: bold;
+            @extend %icon;
             span:before {
                 content: '3';
             }
         }
         &.information {
             background-color: $alert-blue;
-            border: 1px solid $white;
             border-radius: 40px;
-            color: $white;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 30px;
-            font-weight: bold;
+
+            @extend %icon;
             span:before {
                 content: '4';
             }
         }
     }
-    .message {
-        p.more {
-            text-align: center;
-            font-size: 1.4rem;
-            margin-left: 20px;
-        }
-        span:first-child {
-            font-weight: bold;
-        }
-    }
+
     .action {
         .dismiss {
             color: $gray6;

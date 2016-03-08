@@ -36,12 +36,14 @@
         <div class="alert-message-container">
             <!-- instance 1, "predix" theme -->
             <px-alert-message
+                id="basicAlert"
                 type="error"
                 message-title="Well done!"
                 message="You successfully read this.">
             </px-alert-message>
 
             <px-alert-message
+                id='closeBtnAlert'
                 type="warning"
                 message-title="Oh snap!"
                 message="Change a few things up."
@@ -49,6 +51,7 @@
             </px-alert-message>
 
             <px-alert-message
+                id='okBtnAlert'
                 type="important"
                 message-title="Warning!"
                 message="Best check yourself."
@@ -56,65 +59,329 @@
             </px-alert-message>
 
             <px-alert-message
-                id="testAlert"
+                id="autoDismissAlert"
                 type="information"
                 message-title="Heads up!"
                 message="This definitely needs your attention."
                 action="https://www.gesoftware.com/predix"
-                auto-dismiss="8000">
+                auto-dismiss="2000">
             </px-alert-message>
 
             <px-alert-message
+                id='longTitleAlert'
                 type="information"
-                message-title="Heads up!"
+                message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy."
                 message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
                 action="https://www.gesoftware.com/predix">
             </px-alert-message>
 
             <px-alert-message
+                id='longMessageAlert'
                 type="custom"
                 message-title="Custom Alert"
-                message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags."
+                message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
                 action="https://www.gesoftware.com/predix">
                 <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
             </px-alert-message>
 
             <px-alert-message
-                type="more"
+                id='noContentAlert'
+                type="information"
+                message-title=" "
+                message=" "
+                action="https://www.gesoftware.com/predix">
+            </px-alert-message>
+
+            <px-alert-message
+                type="moreAlert"
                 message="15"
                 action="dismiss">
             </px-alert-message>
         </div>
 
         <script>
-            suite('<px-alert-message>', function() {
-                var testAlert = document.getElementById('testAlert');
+            var basicAlert = document.getElementById('basicAlert');
+            var autoDismissAlert = document.getElementById('autoDismissAlert');
+            var closeBtnAlert = document.getElementById('closeBtnAlert');
+            var okBtnAlert = document.getElementById('okBtnAlert');
+            var longTitleAlert = document.getElementById('longTitleAlert');
+            var longMessageAlert = document.getElementById('longMessageAlert');
+            var noContentAlert = document.getElementById('noContentAlert');
+            var moreAlert = document.getElementById('moreAlert');
 
-                test('reflects the "type" property', function() {
-                    assert.equal(testAlert.type, "information");
+            describe('Alert attrs dont get changed', function() {
+                //info isn't be manipulated
+                it('reflects the "type" property', function() {
+                    assert.equal(autoDismissAlert.type, "information");
                 });
 
-                test('reflects the "title" property', function() {
-                    assert.equal(testAlert.messageTitle, "Heads up!");
+                it('reflects the "title" property', function() {
+                    assert.equal(autoDismissAlert.messageTitle, "Heads up!");
                 });
 
-                test('reflects the "message" property', function() {
-                    assert.equal(testAlert.message, "This definitely needs your attention.");
+                it('reflects the "message" property', function() {
+                    assert.equal(autoDismissAlert.message, "This definitely needs your attention.");
                 });
 
-                test('reflects the "action" property', function() {
-                    assert.equal(testAlert.action, "https://www.gesoftware.com/predix");
+                it('reflects the "action" property', function() {
+                    assert.equal(autoDismissAlert.action, "https://www.gesoftware.com/predix");
                 });
 
-                test('reflects the "auto-dismiss" property and its a number', function() {
-                    assert.equal(testAlert.autoDismiss, 8000);
+                it('reflects the "auto-dismiss" property and its a number', function() {
+                    assert.equal(autoDismissAlert.autoDismiss, 2000);
                 });
 
-                test('alert is not hidden', function() {
+                it('alert is not hidden', function() {
                     var wrapper = document.querySelector('#alert');
                     expect(wrapper.classList.contains('hidden')).to.equal(false);
                 });
+            });
 
+            describe('Alert action buttons update correctly', function() {
+                //Button displays
+                it('action button reflects the "action" property - open', function() {
+                    var btn = autoDismissAlert.querySelector('.action button');
+                    assert.equal(btn.textContent, "Open");
+                });
+
+                it('action button reflects the "action" property - ok', function() {
+                    var btn = okBtnAlert.querySelector('.action button');
+                    assert.equal(btn.textContent, "OK");
+                });
+
+                it('action button reflects the "dismiss" property', function() {
+                    var icon = closeBtnAlert.querySelector('.action .dismiss > i.fa-times');
+                    expect(icon).to.exist;
+                });
+
+                it('action section does not exist', function() {
+                    var actionBtn = basicAlert.querySelector('.action');
+                    expect(actionBtn).to.not.exist;
+                });
+            });
+
+
+            describe('Alert Dismiss', function() {
+              it('does not has the class hidden applied',function() {
+                expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(false);
+              });
+
+              before(function(done){
+                closeBtnAlert.querySelector('.action .dismiss').click();
+                okBtnAlert.querySelector('.action button').click();
+                //wait for alert to dismiss
+                setTimeout(function(){
+                  done();
+                },600);
+              });
+
+              it('has the class hidden applied', function() {
+                expect(closeBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
+              });
+              it('has the class hidden applied', function() {
+                expect(okBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
+              });
+
+              // it('has the class hidden applied',function(done) {
+              //   setTimeout(function(){
+              //     expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
+              //     done();
+              //   },2000);
+              // });
+            });
+
+
+            describe('Truncation features', function() {
+                describe('Truncation shortens message', function() {
+                  it('ow more" btn is hidden on basic alert', function() {
+                    var moreBtn = basicAlert.querySelector('#showMoreButton');
+                      var moreBtn = basicAlert.querySelector('#showMoreButton');
+                      expect(moreBtn.classList.contains('visuallyhidden')).equal(true);
+                  });
+
+                  it('show more" btn is not hidden on longTitleAlert alert', function() {
+                      var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+                      expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
+                  });
+                  it('show more" btn is not hidden on longMessageAlert alert', function() {
+                      var moreBtn = longMessageAlert.querySelector('#showMoreButton');
+                      expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
+                  });
+
+                  it(' if fullMessage has a max height of 3.7rem', function() {
+                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
+                      assert.closeTo(parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("max-height")),60,3,'they are close');
+                  });
+                  it('fullMessage has a max height of 3.7rem', function() {
+                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
+                      assert.closeTo(parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("max-height")),60,3,'they are close');
+                  });
+
+                  it(' if longTitleAlert truncates properly', function() {
+                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
+                      var messageP  = longTitleAlert.querySelector('#message');
+                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) <=
+                             parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"))).equal(true);
+                  });
+                  it('truncates longMessageAlert properly', function() {
+                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
+                      var messageP  = longMessageAlert.querySelector('#message');
+                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) <=
+                             parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"))).equal(true);
+                  });
+
+                  it('should truncate a long title', function() {
+                      var messageP  = longTitleAlert.querySelector('#message');
+                      var currentTitle,originalTitle,currentMessage;
+                      originalTitle = longTitleAlert._messageTitleOriginal;
+                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
+                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
+                      assert.isBelow(currentTitle.split(' ').length,originalTitle.split(' ').length );
+                      assert.equal(currentMessage, '');
+                  });
+                  it('should truncate a long message', function() {
+                      var messageP  = longMessageAlert.querySelector('#message');
+                      var currentTitle,originalTitle,currentMessage,originalMessage;
+                      originalTitle = longMessageAlert._messageTitleOriginal;
+                      originalMessage = longMessageAlert._messageOriginal;
+                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
+                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
+                      assert.equal(originalTitle , currentTitle);
+                      assert.isBelow(currentMessage.split(' ').length, originalMessage.split(' ').length);
+                  });
+                });
+
+
+                describe('Message expands after click', function() {
+                  before(function(done){
+                    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+                    moreBtnTitle.click();
+                    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+                    moreBtnMessage.click();
+                    //wait for message to expand
+                    setTimeout(function(){
+                      done();
+                    },500);
+                  });
+                  it('if the collapse class is removed from longTitleAlert', function() {
+                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(false);
+                  });
+                  it('if the collapse class is removed from longMessageAlert', function() {
+                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(false);
+                  });
+
+                  it('if the "show more" says "show less"', function() {
+                      var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+                      assert.equal(moreBtnTitle.textContent, "Show Less");
+                  });
+                  it('if the "show more" says "show less"', function() {
+                      var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+                      assert.equal(moreBtnMessage.textContent, "Show Less");
+                  });
+
+                  it('if the expanded title & message is equal to the orginial title & message ', function() {
+                      var messageP  = longTitleAlert.querySelector('#message');
+                      var currentTitle,originalTitle,currentMessage,originalMessage;
+                      originalTitle = longTitleAlert._messageTitleOriginal;
+                      originalMessage = longTitleAlert._messageOriginal;
+                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
+                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
+                      assert.equal(originalTitle , currentTitle);
+                      assert.equal(originalMessage , currentMessage);
+                  });
+                  it('if the expanded title & message is equal to the orginial title & message ', function() {
+                      var messageP  = longMessageAlert.querySelector('#message');
+                      var currentTitle,originalTitle,currentMessage,originalMessage;
+                      originalTitle = longMessageAlert._messageTitleOriginal;
+                      originalMessage = longMessageAlert._messageOriginal;
+                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
+                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
+                      assert.equal(originalTitle , currentTitle);
+                      assert.equal(originalMessage , currentMessage);
+                  });
+
+                  it('Message height has grown for longTitle', function() {
+                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
+                      var messageP  = longTitleAlert.querySelector('#message');
+                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
+                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
+                      assert.equal(mpHeight,fullMessageHeight);
+                      assert.isAbove(mpHeight,longTitleAlert.messsageTruncatedHeight);
+                  });
+                  it('Message height has grown for longMessage', function() {
+                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
+                      var messageP  = longMessageAlert.querySelector('#message');
+                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
+                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
+                      assert.equal(mpHeight,fullMessageHeight);
+                      assert.isAbove(mpHeight,longMessageAlert.messsageTruncatedHeight);
+                  });
+                });
+
+
+                describe('Message collapses after click', function() {
+                  before(function(done){
+                    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+                    moreBtnTitle.click();
+                    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+                    moreBtnMessage.click();
+                    //wait for message to expand
+                    setTimeout(function(){
+                      done();
+                    },500);
+                  });
+                  it('reapplies the collapse class from longTitleAlert', function() {
+                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(true);
+                  });
+                  it('reapplies the collapse class from longMessageAlert', function() {
+                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(true);
+                  });
+
+                  it('say "show more" instead of "show less"', function() {
+                      var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+                      assert.equal(moreBtnTitle.textContent, "Show More");
+                  });
+                  it('say "show more" instead of "show less"', function() {
+                      var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+                      assert.equal(moreBtnMessage.textContent, "Show More");
+                  });
+
+                  it('displays the truncated title message ', function() {
+                      var messageP  = longTitleAlert.querySelector('#message');
+                      var currentTitle,truncatedTitle,currentMessage,truncatedMessage;
+                      truncatedTitle = longTitleAlert.shortMessageTitle;
+                      truncatedMessage = longTitleAlert.shortMessage;
+                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
+                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
+                      assert.equal(truncatedTitle , currentTitle);
+                      assert.equal(truncatedMessage , currentMessage);
+                  });
+                  it('displays the truncated title message ', function() {
+                      var messageP  = longMessageAlert.querySelector('#message');
+                      var currentTitle,truncatedTitle,currentMessage,truncatedMessage;
+                      truncatedTitle = longMessageAlert.shortMessageTitle;
+                      truncatedMessage = longMessageAlert.shortMessage;
+                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
+                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
+                      assert.equal(truncatedTitle , currentTitle);
+                      assert.equal(truncatedMessage , currentMessage);
+                  });
+
+                  it('Message height has shrunk for longTitle', function() {
+                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
+                      var messageP  = longTitleAlert.querySelector('#message');
+                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
+                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
+                      assert.equal(fullMessageHeight,longTitleAlert.messsageTruncatedHeight);
+                  });
+                  it('Message height has shrunk for longMessage', function() {
+                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
+                      var messageP  = longMessageAlert.querySelector('#message');
+                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
+                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
+                      assert.equal(fullMessageHeight,longMessageAlert.messsageTruncatedHeight);
+                    });
+                });
             });
         </script>
     </body>
