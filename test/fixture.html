@@ -182,12 +182,6 @@
                 expect(okBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
               });
 
-              // it('has the class hidden applied',function(done) {
-              //   setTimeout(function(){
-              //     expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
-              //     done();
-              //   },2000);
-              // });
             });
 
 
@@ -305,7 +299,7 @@
                       var messageP  = longTitleAlert.querySelector('#message');
                       var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
                       var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
-                      assert.equal(mpHeight,fullMessageHeight);
+                      expect(fullMessageHeight).to.be.closeTo(mpHeight,1)
                       assert.isAbove(mpHeight,longTitleAlert.messsageTruncatedHeight);
                   });
                   it('Message height has grown for longMessage', function() {
@@ -313,7 +307,7 @@
                       var messageP  = longMessageAlert.querySelector('#message');
                       var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
                       var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
-                      assert.equal(mpHeight,fullMessageHeight);
+                      expect(fullMessageHeight).to.be.closeTo(mpHeight,1)
                       assert.isAbove(mpHeight,longMessageAlert.messsageTruncatedHeight);
                   });
                 });
