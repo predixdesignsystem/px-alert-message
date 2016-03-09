@@ -29,28 +29,79 @@ Predix branding rules go in px-alert-message-predix.scss, not in this file.
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
 @import "px-viewport-design/_base.viewport.scss";
-@import "px-meta-buttons-design/_meta.buttons.scss";
+$inuit-enable-btn--bare: true;
+$inuit-enable-btn--bare-primary: true;
+@import "px-buttons-design/_objects.buttons.scss";
+$actionable: true;
+@import "px-actionable-text-icons/_objects.actionable.scss";
+
+/** these should be more abstract than residing within this component */
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+        max-height: $inuit-base-spacing-unit--small * 10;
+        min-height: 0px;
+    }
+    to   {
+        opacity: 0;
+        max-height: 0px;
+        min-height: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+}
 
 // Component
 .alert-message {
-    width: 400px;
-    margin: 5px;
-    padding: 10px;
-    min-height: 50px;
+    width: $inuit-base-spacing-unit--small * 40;
+    margin: $inuit-base-spacing-unit--tiny;
+    padding: $inuit-base-spacing-unit--small;
+    min-height: $inuit-base-spacing-unit--small * 5;
+    animation: fadein .5s;
+    transition: max-height 1;
+    &.fade-out {
+        animation: fadeout .5s;
+        max-height: 0px;
+    }
     .severity {
         #icon {
             position: relative;
-            height: 30px;
-            width: 30px;
+            height:  1.9rem;
+            width:  1.9rem;
+            //The square needs to be visually smaller
+            &.error {
+              height:  1.8rem;
+              width:  1.8rem;
+            }
         }
     }
     .message {
-        flex: 2 0px;
-        margin-left: 10px;
-        margin-right: 10px;
+        flex: 2;
+        margin-left: $inuit-base-spacing-unit--small;
+        margin-right: $inuit-base-spacing-unit--small;
+        transition: height 0.3s ease-in-out;
+        line-height: 1.14em;
+        font-size: 15px;
         p {
             padding: 0;
             margin: 0;
+        }
+        p.more {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-left:  $inuit-base-spacing-unit--large;
+        }
+        &.collapse{
+          max-height: 3.7rem;
+        }
+        span:first-child {
+            font-weight: bold;
         }
     }
     .action {
