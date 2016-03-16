@@ -64,8 +64,7 @@ $alert-message-background: $gray3;
                 max-width: 100%;
             }
         }
-        &.important,
-        %&.important {
+        &.important {
             border: none;
             @extend %icon;
             span:before {
