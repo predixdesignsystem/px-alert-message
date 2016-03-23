@@ -1,3 +1,7 @@
+v0.4.0
+==================
+* Added px-alert-message-hidden event when dismissing an alert
+
 v0.3.0
 ==================
 * Message truncates after 3 lines, able to expand

@@ -166,7 +166,19 @@
                 expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(false);
               });
 
+              var closeBtnHiddenEvent = false;
+              var okBtnHiddenEvent = false;
+
               before(function(done){
+
+                closeBtnAlert.addEventListener('px-alert-message-hidden', function() {
+                  closeBtnHiddenEvent = true;
+                });
+
+                okBtnAlert.addEventListener('px-alert-message-hidden', function() {
+                  okBtnHiddenEvent = true;
+                });
+
                 closeBtnAlert.querySelector('.action .dismiss').click();
                 okBtnAlert.querySelector('.action button').click();
                 //wait for alert to dismiss
@@ -181,7 +193,12 @@
               it('has the class hidden applied', function() {
                 expect(okBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
               });
-
+              it('hidden event has been fired', function() {
+                assert(closeBtnHiddenEvent, true);
+              });
+              it('hidden event has been fired', function() {
+                assert(okBtnHiddenEvent, true);
+              });
             });
 
 

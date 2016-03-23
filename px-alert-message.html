@@ -221,6 +221,7 @@ Element providing message notifications.
         _hide: function (event) {
             if(event.animationName === 'fadeout') {
                 event.target.classList.add('hidden');
+                this.fire('px-alert-message-hidden');
             }
         },
         _show: function () {
