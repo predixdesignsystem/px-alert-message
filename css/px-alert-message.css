@@ -30,6 +30,9 @@ common/abstract rules go in px-alert-message-sketch.scss, not in this file.
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -1339,7 +1342,6 @@ button.btn {
       position: absolute;
       top: 0px; }
   .alert-message #icon.warning {
-    position: absolute;
     height: 24px !important;
     width: 24px !important;
     left: 2px;

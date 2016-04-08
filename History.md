@@ -1,3 +1,7 @@
+v0.3.2
+=================
+* fix small css bug with warning icon in shadow dom
+
 v0.3.0
 ==================
 * Message truncates after 3 lines, able to expand
