@@ -1,9 +1,9 @@
-Px-Alert-Message
+#Px-Alert-Message
 -----------------------------------------------
 
 ## Overview
 
-Px-Alert-Message is a Predix Experience ('Px') component that appears in a queue within the message container.
+Px-Alert-Message is a Predix UI component that appears in a queue within the message container.
 
 ## Usage
 
@@ -20,7 +20,7 @@ Node, npm and bower are necessary to install the component and dependencies. web
 First, install the component via bower on the command line.
 
 ```
-bower install https://github.com/PredixDev/px-alert-message.git --save
+bower install px-alert-message --save
 ```
 
 Second, import the component to your application with the following tag in your head.
@@ -44,90 +44,11 @@ Finally, use the component in your application:
 <br />
 <hr />
 
-## Attributes
+## documentation
 
-#### type
-
-*Type:* **String** - (*Optional*) - *Default:* "information"
-
-Type defines the alert level; this is reflected in the icon.
-```
-'important' - red triangle labeled 1
-'warning'- orange diamond labeled 2
-'error' - yellow square labeled 3
-'information' - blue circle labeled 4
-'custom' - allows a developer to specify HTML incluing images in place of the icon.
-'more' - allows for a message that shows that there are more messages.
-```
-```
-<px-alert-message
-	...
-	type="information">
-</px-alert-message>
-```
-#### message-title
-
-*Type:* **String** - (*Optional*) - *Default:* ""
-
-The title that is displayed bold in the message area of the alert box.
-
-```
-<px-alert-message
-	...
-	message-title="Heads up!">
-</px-alert-message>
-```
-
-#### message
-
-*Type:* **String** - (*Optional*) - *Default:* ""
-
-The message body that is displayed after the message-title in the message area of the alert box.
-
-```
-<px-alert-message
-	...
-  message="This definitely needs our attention.">
-</px-alert-message>
-```
-
-#### action
-
-*Type:* **String** - (*Optional*) - *Default:* null
-
-User interaction on the right hand side of the message box.  
-```
-'dismiss' - displays the (x) control to dismiss  
-'acknowledge' - displays the (OK) button to dismiss  
-'URL' - string containing http url to be opened, displays the (Open) button.
-```
-```
-<px-alert-message
-	...
-	action="https://www.predix.io/">
-</px-alert-message>
-```
-
-#### auto-dismiss
-
-*Type:* **Number** - (*Optional*) - *Default:* null
-
-A delay in milliseconds before an alert message is dismissed automatically.
-
-```
-<px-alert-message
-	...
-  auto-dismiss="5000">
-</px-alert-message>
-```
-
-
-<br />
-<hr />
-
+Read the full API and view the demo [here](https://predixdev.github.io/px-alert-message).
 
 ## Local Development
-
 
 From the component's directory...
 
@@ -203,3 +124,5 @@ GE Coding Style Guide
 
 
 ### Known Issues
+
+Please use [Github Issues](https://github.com/PredixDev/px-alert-message/issues) to submit any bugs you might find.
