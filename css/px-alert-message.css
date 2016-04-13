@@ -30,9 +30,6 @@ common/abstract rules go in px-alert-message-sketch.scss, not in this file.
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
- * Define grey = gray to avoid dev typos
- */
-/**
  * Buttons
  */
 /**
@@ -1314,14 +1311,6 @@ button.btn {
 .svg-canvas {
   display: none; }
 
-.alert-message #icon.important, .alert-message #icon.warning, .alert-message #icon.error, .alert-message #icon.information {
-  color: white;
-  text-align: center;
-  vertical-align: middle;
-  line-height: 30px;
-  font-weight: bold;
-  border: 1px solid white; }
-
 .alert-message {
   background-color: #e4e4ea;
   opacity: 1; }
@@ -1331,6 +1320,12 @@ button.btn {
     width: 100%;
     max-width: 100%; }
   .alert-message #icon.important {
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-weight: bold;
+    border: 1px solid white;
     border: none; }
     .alert-message #icon.important span:before {
       content: '1';
@@ -1348,7 +1343,13 @@ button.btn {
     margin-right: 5px;
     background-color: #dd6b1f;
     -webkit-transform: rotate(45deg);
-            transform: rotate(45deg); }
+            transform: rotate(45deg);
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-weight: bold;
+    border: 1px solid white; }
     .alert-message #icon.warning span {
       display: block;
       position: relative;
@@ -1359,12 +1360,24 @@ button.btn {
     .alert-message #icon.warning span:before {
       content: '2'; }
   .alert-message #icon.error {
-    background-color: #e8a736; }
+    background-color: #e8a736;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-weight: bold;
+    border: 1px solid white; }
     .alert-message #icon.error span:before {
       content: '3'; }
   .alert-message #icon.information {
     background-color: #4364dd;
-    border-radius: 40px; }
+    border-radius: 40px;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+    font-weight: bold;
+    border: 1px solid white; }
     .alert-message #icon.information span:before {
       content: '4'; }
   .alert-message .action .dismiss {
