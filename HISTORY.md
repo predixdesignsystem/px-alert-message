@@ -1,3 +1,11 @@
+v0.3.4
+=================
+* added comments for api documentation and replaced @extend with @mixin 
+
+v0.3.3
+=================
+* updated README, replacing docs with auto-built ones from gh-pages.
+
 v0.3.2
 =================
 * fix small css bug with warning icon in shadow dom
