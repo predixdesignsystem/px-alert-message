@@ -211,6 +211,8 @@ Element providing message notifications.
         },
         attached: function () {
             this.listen(this, 'animationend', '_hide');
+            //safari 8
+            this.listen(this, 'webkitAnimationEnd', '_hide');
             if(this.autoDismiss && this.autoDismiss > 0)  {
                 this.setAutoDismiss(this.autoDismiss);
             }
@@ -302,6 +304,7 @@ Element providing message notifications.
         _hide: function (event) {
             if(event.animationName === 'fadeout') {
                 event.target.classList.add('hidden');
+                this.fire('px-alert-message-hidden');
             }
         },
         /**
