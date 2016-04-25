@@ -211,6 +211,8 @@ Element providing message notifications.
         },
         attached: function () {
             this.listen(this, 'animationend', '_hide');
+            //safari 8
+            this.listen(this, 'webkitAnimationEnd', '_hide');
             if(this.autoDismiss && this.autoDismiss > 0)  {
                 this.setAutoDismiss(this.autoDismiss);
             }
