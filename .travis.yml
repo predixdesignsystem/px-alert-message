@@ -1,24 +1,29 @@
+sudo: required
+dist: trusty
 language: node_js
-sudo: false
-node_js: stable
+node_js:
+  - 'stable'
 branches:
   except:
   - gh-pages
 addons:
+  # You can't install latest and beta as addons
   firefox: latest
   apt:
     sources:
-    - google-chrome
+      - google-chrome
     packages:
-    - google-chrome-stable
+      - google-chrome-stable
+
 before_script:
-- npm install web-component-tester
-- npm install bower
-- export PATH=$PWD/node_modules/.bin:$PATH
-- bower install
+  - npm install web-component-tester
+  - npm install bower
+  - export PATH=$PWD/node_modules/.bin:$PATH
+  - bower install
+
 script:
-- xvfb-run wct --skip-plugin sauce
-- wct --plugin sauce --skip-plugin local
+  - xvfb-run wct --skip-plugin sauce
+  - if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then wct --plugin sauce --skip-plugin local; fi
 env:
   global:
   - secure: D20FMq3CaaHJcBRHcX/ssr8lQdta92rp8aJ1407kl9raKyn0xRhaOYvtYUcfc12CQlrc0xS+9hVGfBbsWHe1ob9wvZWVFEy1uCHeAbRXiJsXmixKEdG4WIQDb134O24G9KwcVDwxdc6n/FUkHuvEGnEFZCE+RjSVyIAo7Thn52yKYIhatTt7AP2U02L/p5G9B9N3Ag8isPUWyelURWN06dWFvbCVMV+BBGfrffQMamZydjifQHUYX0KQdFFnQLNW/4JsGnVu4Epsn8NaboI/Ln/qfoNnEhz83oQDJ1aX5h2TzRTYbAYmhjgAgafmgill19CxwDPLU/Xm0dAfAwo1HdmL1QudJbBZoY+jEPsPrA3NfK/qkOrW2fp6nZS/Xhfstu7GjDi1bL/BL6HEJ9aywIhlC+dbd8ezxhnSt3f1M5inB+Hy4BetYG76r3f4Ge8KhJyTr+Sy3W0nK+hFSG+EBzJkvS/VKQVtFmXRVkgLkx5Q8PCKcnaWhW6laV9/sIKRPb/VhKOARmkJPpxdiVc2tgZipM1y9zMVAgI0xjyOh1IPnGc3qtx1E5dlAwjqpsgqZ5bugsGpMZW9v6c5mvbDUitetkReZ1Y/JLdi5Ghz9fsepbh3jBkVjcAsbE9fOajH6AAn2TJEXsYQk9q+IGCDEMCriquGZZGHbxmc7oZvp0s=

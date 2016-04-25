@@ -41,7 +41,7 @@ $alert-message-background: $gray3;
 }
 
 //Extend
-%icon {
+@mixin iconCommon {
   color: $white;
   text-align: center;
   vertical-align: middle;
@@ -65,8 +65,8 @@ $alert-message-background: $gray3;
             }
         }
         &.important {
+            @include iconCommon;
             border: none;
-            @extend %icon;
             span:before {
                 content: '1';
                 position: absolute;
@@ -80,14 +80,13 @@ $alert-message-background: $gray3;
             }
         }
         &.warning {
-            position: absolute;
             height: 24px !important;
             width: 24px !important;
             left: 2px;
             margin-right: 5px;
             background-color: $alert-orange;
             transform: rotate(45deg);
-            @extend %icon;
+            @include iconCommon;
             span {
                 display: block;
                 position: relative;
@@ -101,7 +100,7 @@ $alert-message-background: $gray3;
         }
         &.error {
             background-color: $alert-yellow;
-            @extend %icon;
+            @include iconCommon;
             span:before {
                 content: '3';
             }
@@ -109,8 +108,7 @@ $alert-message-background: $gray3;
         &.information {
             background-color: $alert-blue;
             border-radius: 40px;
-
-            @extend %icon;
+            @include iconCommon;
             span:before {
                 content: '4';
             }

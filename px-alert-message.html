@@ -14,11 +14,11 @@ Element providing message notifications.
 ##### Usage
 
     <px-alert-message
-        type="information"
+        type="important"
         message-title="Heads up!"
         message="This definitely needs our attention."
-        action="https://www.gesoftware.com/predix"
-        auto-dismiss="8000">
+        action="https://www.predix.io/"
+        auto-dismiss="5000">
     </px-alert-message>
 
 @element px-alert-message
@@ -35,7 +35,7 @@ Element providing message notifications.
                     <div id="icon" class$="{{ type }}">
                         <template is="dom-if" if="{{ _isNotCustom }}">
                             <div class="svg-canvas">
-                                <!-- Adding "important" icon, it is the only svg icon-->
+                                <!-- Added "important" ico, only svg icon-->
                                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-triangle">
                                   <polygon points="0,27 15,0 30,27"/>
                                 </svg>
@@ -84,108 +84,161 @@ Element providing message notifications.
          */
         properties: {
             /**
-             * Establishes the alert level
+             * defines the alert level, reflected in the icon.
              * - 'important' - red triangle labeled 1
              * - 'warning'- orange diamond labeled 2
              * - 'error' - yellow square labeled 3
              * - 'information' - blue circle labeled 4
              * - 'custom' - allows a developer to specify HTML including images in place of the icon.
              * - 'more' - allows for a message that shows that there are more messages.
+             *
+             * @default information
+             *
              */
             type: {
-                type: String,
-                reflect: true,
-                value: 'information'
+              type: String,
+              reflect: true,
+              value: 'information'
             },
             /**
-             * The title that is displayed bold in the message area of the alert box.
+             * The title of the message, displayed in bold.
+             *
              */
             messageTitle: {
-                type: String,
-                reflect: true
+              type: String,
+              reflect: true
             },
             /**
-             * The message body that is displayed in the message area of the alert box.
+             * The message body
+             *
              */
             message: {
-                type: String
+              type: String
             },
             /**
-             * A delay in MS before a message is dismissed automatically.
+             * automatically dismisses the alert message after number specified
+             *
+             * unit: milliseconds
+             *
              */
             autoDismiss: {
-                type: Number,
-                reflect: true
+              type: Number,
+              reflect: true
             },
             /**
              * User interaction on the right hand side of the message box.
-             * - 'dismiss' - displays the (x) control to dismiss
-             * - 'acknowledge' - displays the (OK) button to dismiss
-             * - 'URL' - string containing http url to be opened, displays the (Open) button.
+             * - 'dismiss' - displays (x) to dismiss
+             * - 'acknowledge' - displays (OK) to dismiss
+             * - 'URL' - string containing http url to be opened, displays (Open).
              */
             action: {
-                type: String,
-                reflect: true
+              type: String,
+              reflect: true
             },
             /**
              * An array to store ID values of timer in order to clear all timer once.
+             * @type Array
              */
             _timeouts: {
-                type: Array,
-                value: function (){ return [];}
+              type: Array,
+              value: function (){ return [];}
             },
+            /**
+             * computed property. Displays the value of _setActionText() inside the action button
+             * @private
+             */
             actionText: {
-                type: String,
-                computed: '_setActionText(action)'
+              type: String,
+              computed: '_setActionText(action)'
             },
+            /**
+             * computed property. Returns true if action property is 'dismiss'
+             *
+             */
             _showDismiss: {
-                computed: '_dismissDisplay(action)'
+              type: String,
+              computed: '_dismissDisplay(action)'
             },
+            /**
+             * computed property. Returns true if action property is not 'dismiss'
+             *
+             */
             _showButton: {
-                computed: '_buttonDisplay(action)'
+              type: String,
+              computed: '_buttonDisplay(action)'
             },
+            /**
+             * computed property. Returns true if type property is 'custom'
+             *
+             */
             _isCustom: {
-                computed: '_isCustomType(type)'
+              type: String,
+              computed: '_isCustomType(type)'
             },
+            /**
+             * computed property. Returns true if type property is not 'custom'
+             *
+             */
             _isNotCustom: {
-                computed: '_isNotCustomType(type)'
+              type: String,
+              computed: '_isNotCustomType(type)'
             },
+            /**
+             * computed property. Returns true if type property is not 'more'
+             *
+             */
             _isNotMore: {
-                computed: '_isNotMoreType(type)'
+              type: String,
+              computed: '_isNotMoreType(type)'
             },
+            /**
+             * stores the value to be displayed in the show more action text
+             * @type String
+             */
             _showBtnText: {
               type: String,
               value: "Show More"
             },
+            /**
+             * checks whether the _showMore() if false or _showLess() if true functions are called.
+             * @type Boolean
+             * @default false
+             */
             _expandText: {
               type: Boolean,
               value: false
             }
         },
         attached: function () {
-
             this.listen(this, 'animationend', '_hide');
             if(this.autoDismiss && this.autoDismiss > 0)  {
                 this.setAutoDismiss(this.autoDismiss);
             }
-            //for IE10 only: the attach callback is still too early for all text styles to have been applied
-            //this workaround allows for those styles to get applied, and then calling the message truncation function
-            //but, dom-change is too early for other browsers?
+            /**
+             * for IE10 only: the attach callback is still too early for all text styles to have been applied
+             * this workaround allows for those styles to get applied, and then calling the message truncation function
+             * but, dom-change is too early for other browsers?
+             */
             this.listen(this,'dom-change','_checkMessageLength');
-            //for all browsers except ie10, attach callback is sufficient
+            /**
+             * for all browsers except ie10, attach callback is sufficient
+             */
             this._checkMessageLength();
             this.listen(this.$.showMoreButton,'tap','_isTextExpanded');
-
         },
         detached: function () {
           this.unlisten(this, 'animationend', '_hide');
           this.unlisten(this,'dom-change','_checkMessageLength');
           this.unlisten(this.$.showMoreButton,'tap','_isTextExpanded');
         },
+        /**
+         * Clear timer if needed and set the time to the autoDismiss property
+         *
+         */
         setAutoDismiss: function (dismissAfter) {
             var _this = this;
             if(dismissAfter > 0)  {
-                // if timer sets already, clear it
+                // if timer is set already, clear it
                 if (this._timeouts.length > 0) {
                     for (var i = 0; i < this._timeouts.length; i++) {
                             clearTimeout(this._timeouts[i]);
@@ -200,34 +253,70 @@ Element providing message notifications.
                 this._show();
             }
         },
+        /**
+         * return true if action property is 'dismiss'
+         *
+         */
         _dismissDisplay: function (action) {
             return action === 'dismiss';
         },
+        /**
+         * return true if action property is NOT 'dismiss'
+         *
+         */
         _buttonDisplay: function (action) {
             return action !== 'dismiss';
         },
+        /**
+         * return true if type property is 'custom'
+         *
+         */
         _isCustomType: function (type) {
             return (type === 'custom');
         },
+        /**
+         * return true if type property is NOT'custom'
+         *
+         */
         _isNotCustomType: function (type) {
             return (type !== 'custom');
         },
+        /**
+         * return true if type property is 'more'
+         *
+         */
         _isNotMoreType: function (type) {
             return (type !== 'more');
         },
+        /**
+         * add fade-out class to this.$.alert
+         *
+         */
         _dismiss: function () {
             this.$.alert.classList.add('fade-out');
         },
+        /**
+         * add hidden class to event.target
+         *
+         */
         _hide: function (event) {
             if(event.animationName === 'fadeout') {
                 event.target.classList.add('hidden');
                 this.fire('px-alert-message-hidden');
             }
         },
+        /**
+         * remove fade-out and hidden class from this.$.alert
+         *
+         */
         _show: function () {
             this.$.alert.classList.remove('fade-out');
             this.$.alert.classList.remove('hidden');
         },
+        /**
+         * called when the 'show more' action text is clicked
+         *
+         */
         _isTextExpanded: function () {
             this._expandText = !this._expandText;
             if (this._expandText) {
@@ -313,6 +402,11 @@ Element providing message notifications.
           this._checkMessageLength();
           this.unlisten(this.$.fullMessage,'transitionend','_showLessAfterTransition');
         },
+        /**
+         * run when 'actionText' is clicked.
+         * If action property is a URL then open it.
+         * Else dismiss the alert message
+         */
         _action: function () {
             if(this.action.indexOf('http') != -1) {
                 window.open(this.action);
@@ -320,6 +414,10 @@ Element providing message notifications.
                 this._dismiss();
             }
         },
+        /**
+         * Sets the text of action buttons based on what the action property is
+         *
+         */
         _setActionText: function (action) {
             if (action === 'acknowledge') {
                 return 'OK';

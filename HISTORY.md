@@ -1,10 +1,6 @@
-v0.4.0
-==================
-* Added px-alert-message-hidden event when dismissing an alert
-
 v0.3.4
 =================
-* added comments for api documentation and replaced @extend with @mixin
+* added comments for api documentation and replaced @extend with @mixin 
 
 v0.3.3
 =================
