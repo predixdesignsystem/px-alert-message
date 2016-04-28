@@ -1,3 +1,7 @@
+v0.5.0
+==================
+* Upgrade to Polymer 1.4.0
+
 v0.4.0
 ==================
 * Added px-alert-message-hidden event when dismissing an alert
