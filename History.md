@@ -1,3 +1,7 @@
+v0.5.1
+==================
+* Modified line-height to fix a windows firefox bug
+
 v0.5.0
 ==================
 * Upgrade to Polymer 1.4.0
