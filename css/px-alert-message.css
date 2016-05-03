@@ -30,6 +30,9 @@ common/abstract rules go in px-alert-message-sketch.scss, not in this file.
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -769,8 +772,9 @@ button.btn {
     margin-left: 0.6666666667rem;
     margin-right: 0.6666666667rem;
     transition: height 0.3s ease-in-out;
-    line-height: 1.14em;
-    font-size: 15px; }
+    line-height: 18px;
+    font-size: 15px;
+    min-height: 20px; }
     .alert-message .message p {
       padding: 0;
       margin: 0; }
@@ -779,7 +783,7 @@ button.btn {
       font-size: 1.4rem;
       margin-left: 1.3333333333rem; }
     .alert-message .message.collapse {
-      max-height: 3.7rem; }
+      max-height: 60px; }
     .alert-message .message span:first-child {
       font-weight: bold; }
   .alert-message .action {

@@ -250,8 +250,8 @@ Element providing message notifications.
                 // store ID value of timer to clear once later
                 this._timeouts.push(
                     setTimeout( function () {
-                                    _this._dismiss();
-                                }, dismissAfter));
+                        _this._dismiss();
+                    }, dismissAfter));
                 this._show();
             }
         },
@@ -355,7 +355,6 @@ Element providing message notifications.
 
           //Run while message is too long and truncate it.
           while(messageDiv.scrollHeight > messageDiv.offsetHeight) {
-
             //first truncate the message, then truncate the title
             if(messageText.length > 0){
               messageText.pop();

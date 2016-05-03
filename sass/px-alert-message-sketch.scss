@@ -85,8 +85,9 @@ $actionable: true;
         margin-left: $inuit-base-spacing-unit--small;
         margin-right: $inuit-base-spacing-unit--small;
         transition: height 0.3s ease-in-out;
-        line-height: 1.14em;
-        font-size: 15px;
+        line-height: $inuit-base-line-height * 0.90;
+        font-size: $inuit-base-font-size  ;
+        min-height: $inuit-base-line-height;
         p {
             padding: 0;
             margin: 0;
@@ -97,7 +98,7 @@ $actionable: true;
             margin-left:  $inuit-base-spacing-unit--large;
         }
         &.collapse{
-          max-height: 3.7rem;
+          max-height: $inuit-base-line-height * 3;
         }
         span:first-child {
             font-weight: bold;
