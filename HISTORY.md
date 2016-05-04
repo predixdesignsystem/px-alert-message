@@ -1,3 +1,7 @@
+v0.5.2
+==================
+* added auto-github pages functionality
+
 v0.5.1
 ==================
 * Modified line-height to fix a windows firefox bug
