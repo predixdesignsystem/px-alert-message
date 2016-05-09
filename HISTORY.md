@@ -1,3 +1,7 @@
+v0.5.3
+==================
+* added pull request test inside travis
+
 v0.5.2
 ==================
 * added auto-github pages functionality
