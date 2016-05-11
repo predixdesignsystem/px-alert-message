@@ -1,6 +1,6 @@
 {
   "name": "px-alert-message",
-  "version": "v0.5.3",
+  "version": "v0.5.4",
   "main": [
     "px-alert-message.html"
   ],
@@ -11,7 +11,8 @@
     "sass",
     "bower_components",
     "node_modules",
-    "test"
+    "test",
+    "OSS_Notice.pdf"
   ],
   "dependencies": {
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
