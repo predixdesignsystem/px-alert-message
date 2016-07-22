@@ -36,6 +36,14 @@
         <div class="alert-message-container">
             <!-- instance 1, "predix" theme -->
             <px-alert-message
+                id="autoDismissAlert"
+                type="information"
+                message-title="Heads up!"
+                message="This definitely needs your attention."
+                action="https://www.gesoftware.com/predix"
+                auto-dismiss="1500">
+            </px-alert-message>
+            <px-alert-message
                 id="basicAlert"
                 type="error"
                 message-title="Well done!"
@@ -58,14 +66,7 @@
                 action="acknowledge">
             </px-alert-message>
 
-            <px-alert-message
-                id="autoDismissAlert"
-                type="information"
-                message-title="Heads up!"
-                message="This definitely needs your attention."
-                action="https://www.gesoftware.com/predix"
-                auto-dismiss="1500">
-            </px-alert-message>
+
 
             <px-alert-message
                 id='longTitleAlert'
@@ -164,6 +165,7 @@
             describe('Alert Dismiss', function() {
               it('does not have the class hidden applied',function() {
                 expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(false);
+                debugger
               });
 
               var closeBtnHiddenEvent = false;
@@ -184,7 +186,7 @@
                 //wait for alert to dismiss
                 setTimeout(function(){
                   done();
-                },3000);
+                },1000);
               });
 
               it('has the class hidden applied', function() {
