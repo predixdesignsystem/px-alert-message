@@ -24,7 +24,8 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'css/noprefix/px-alert-message-sketch.css': 'sass/px-alert-message-sketch.scss',
-                    'css/noprefix/px-alert-message.css': 'sass/px-alert-message-predix.scss'
+                    'css/noprefix/px-alert-message.css': 'sass/px-alert-message-predix.scss',
+                    'css/noprefix/px-alert-message-demo.css': 'sass/px-alert-message-demo.scss'
                 }
             }
         },
