@@ -64,7 +64,7 @@
                 message-title="Heads up!"
                 message="This definitely needs your attention."
                 action="https://www.gesoftware.com/predix"
-                auto-dismiss="2000">
+                auto-dismiss="1500">
             </px-alert-message>
 
             <px-alert-message
@@ -128,7 +128,7 @@
                 });
 
                 it('reflects the "auto-dismiss" property and its a number', function() {
-                    assert.equal(autoDismissAlert.autoDismiss, 2000);
+                    assert.equal(autoDismissAlert.autoDismiss, 1500);
                 });
 
                 it('alert is not hidden', function() {
@@ -162,7 +162,7 @@
 
 
             describe('Alert Dismiss', function() {
-              it('does not has the class hidden applied',function() {
+              it('does not have the class hidden applied',function() {
                 expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(false);
               });
 
@@ -184,7 +184,7 @@
                 //wait for alert to dismiss
                 setTimeout(function(){
                   done();
-                },600);
+                },1600);
               });
 
               it('has the class hidden applied', function() {
