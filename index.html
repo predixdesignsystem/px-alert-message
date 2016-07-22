@@ -58,18 +58,6 @@
             <!-- Properties -->
             <div class="properties u-ph+ u-pb+ u-mt++ u-mh++">
               <p class="epsilon">Properties</p>
-              <!-- <div class="u-mb-">Value: <input id="value{{indexPlusOne(index)}}" class="text-input" type="numeric" placeholder="0" value="{{item.value::input}}" /></div> -->
-              <!-- <div class="u-mb-">value: <px-slider id="value{{indexPlusOne(index)}}" value="{{item.value::input}}" min="0" max="100"></px-slider></div>
-              <div class="flex u-mb-">
-                <input id="striped{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.striped::change}}">
-                <label for$="striped{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">striped</div>
-              </div>
-              <div class="flex u-mb-">
-                <input id="animated{{indexPlusOne(index)}}" class="toggle__input toggle__input--small" type="checkbox" checked="{{item.animated::change}}">
-                <label for$="animated{{indexPlusOne(index)}}" class="toggle__label toggle__label--small"></label>
-                <div class="u-ml-">animated</div>
-              </div> -->
               <div class="u-mb-">type:
                 <div style="width: 100%;">
                   <px-dropdown id="type{{indexPlusOne(index)}}" value="{{item.type}}" display-value="{{item.type}}" bound-target="properties">
@@ -79,14 +67,13 @@
                         {"key":"two", "val": "warning"},
                         {"key":"three", "val": "error"},
                         {"key":"four", "val": "information"},
-                        {"key":"five", "val": "custom"},
                         {"key":"six", "val": "more"}]'>
                     </px-dropdown-content>
                   </px-dropdown>
                 </div>
               </div>
-              <div class="u-mb-">Message title: <input id="messageTitle{{indexPlusOne(index)}}" class="text-input" type="text" placeholder="0" value="{{item.messageTitle::input}}" /></div>
-              <div class="u-mb-">Message: <textarea style="min-height:auto" id="message{{indexPlusOne(index)}}" value="{{item.message::input}}" placeholder="something"></textarea></div>
+              <div class="u-mb-">Message title: <input id="messageTitle{{indexPlusOne(index)}}" class="text-input" readonly type="text" placeholder="0" value="{{item.messageTitle::input}}" /></div>
+              <div class="u-mb-">Message: <textarea style="min-height:auto" id="message{{indexPlusOne(index)}}" readonly value="{{item.message::input}}" placeholder="something"></textarea></div>
               <div class="u-mb-">Auto dismiss: <input id="autoDismiss{{indexPlusOne(index)}}" readonly class="text-input" type="number" placeholder="0" value="{{item.autoDismiss::input}}" /></div>
               <div class="u-mb-">action:
                 <div style="width: 100%;">
@@ -116,6 +103,7 @@
                     message="{{item.message}}"
                     auto-dismiss="{{item.autoDismiss}}"
                     action="{{item.action}}">
+
                   </px-alert-message>
                 </div>
                 <div class="flex__item">
@@ -130,7 +118,7 @@
           <div class="apiContainer">
             <div class="flex flex--col api u-mt++" >
               <div>
-                <!-- <px-api-viewer source="px-alert-message"></px-api-viewer> -->
+                <px-api-viewer source="px-alert-message"></px-api-viewer>
               </div>
             </div>
           </div>
@@ -163,17 +151,21 @@
 window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),
       year = new Date(),
-      type= ["custom",],
-      messageTitle=
-        [ "Oh snap!",
+      type= ["warning","important","information","more"],
+      messageTitle= [
+          "Oh snap!",
           "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'.",
-          "Custom Alert"],
+          "Well done!",
+          ""
+        ],
       message=[
         "Change a few things up.",
-        "We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
-      ],
-      autoDismiss=["0"],
-      action=["dismiss"];
+        "We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message.",
+        "You successfully completed a difficult task.",
+        "15"
+        ],
+      autoDismiss=["0","8000"],
+      action=["dismiss","https://www.predix.io/",""];
 
       optionsArray = [
         {
@@ -184,16 +176,23 @@ window.addEventListener('WebComponentsReady', function() {
           "action":action[0]
         },
         {
-          "type":type[0],
+          "type":type[2],
+          "messageTitle":messageTitle[2],
+          "message":message[2],
+          "autoDismiss":autoDismiss[1],
+          "action":action[2]
+        },
+        {
+          "type":type[1],
           "messageTitle":messageTitle[0],
           "message":message[0],
           "autoDismiss":autoDismiss[0],
-          "action":action[0]
+          "action":action[1]
         },
         {
-          "type":type[0],
-          "messageTitle":messageTitle[2],
-          "message":message[0],
+          "type":type[3],
+          "messageTitle":messageTitle[3],
+          "message":message[3],
           "autoDismiss":autoDismiss[0],
           "action":action[0]
         }
