@@ -1,3 +1,7 @@
+v0.6.3
+==================
+* updated gh-pages script to vulcanize demo
+
 v0.6.2
 ==================
 * fix tests

@@ -1,6 +1,6 @@
 {
   "name": "px-alert-message",
-  "version": "v0.6.2",
+  "version": "v0.6.3",
   "main": [
     "px-alert-message.html"
   ],
@@ -12,16 +12,18 @@
     "bower_components",
     "node_modules",
     "test",
-    "OSS_Notice.pdf"
+    "OSS_Notice.pdf",
+    ".github",
+    "scripts"
   ],
   "dependencies": {
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
     "polymer": "^1.5.0",
-    "px-theme": "https://github.com/PredixDev/px-theme.git#~0.8.0",
+    "px-theme": "~0.8.0",
     "web-component-tester": "~3.3.17",
-    "px-buttons-design": "https://github.com/PredixDev/px-buttons-design.git#^0.4.18",
-    "px-actionable-text-icons": "https://github.com/PredixDev/px-actionable-text-icons.git#^0.0.1",
-    "px-meta-buttons-design": "https://github.com/PredixDev/px-meta-buttons-design.git#~0.5.1"
+    "px-buttons-design": "^0.4.18",
+    "px-actionable-text-icons": "^0.0.1",
+    "px-meta-buttons-design": "~0.5.1"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#~v1.1.6",
@@ -31,9 +33,8 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
     "polymer-font-awesome": "~0.1.5",
     "px-tabs": "~0.4.0",
-    "ace-widget": "LostInBrittany/ace-widget#~1.0.13",
-    "px-api-viewer": "https://github.com/PredixDev/px-api-viewer.git",
-    "px-demo-snippet": "https://github.com/predixdev/px-demo-snippet.git",
+    "px-api-viewer": "~0.0.3",
+    "px-demo-snippet": "~0.0.11",
     "px-toggle-design": "^0.2.12",
     "px-actionable-text-icons-design": "^0.0.3",
     "px-code-design": "^0.2.11",
