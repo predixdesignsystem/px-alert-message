@@ -1,6 +1,6 @@
 {
   "name": "px-alert-message",
-  "version": "v0.6.3",
+  "version": "v0.6.4",
   "main": [
     "px-alert-message.html"
   ],
@@ -14,7 +14,8 @@
     "test",
     "OSS_Notice.pdf",
     ".github",
-    "scripts"
+    "scripts",
+    "px-alert-message.png"
   ],
   "dependencies": {
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
@@ -31,7 +32,7 @@
     "px-forms-design": "#~0.3.15",
     "px-tables-design": "#~0.3.12",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-    "polymer-font-awesome": "~0.1.5",
+    "px-polymer-font-awesome":"^0.1.8",
     "px-tabs": "~0.4.0",
     "px-api-viewer": "~0.0.3",
     "px-demo-snippet": "~0.0.11",

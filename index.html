@@ -15,7 +15,7 @@
   <link rel="import" href="../px-demo-snippet/px-demo-snippet.html">
   <link rel="import" href="../px-slider/px-slider.html">
   <link rel="import" href="../px-dropdown/px-dropdown.html">
-  <link rel="import" href="../polymer-font-awesome/polymer-font-awesome.html">
+  <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html" />
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
 
   </head>
@@ -28,16 +28,21 @@
 
     <!-- discription -->
     <div class="hero u-p++ text--shadow">
+      <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-alert-message" target="_blank"><iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github</a>
   		<h1 class="delta">px-alert-message</h1>
   		<p>
-  			The	<code>px-alert-message</code> component provides a progress bar, which can optionally include stripes and an animation effect.
+  			Alert Messages appear in a queue within the message container.<br />
+        Each message consists of an icon, title, body, and action.<br />
+        See Alert Icons for more on the default icons available – a custom icon can also be defined.<br />
+        The title appears in bold, whereas the message body text does not.<br />
+        The action on the right will either appear as an “X” for dismissing the alert, an “OK” button for acknowledging, or an “Open” button if a URL is specified.<br />
+        If Auto Dismiss is enabled, the alert will disappear on its own after a configurable delay period. The text on the alert messages should be kept short, ideally around three lines.<br />
   		</p>
 
   		<div class="flex">
   			<img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-alert-message.svg?style=flat-square" alt="Travis"/>
   			<img class="u-mr--" src="https://img.shields.io/bower/v/px-alert-message.svg?style=flat-square" alt="Bower"/>
   			<img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-alert-message.svg?style=flat-square" alt="Issues"/>
-  			<img class="u-mr--" src="https://img.shields.io/github/watchers/PredixDev/px-alert-message.svg?style=social&label=Watch"/>
   		</div>
   	</div>
     <br />
@@ -72,9 +77,9 @@
                   </px-dropdown>
                 </div>
               </div>
-              <div class="u-mb-">Message title: <input id="messageTitle{{indexPlusOne(index)}}" class="text-input" readonly type="text" placeholder="0" value="{{item.messageTitle::input}}" /></div>
-              <div class="u-mb-">Message: <textarea style="min-height:auto" id="message{{indexPlusOne(index)}}" readonly value="{{item.message::input}}" placeholder="something"></textarea></div>
-              <div class="u-mb-">Auto dismiss: <input id="autoDismiss{{indexPlusOne(index)}}" readonly class="text-input" type="number" placeholder="0" value="{{item.autoDismiss::input}}" /></div>
+              <div class="u-mb-">Message title: <input id="messageTitle{{indexPlusOne(index)}}" class="text-input" type="text" placeholder="" value="{{item.messageTitle::input}}" /></div>
+              <div class="u-mb-">Message: <textarea style="min-height:auto" id="message{{indexPlusOne(index)}}" value="{{item.message::input}}" placeholder="``"></textarea></div>
+              <div class="u-mb-">Auto dismiss: <input id="autoDismiss{{indexPlusOne(index)}}" readonly class="text-input" type="number" placeholder="" value="{{item.autoDismiss::input}}" /></div>
               <div class="u-mb-">action:
                 <div style="width: 100%;">
                   <px-dropdown id="action{{indexPlusOne(index)}}" value="{{item.action}}" display-value="{{item.action}}" bound-target="properties">
