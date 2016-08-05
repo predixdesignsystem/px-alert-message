@@ -30,14 +30,16 @@
     <div class="hero u-p++ text--shadow">
       <a class="actionable flex flex--right flex--middle" href="https://github.com/PredixDev/px-alert-message" target="_blank"><iron-icon class="menu__open" icon="fa:fa-github"></iron-icon>View on Github</a>
   		<h1 class="delta">px-alert-message</h1>
-  		<p>
-  			Alert Messages appear in a queue within the message container.<br />
-        Each message consists of an icon, title, body, and action.<br />
-        See Alert Icons for more on the default icons available – a custom icon can also be defined.<br />
-        The title appears in bold, whereas the message body text does not.<br />
-        The action on the right will either appear as an “X” for dismissing the alert, an “OK” button for acknowledging, or an “Open” button if a URL is specified.<br />
-        If Auto Dismiss is enabled, the alert will disappear on its own after a configurable delay period. The text on the alert messages should be kept short, ideally around three lines.<br />
-  		</p>
+      <div class="description-text">
+        <p>
+          Alert Messages appear in a queue within the message container.Each message consists of an icon, title,
+          body, and action. See Alert Icons for more on the default icons available – a custom icon can also be defined.
+          The title appears in bold, whereas the message body text does not.The action on the right will either appear
+          as an “X” for dismissing the alert, an “OK” button for acknowledging, or an “Open” button if a URL is specified.
+          If Auto Dismiss is enabled, the alert will disappear on its own after a configurable delay period. The
+          text on the alert messages should be kept short, ideally around three lines.
+        </p>
+      </div>
 
   		<div class="flex">
   			<img class="u-mr--" src="https://img.shields.io/travis/PredixDev/px-alert-message.svg?style=flat-square" alt="Travis"/>
@@ -45,113 +47,112 @@
   			<img class="u-mr--" src="https://img.shields.io/github/issues-raw/PredixDev/px-alert-message.svg?style=flat-square" alt="Issues"/>
   		</div>
   	</div>
-    <br />
 
     <!-- mega demo -->
     <div style="position: relative;" class="u-pb++ flex flex--col" id="defaultTab">
       <div class="tabContainer u-pt++ u-pl++">
         <px-tab-set selected="{{selected}}" bare no-bottom-border>
           <template is="dom-repeat" items="{{optionsArray}}">
-            <px-tab>Configuration {{indexPlusOne(index)}}</px-tab>
+            <px-tab>Option {{indexPlusOne(index)}}</px-tab>
           </template>
         </px-tab-set>
       </div>
       <px-tab-pages selected="{{selected}}">
         <template is="dom-repeat" items="{{optionsArray}}">
-          <section class="tab-page flex flex--right flex--wrap">
-            <div class="mega-demo flex u-pb++">
-            <!-- Properties -->
-            <div class="properties u-ph+ u-pb+ u-mt++ u-mh++">
-              <p class="epsilon">Properties</p>
-              <div class="u-mb-">type:
-                <div style="width: 100%;">
-                  <px-dropdown id="type{{indexPlusOne(index)}}" value="{{item.type}}" display-value="{{item.type}}" bound-target="properties">
-                    <px-dropdown-content
-                      items='[
-                        {"key":"one", "val": "important"},
-                        {"key":"two", "val": "warning"},
-                        {"key":"three", "val": "error"},
-                        {"key":"four", "val": "information"},
-                        {"key":"six", "val": "more"}]'>
-                    </px-dropdown-content>
-                  </px-dropdown>
+          <section class="tab-page">
+            <div class="mega-demo flex flex--wrap u-ph++ u-pb++">
+              <!-- Properties -->
+              <div class="properties u-ph+ u-pb+ u-mt+">
+                <p class="epsilon">Properties</p>
+                <div class="u-mb-">type:
+                  <div style="width: 100%;">
+                    <px-dropdown id="type{{indexPlusOne(index)}}" value="{{item.type}}" display-value="{{item.type}}" bound-target="properties">
+                      <px-dropdown-content
+                        items='[
+                          {"key":"one", "val": "important"},
+                          {"key":"two", "val": "warning"},
+                          {"key":"three", "val": "error"},
+                          {"key":"four", "val": "information"},
+                          {"key":"six", "val": "more"}]'>
+                      </px-dropdown-content>
+                    </px-dropdown>
+                  </div>
                 </div>
-              </div>
-              <div class="u-mb-">Message title: <input id="messageTitle{{indexPlusOne(index)}}" class="text-input" type="text" placeholder="" value="{{item.messageTitle::input}}" /></div>
-              <div class="u-mb-">Message: <textarea style="min-height:auto" id="message{{indexPlusOne(index)}}" value="{{item.message::input}}" placeholder="``"></textarea></div>
-              <div class="u-mb-">Auto dismiss: <input id="autoDismiss{{indexPlusOne(index)}}" readonly class="text-input" type="number" placeholder="" value="{{item.autoDismiss::input}}" /></div>
-              <div class="u-mb-">action:
-                <div style="width: 100%;">
-                  <px-dropdown id="action{{indexPlusOne(index)}}" value="{{item.action}}" display-value="{{item.action}}" bound-target="properties">
-                    <px-dropdown-content
-                      items='[
-                        {"key":"one", "val": "dismiss"},
-                        {"key":"two", "val": "acknowledge"},
-                        {"key":"three", "val": "https://www.predix.io/"},
-                        {"key":"four", "val": "https://www.google.com/"}]'>
-                    </px-dropdown-content>
-                  </px-dropdown>
+                <div class="u-mb-">Message title: <input id="messageTitle{{indexPlusOne(index)}}" class="text-input" type="text" placeholder="" value="{{item.messageTitle::input}}" /></div>
+                <div class="u-mb-">Message: <textarea style="min-height:auto" id="message{{indexPlusOne(index)}}" value="{{item.message::input}}" placeholder="``"></textarea></div>
+                <div class="u-mb-">Auto dismiss: <input id="autoDismiss{{indexPlusOne(index)}}" readonly class="text-input" type="number" placeholder="" value="{{item.autoDismiss::input}}" /></div>
+                <div class="u-mb-">action:
+                  <div style="width: 100%;">
+                    <px-dropdown id="action{{indexPlusOne(index)}}" value="{{item.action}}" display-value="{{item.action}}" bound-target="properties">
+                      <px-dropdown-content
+                        items='[
+                          {"key":"one", "val": "dismiss"},
+                          {"key":"two", "val": "acknowledge"},
+                          {"key":"three", "val": "https://www.predix.io/"},
+                          {"key":"four", "val": "https://www.google.com/"}]'>
+                      </px-dropdown-content>
+                    </px-dropdown>
+                  </div>
                 </div>
+
               </div>
 
-            </div>
+              <div class="demoContainer u-mt+">
+                <!-- demo -->
+                <div class="flex flex--col">
+                  <div class="flex__item demo u-p+">
+                    
+                    <px-alert-message
+                      id="progress"
+                      type="{{item.type}}"
+                      message-title="{{item.messageTitle}}"
+                      message="{{item.message}}"
+                      auto-dismiss="{{item.autoDismiss}}"
+                      action="{{item.action}}">
 
-            <div class="demoContainer u-mr++">
-              <!-- demo -->
-              <div class="flex flex--col">
-                <div class="flex__item demo u-ph+ u-pb+ u-mt++">
-                  <br />
-                  <px-alert-message
-                    id="progress"
-                    type="{{item.type}}"
-                    message-title="{{item.messageTitle}}"
-                    message="{{item.message}}"
-                    auto-dismiss="{{item.autoDismiss}}"
-                    action="{{item.action}}">
-
-                  </px-alert-message>
-                </div>
-                <div class="flex__item">
-                  <px-demo-snippet
-                    element-properties={{item}}
-                    element-name="px-alert-message">
-                  </px-demo-snippet>
+                    </px-alert-message>
+                  </div>
+                  <div class="flex__item">
+                    <px-demo-snippet
+                      element-properties={{item}}
+                      element-name="px-alert-message">
+                    </px-demo-snippet>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="apiContainer">
-            <div class="flex flex--col api u-mt++" >
-              <div>
-                <px-api-viewer source="px-alert-message"></px-api-viewer>
+            <div class="apiContainer">
+              <div class="flex flex--col api u-mt++" >
+                <div>
+                  <px-api-viewer source="px-alert-message"></px-api-viewer>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </template>
-    </px-tab-pages>
-  </div>
-  <footer class="footer flex flex--center">
-    <div class="footer__container u-pv++">
-      <div>
-        <a href="https://ge.com/digital" >
-          <img src="monogram-wdmk.png" alt="GE Monogram" class="footer__img">
-        </a>
-      </div>
-      <div class="footer__list">
-        <ul class="list-inline list-inline--delimited">
-          <li>
-            <a href="http://predix.io/legal" class="footer__list--lnk">Legal</a>
-          </li>
-          <li>
-            <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
-          </li>
-          <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
-        </ul>
-      </div>
+          </section>
+        </template>
+      </px-tab-pages>
     </div>
-  </footer>
-</template>
+    <footer class="footer flex flex--center">
+      <div class="footer__container u-pv++">
+        <div>
+          <a href="https://ge.com/digital" >
+            <img src="monogram-wdmk.png" alt="GE Monogram" class="footer__img">
+          </a>
+        </div>
+        <div class="footer__list">
+          <ul class="list-inline list-inline--delimited">
+            <li>
+              <a href="http://predix.io/legal" class="footer__list--lnk">Legal</a>
+            </li>
+            <li>
+              <a href="mailto:info@predix.io" class="footer__list--lnk">Contact Us</a>
+            </li>
+            <li>Copyright &copy; {{year}} General Electric Company. All rights reserved.</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </template>
 <script>
 window.addEventListener('WebComponentsReady', function() {
   var template = document.querySelector('template[is=dom-bind]'),

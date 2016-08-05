@@ -1,3 +1,7 @@
+v0.6.5
+==================
+* updated mega demo styles and bower px-demo-snippet to ^
+
 v0.6.4
 ==================
 * added image to readme, removed watch, added view on github

@@ -1,6 +1,6 @@
 {
   "name": "px-alert-message",
-  "version": "v0.6.4",
+  "version": "v0.6.5",
   "main": [
     "px-alert-message.html"
   ],
@@ -35,7 +35,7 @@
     "px-polymer-font-awesome":"^0.1.8",
     "px-tabs": "~0.4.0",
     "px-api-viewer": "~0.0.3",
-    "px-demo-snippet": "~0.0.11",
+    "px-demo-snippet": "^0.1.0",
     "px-toggle-design": "^0.2.12",
     "px-actionable-text-icons-design": "^0.0.3",
     "px-code-design": "^0.2.11",
