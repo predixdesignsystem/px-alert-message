@@ -48,7 +48,7 @@ Element providing message notifications.
                     </div>
                 </div>
             </template>
-            <div class="message collapse" id="fullMessage">
+            <div class="message collapsedMessage" id="fullMessage">
                 <p class$="{{ type }}" id="message">
                     <span>{{ messageTitle }}</span>
                     <span>{{ message }}</span>
@@ -379,7 +379,7 @@ Element providing message notifications.
           this.$.fullMessage.style.height = this.messsageTruncatedHeight + 'px';
           this.$.fullMessage.style.overflow = 'hidden';
 
-          this.toggleClass('collapse',false,this.$.fullMessage);
+          this.toggleClass('collapsedMessage',false,this.$.fullMessage);
           this.messageTitle = this._messageTitleOriginal;
           this.message = this._messageOriginal;
           this._showBtnText = 'Show Less';
@@ -399,7 +399,7 @@ Element providing message notifications.
          * helper function for _showLess, runs after css transition is completed
          */
         _showLessAfterTransition: function(){
-          this.toggleClass('collapse',true,this.$.fullMessage);
+          this.toggleClass('collapsedMessage',true,this.$.fullMessage);
           this._checkMessageLength();
           this.unlisten(this.$.fullMessage,'transitionend','_showLessAfterTransition');
         },

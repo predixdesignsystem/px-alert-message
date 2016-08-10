@@ -276,11 +276,11 @@
                       done();
                     },500);
                   });
-                  it('if the collapse class is removed from longTitleAlert', function() {
-                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(false);
+                  it('if the collapsedMessage class is removed from longTitleAlert', function() {
+                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(false);
                   });
-                  it('if the collapse class is removed from longMessageAlert', function() {
-                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(false);
+                  it('if the collapsedMessage class is removed from longMessageAlert', function() {
+                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(false);
                   });
 
                   it('if the "show more" says "show less"', function() {
@@ -343,11 +343,11 @@
                       done();
                     },500);
                   });
-                  it('reapplies the collapse class from longTitleAlert', function() {
-                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(true);
+                  it('reapplies the collapsedMessage class from longTitleAlert', function() {
+                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(true);
                   });
-                  it('reapplies the collapse class from longMessageAlert', function() {
-                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapse')).equal(true);
+                  it('reapplies the collapsedMessage class from longMessageAlert', function() {
+                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(true);
                   });
 
                   it('say "show more" instead of "show less"', function() {

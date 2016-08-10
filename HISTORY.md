@@ -1,3 +1,7 @@
+v0.6.6
+==================
+* Changed classname for collapsed messages
+
 v0.6.5
 ==================
 * updated mega demo styles and bower px-demo-snippet to ^

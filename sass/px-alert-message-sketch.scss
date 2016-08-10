@@ -97,7 +97,7 @@ $actionable: true;
             font-size: 1.4rem;
             margin-left:  $inuit-base-spacing-unit--large;
         }
-        &.collapse{
+        &.collapsedMessage{
           max-height: $inuit-base-line-height * 3;
         }
         span:first-child {
