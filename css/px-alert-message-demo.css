@@ -30,6 +30,9 @@ Predix branding rules go in px-alert-message.scss, not in this file.
  * Monochromatic (gray10 is darkest, gray1 is lightest)
  */
 /**
+ * Define grey = gray to avoid dev typos
+ */
+/**
  * Buttons
  */
 /**
@@ -217,12 +220,17 @@ pre {
 html {
   box-sizing: border-box; }
 
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+/**
+ * the html and :host declarations cannot be adjacent to one other
+ * or cssmin will combine them into a single rule, breaking in
+ * Safari and Firefox.
+ */
 :host {
   /*! Comment to prevent cssmin munging this rule with html above and borking Safari */
   box-sizing: border-box; }
-
-*, *:before, *:after {
-  box-sizing: inherit; }
 
 /**
  * A series of helper classes to use arbitrarily. Only use a helper class if an
@@ -427,6 +435,11 @@ a {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
+
+.inline--flex {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex; }
 
 .flex--row {
   -webkit-flex-direction: row;
@@ -1114,7 +1127,8 @@ textarea {
 .demoContainer {
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
-          flex: 1 1 auto; }
+          flex: 1 1 auto;
+  overflow: auto; }
 
 .demoSnippet {
   -webkit-flex-basis: 10rem;
@@ -1294,52 +1308,66 @@ textarea {
 /**
      * Add large margins.
      */
-.u-m\00002b {
+.u-m\00002b
+{
   margin: 1.3333333333rem !important; }
 
-.u-mt\00002b {
+.u-mt\00002b
+{
   margin-top: 1.3333333333rem !important; }
 
-.u-mr\00002b {
+.u-mr\00002b
+{
   margin-right: 1.3333333333rem !important; }
 
-.u-mb\00002b {
+.u-mb\00002b
+{
   margin-bottom: 1.3333333333rem !important; }
 
-.u-ml\00002b {
+.u-ml\00002b
+{
   margin-left: 1.3333333333rem !important; }
 
-.u-mh\00002b {
+.u-mh\00002b
+{
   margin-right: 1.3333333333rem !important;
   margin-left: 1.3333333333rem !important; }
 
-.u-mv\00002b {
+.u-mv\00002b
+{
   margin-top: 1.3333333333rem !important;
   margin-bottom: 1.3333333333rem !important; }
 
 /**
      * Add huge margins.
      */
-.u-m\00002b\00002b {
+.u-m\00002b\00002b
+{
   margin: 2rem !important; }
 
-.u-mt\00002b\00002b {
+.u-mt\00002b\00002b
+{
   margin-top: 2rem !important; }
 
-.u-mr\00002b\00002b {
+.u-mr\00002b\00002b
+{
   margin-right: 2rem !important; }
 
-.u-mb\00002b\00002b {
+.u-mb\00002b\00002b
+{
   margin-bottom: 2rem !important; }
 
-.u-ml\00002b\00002b {
+.u-ml\00002b\00002b
+{
   margin-left: 2rem !important; }
 
-.u-mh\00002b\00002b {
+.u-mh\00002b\00002b
+{
   margin-right: 2rem !important;
   margin-left: 2rem !important; }
 
-.u-mv\00002b\00002b {
+.u-mv\00002b\00002b
+{
   margin-top: 2rem !important;
   margin-bottom: 2rem !important; }
 
@@ -1426,52 +1454,66 @@ textarea {
 /**
      * Add large paddings.
      */
-.u-p\00002b {
+.u-p\00002b
+{
   padding: 1.3333333333rem !important; }
 
-.u-pt\00002b {
+.u-pt\00002b
+{
   padding-top: 1.3333333333rem !important; }
 
-.u-pr\00002b {
+.u-pr\00002b
+{
   padding-right: 1.3333333333rem !important; }
 
-.u-pb\00002b {
+.u-pb\00002b
+{
   padding-bottom: 1.3333333333rem !important; }
 
-.u-pl\00002b {
+.u-pl\00002b
+{
   padding-left: 1.3333333333rem !important; }
 
-.u-ph\00002b {
+.u-ph\00002b
+{
   padding-right: 1.3333333333rem !important;
   padding-left: 1.3333333333rem !important; }
 
-.u-pv\00002b {
+.u-pv\00002b
+{
   padding-top: 1.3333333333rem !important;
   padding-bottom: 1.3333333333rem !important; }
 
 /**
      * Add huge paddings.
      */
-.u-p\00002b\00002b {
+.u-p\00002b\00002b
+{
   padding: 2rem !important; }
 
-.u-pt\00002b\00002b {
+.u-pt\00002b\00002b
+{
   padding-top: 2rem !important; }
 
-.u-pr\00002b\00002b {
+.u-pr\00002b\00002b
+{
   padding-right: 2rem !important; }
 
-.u-pb\00002b\00002b {
+.u-pb\00002b\00002b
+{
   padding-bottom: 2rem !important; }
 
-.u-pl\00002b\00002b {
+.u-pl\00002b\00002b
+{
   padding-left: 2rem !important; }
 
-.u-ph\00002b\00002b {
+.u-ph\00002b\00002b
+{
   padding-right: 2rem !important;
   padding-left: 2rem !important; }
 
-.u-pv\00002b\00002b {
+.u-pv\00002b\00002b
+{
   padding-top: 2rem !important;
   padding-bottom: 2rem !important; }
 
