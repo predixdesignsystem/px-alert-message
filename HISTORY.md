@@ -1,3 +1,7 @@
+v0.6.8
+==================
+* added codepen
+
 v0.6.7
 ==================
 * added overflow to demoContainer and removed flex__wrap from mega-demo

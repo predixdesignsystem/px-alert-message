@@ -1,6 +1,6 @@
 {
   "name": "px-alert-message",
-  "version": "v0.6.7",
+  "version": "v0.6.8",
   "main": [
     "px-alert-message.html"
   ],
@@ -21,21 +21,20 @@
     "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
     "polymer": "^1.5.0",
     "px-theme": "~0.8.0",
-    "web-component-tester": "~3.3.17",
     "px-buttons-design": "^0.4.18",
     "px-actionable-text-icons": "^0.0.1",
     "px-meta-buttons-design": "~0.5.1"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#~v1.1.6",
     "px-starter-kit-design": "~0.5.5",
+    "web-component-tester": "~3.3.17",
     "px-forms-design": "#~0.3.15",
     "px-tables-design": "#~0.3.12",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-    "px-polymer-font-awesome":"^0.1.8",
+    "px-polymer-font-awesome": "^0.1.8",
     "px-tabs": "~0.4.0",
-    "px-api-viewer": "~0.0.3",
-    "px-demo-snippet": "^0.1.0",
+    "px-api-viewer": "~0.0.4",
+    "px-demo-snippet": "^0.4.0",
     "px-toggle-design": "^0.2.12",
     "px-actionable-text-icons-design": "^0.0.3",
     "px-code-design": "^0.2.11",
