@@ -79,7 +79,7 @@
                 </div>
                 <div class="u-mb-">Message title: <input id="messageTitle{{indexPlusOne(index)}}" class="text-input" type="text" placeholder="" value="{{item.messageTitle::input}}" /></div>
                 <div class="u-mb-">Message: <textarea style="min-height:auto" id="message{{indexPlusOne(index)}}" value="{{item.message::input}}" placeholder="``"></textarea></div>
-                <div class="u-mb-">Auto dismiss: <input id="autoDismiss{{indexPlusOne(index)}}" readonly class="text-input" type="number" placeholder="" value="{{item.autoDismiss::input}}" /></div>
+                <div class="u-mb-">Auto dismiss: <input id="autoDismiss{{indexPlusOne(index)}}" readonly class="text-input" type="text" placeholder="" value="{{item.autoDismiss::input}}" /></div>
                 <div class="u-mb-">action:
                   <div style="width: 100%;">
                     <px-dropdown id="action{{indexPlusOne(index)}}" value="{{item.action}}" display-value="{{item.action}}" bound-target="properties">
