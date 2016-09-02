@@ -1,90 +1,69 @@
 <!doctype html>
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>px-alert-message Demo</title>
-        <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-        <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
-        <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-        <link rel="import" href="px-alert-message.html"/>
-        <link rel="import" href="../px-theme/px-theme.html"/>
-        <style media="screen">
-            .alert-message-container {
-                position: fixed;
-                top: 15px;
-                right: 15px;
-                z-index: 1020;
-                height:100vh;
-                overflow-y: scroll;
-            }
-        </style>
-    </head>
 
-    <body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>px-alert-message Demo</title>
+  <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+  <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+  <link rel="import" href="../px-theme/px-theme-styles.html">
+  <style include="px-theme-styles" is="custom-style"></style>
 
-        <h3>Demo</h3>
+  <link rel="import" href="px-alert-message.html" />
+
+  <style media="screen">
+    .alert-message-container {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      z-index: 1020;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h3>Demo</h3>
 
 
-        <p>
-            Although related, examples are /not/ the same as the test fixtures.
-            Tests are tests, examples are examples.
-        </p>
+  <p>
+    Although related, examples are /not/ the same as the test fixtures. Tests are tests, examples are examples.
+  </p>
 
-        <p>
-            Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
-        </p>
+  <p>
+    Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
+  </p>
 
-        <div class="alert-message-container">
-            <!-- instance 1, "predix" theme -->
-            <px-alert-message
-                type="important"
-                message-title="Heads up!"
-                message="This definitely needs your attention.">
-            </px-alert-message>
+  <div class="alert-message-container">
+    <!-- instance 1, "predix" theme -->
+    <px-alert-message type="important" message-title="Heads up!" message="This definitely needs your attention.">
+    </px-alert-message>
 
-            <px-alert-message
-                type="warning"
-                message-title="Oh snap!"
-                message="Change a few things up."
-                action="dismiss">
-            </px-alert-message>
+    <px-alert-message type="warning" message-title="Oh snap!" message="Change a few things up." action="dismiss">
+    </px-alert-message>
 
-            <px-alert-message
-                type="error"
-                message-title="Warning!"
-                message="Something isn't quite right"
-                action="acknowledge">
-            </px-alert-message>
+    <px-alert-message type="error" message-title="Warning!" message="Something isn't quite right" action="acknowledge">
+    </px-alert-message>
 
-             <px-alert-message
-                type="information"
-                message-title="Well done!"
-                message="You successfully completed a difficult task."
-                auto-dismiss="5000">
-            </px-alert-message>
+    <px-alert-message type="information" message-title="Well done!" message="You successfully completed a difficult task." auto-dismiss="5000">
+    </px-alert-message>
 
-            <px-alert-message
-                type="information"
-                message-title="This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'."
-                message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
-                action="https://www.predix.io/">
-            </px-alert-message>
+    <px-alert-message type="information" message-title="This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'." message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
+        action="https://www.predix.io/">
+    </px-alert-message>
 
-            <px-alert-message
-                type="custom"
-                message-title="Custom Alert"
-                message="The icon to the left is defined by placing content between the px-alert-message tags. If applicable it is possible to have various file types."
-                action="https://www.predix.io/">
-                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
-            </px-alert-message>
+    <px-alert-message type="custom" message-title="Custom Alert" message="The icon to the left is defined by placing content between the px-alert-message tags. If applicable it is possible to have various file types." action="https://www.predix.io/">
+      <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" />
+    </px-alert-message>
 
-             <px-alert-message
-                type="more"
-                message="15"
-                action="dismiss">
-            </px-alert-message>
-        </div>
-    </body>
+    <px-alert-message type="more" message="15" action="dismiss">
+    </px-alert-message>
+  </div>
+</body>
+
 </html>
