@@ -164,8 +164,9 @@
 
             describe('Alert Dismiss', function() {
               it('does not have the class hidden applied',function() {
-                expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(false);
-                debugger
+                flush(function(){
+                  expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(false);
+                });
               });
 
               var closeBtnHiddenEvent = false;
