@@ -1,3 +1,11 @@
+v0.7.1
+==================
+* Make tests more resilient, clean up tests also.
+
+v0.7.0
+==================
+* Grunt to gulp migration.
+
 v0.6.9
 ==================
 * fixed demo page for IE
