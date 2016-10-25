@@ -1,3 +1,7 @@
+v0.7.2
+==================
+* Update dependencies
+
 v0.7.1
 ==================
 * Make tests more resilient, clean up tests also.

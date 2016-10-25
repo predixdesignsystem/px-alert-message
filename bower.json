@@ -1,6 +1,6 @@
 {
   "name": "px-alert-message",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "main": [
     "px-alert-message.html"
   ],
@@ -22,7 +22,7 @@
     "polymer": "^1.6.1",
     "px-theme": "~1.1.2",
     "px-buttons-design": "^0.4.18",
-    "px-actionable-text-icons": "^0.0.3",
+    "px-actionable-text-icons": "^0.1.0",
     "px-meta-buttons-design": "~0.5.1"
   },
   "devDependencies": {
@@ -35,7 +35,6 @@
     "px-api-viewer": "~0.1.0",
     "px-demo-snippet": "^0.6.4",
     "px-toggle-design": "^0.2.12",
-    "px-actionable-text-icons-design": "^0.0.3",
     "px-code-design": "^0.2.11",
     "px-headings-design": "^0.2.14",
     "px-list-inline-design": "^0.2.11",
