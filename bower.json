@@ -1,13 +1,13 @@
 {
     "name": "px-alert-message",
-    "version": "0.7.4",
+    "version": "0.7.5",
     "main": [
         "px-alert-message.html"
     ],
     "ignore": [
         ".*",
         "npm-debug.log",
-        "Gruntfile.js",
+        "gulpfile.js",
         "sass",
         "bower_components",
         "node_modules",
