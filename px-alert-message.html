@@ -44,7 +44,7 @@ Custom property | Description | Default
 <dom-module id="px-alert-message">
   <template>
     <style include="px-alert-message-styles"></style>
-    
+
     <div id="alert" class="alert-message flex flex--left flex--middle">
       <template is="dom-if" if="{{ _isNotMore }}">
         <div class="severity">
@@ -76,7 +76,7 @@ Custom property | Description | Default
         <div class="action">
           <template is="dom-if" if="{{ _showDismiss }}">
             <button class="btn btn--bare dismiss" on-click="_dismiss">
-              <i class="fa fa-times"></i>
+              <iron-icon icon="fa:fa-times"></iron-icon>
             </button>
           </template>
           <template is="dom-if" if="{{ _showButton }}">
