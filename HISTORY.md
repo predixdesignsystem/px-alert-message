@@ -1,3 +1,7 @@
+v0.7.8
+==================
+* fixed test that broke when replaced i with iron-icon
+
 v0.7.7
 ==================
 * changed <i to <iron-icon
