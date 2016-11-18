@@ -1,3 +1,7 @@
+v0.7.9
+==================
+* update dependencies for dropdown
+
 v0.7.8
 ==================
 * fixed test that broke when replaced i with iron-icon

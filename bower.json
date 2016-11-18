@@ -1,45 +1,45 @@
 {
-  "name": "px-alert-message",
-  "version": "0.7.8",
-  "main": [
-    "px-alert-message.html"
-  ],
-  "ignore": [
-    ".*",
-    "npm-debug.log",
-    "gulpfile.js",
-    "sass",
-    "bower_components",
-    "node_modules",
-    "test",
-    "OSS_Notice.pdf",
-    ".github",
-    "scripts",
-    "px-alert-message.png"
-  ],
-  "dependencies": {
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
-    "polymer": "^1.6.1",
-    "px-theme": "~1.1.2",
-    "px-buttons-design": "^0.4.18",
-    "px-actionable-text-icons": "^0.1.0",
-    "px-meta-buttons-design": "~0.5.1",
-    "polymer-font-awesome": "px-polymer-font-awesome#^0.1.9"
-  },
-  "devDependencies": {
-    "px-starter-kit-design": "~0.6.0",
-    "px-forms-design": "#~0.3.15",
-    "px-tables-design": "#~0.3.12",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-    "px-polymer-font-awesome": "^0.1.8",
-    "px-tabs": "~0.5.2",
-    "px-api-viewer": "~0.1.0",
-    "px-demo-snippet": "^0.6.9",
-    "px-toggle-design": "^0.2.12",
-    "px-code-design": "^0.2.11",
-    "px-headings-design": "^0.2.14",
-    "px-list-inline-design": "^0.2.11",
-    "px-slider": "^0.6.0",
-    "px-dropdown": "^0.12.1"
-  }
+    "name": "px-alert-message",
+    "version": "0.7.9",
+    "main": [
+        "px-alert-message.html"
+    ],
+    "ignore": [
+        ".*",
+        "npm-debug.log",
+        "gulpfile.js",
+        "sass",
+        "bower_components",
+        "node_modules",
+        "test",
+        "OSS_Notice.pdf",
+        ".github",
+        "scripts",
+        "px-alert-message.png"
+    ],
+    "dependencies": {
+        "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
+        "polymer": "^1.6.1",
+        "px-theme": "~1.1.2",
+        "px-buttons-design": "^0.4.18",
+        "px-actionable-text-icons": "^0.1.0",
+        "px-meta-buttons-design": "~0.5.1",
+        "polymer-font-awesome": "px-polymer-font-awesome#^0.1.9"
+    },
+    "devDependencies": {
+        "px-starter-kit-design": "~0.6.0",
+        "px-forms-design": "#~0.3.15",
+        "px-tables-design": "#~0.3.12",
+        "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
+        "px-polymer-font-awesome": "^0.1.8",
+        "px-tabs": "~0.5.2",
+        "px-api-viewer": "~0.1.0",
+        "px-demo-snippet": "^0.6.9",
+        "px-toggle-design": "^0.2.12",
+        "px-code-design": "^0.2.11",
+        "px-headings-design": "^0.2.14",
+        "px-list-inline-design": "^0.2.11",
+        "px-slider": "^0.6.0",
+        "px-dropdown": "~2.0.0"
+    }
 }
