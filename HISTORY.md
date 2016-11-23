@@ -1,3 +1,7 @@
+v0.7.11
+==================
+* Update px-theme to 2.0.1 and update test fixtures
+
 v0.7.10
 ==================
 * Update px-theme to 2.0.1 and update test fixtures
