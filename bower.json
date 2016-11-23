@@ -1,6 +1,6 @@
 {
     "name": "px-alert-message",
-    "version": "0.7.18",
+    "version": "0.7.19",
     "main": [
         "px-alert-message.html"
     ],
@@ -39,7 +39,7 @@
         "px-code-design": "^0.2.11",
         "px-headings-design": "^0.2.14",
         "px-list-inline-design": "^0.2.11",
-        "px-slider": "^0.6.0",
+        "px-slider": "^0.7.6",
         "px-dropdown": "^2.0.0"
     }
 }

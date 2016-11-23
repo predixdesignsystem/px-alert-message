@@ -1,3 +1,7 @@
+v0.7.19
+==================
+* bumping px-slider.
+
 v0.7.18
 ==================
 * changing all devDeps to ^
