@@ -1,3 +1,7 @@
+v0.7.20
+==================
+* updating slider dependency
+
 v0.7.19
 ==================
 * bumping px-slider.

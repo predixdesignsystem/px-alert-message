@@ -1,6 +1,6 @@
 {
     "name": "px-alert-message",
-    "version": "0.7.19",
+    "version": "0.7.20",
     "main": [
         "px-alert-message.html"
     ],
