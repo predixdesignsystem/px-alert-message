@@ -321,7 +321,7 @@ Custom property | Description | Default
          *
          */
     _hide: function(event) {
-      if (event.animationName === 'fadeout') {
+      if (event.target.classList.contains('fade-out')) {
         event.target.classList.add('hidden');
         this.fire('px-alert-message-hidden');
       }

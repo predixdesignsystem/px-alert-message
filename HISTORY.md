@@ -1,3 +1,7 @@
+v0.7.23
+==================
+* fixed failing tests (?)
+
 v0.7.22
 ==================
 * added word-wrap and word-break to fix #20
