@@ -1,3 +1,7 @@
+v0.7.22
+==================
+* added word-wrap and word-break to fix #20
+
 v0.7.21
 ==================
 * changing browser in wct testing from safari 8 to safari 10 on elcapitan

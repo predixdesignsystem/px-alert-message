@@ -64,6 +64,8 @@ $actionable: true;
     min-height: $inuit-base-spacing-unit--small * 5;
     animation: fadein .5s;
     transition: max-height 1;
+    word-wrap: break-word;
+    word-break: break-word;
     &.fade-out {
         animation: fadeout .5s;
         max-height: 0px;
