@@ -1,3 +1,7 @@
+v0.8.0
+==================
+* Updated dependencies
+
 v0.7.23
 ==================
 * fixed failing tests (?)
