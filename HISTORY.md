@@ -1,3 +1,7 @@
+v0.8.1
+==================
+* Update dependencies
+
 v0.8.0
 ==================
 * Updated dependencies
