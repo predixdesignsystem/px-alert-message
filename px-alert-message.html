@@ -6,6 +6,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 <!--
 Element providing message notifications.
 
@@ -68,7 +69,7 @@ Custom property | Description | Default
         <p class$="{{ type }}" id="message">
           <span>{{ messageTitle }}</span>
           <span>{{ message }}</span>
-          <span id="showMoreButton" class="actionable visuallyhidden">{{_showBtnText}}</span>
+          <span id="showMoreButton" class="actionable visuallyhidden">{{localize(_showBtnText)}}</span>
         </p>
 
       </div>
@@ -80,7 +81,7 @@ Custom property | Description | Default
             </button>
           </template>
           <template is="dom-if" if="{{ _showButton }}">
-            <button class="btn" on-click="_action">{{ actionText }}</button>
+            <button class="btn" on-click="_action">{{localize(_actionText)}}</button>
           </template>
         </div>
       </template>
@@ -93,7 +94,12 @@ Custom property | Description | Default
   Polymer({
 
     is: 'px-alert-message',
-
+    /**
+    * use app-localize-behavior to realize internationalization
+    */
+    behaviors: [
+      Polymer.AppLocalizeBehavior
+    ],
     /**
          * Properties block, expose attribute values to the DOM via 'reflect'
          *
@@ -101,6 +107,15 @@ Custom property | Description | Default
          * @type Object
          */
     properties: {
+      /**
+             * The multiple language options, support en , zh-cn now
+             * @type String
+             * @default "en"
+             */
+      language: {
+        value: 'en',
+        type: String
+      },
       /**
              * defines the alert level, reflected in the icon.
              * - 'important' - red triangle labeled 1
@@ -167,7 +182,7 @@ Custom property | Description | Default
              * computed property. Displays the value of _setActionText() inside the action button
              * @private
              */
-      actionText: {
+      _actionText: {
         type: String,
         computed: '_setActionText(action)'
       },
@@ -230,6 +245,7 @@ Custom property | Description | Default
       }
     },
     attached: function() {
+      this.loadResources(this.resolveUrl('locales.json'));
       this.listen(this, 'animationend', '_hide');
       //safari 8
       this.listen(this, 'webkitAnimationEnd', '_hide');

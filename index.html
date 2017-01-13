@@ -96,7 +96,7 @@
                     </px-dropdown>
                   </div>
                 </div>
-
+                <div class="u-mb-">Language: <input id="language{{indexPlusOne(index)}}" class="text-input" type="text" placeholder="" value="{{item.language::input}}" /></div>
               </div>
 
               <div class="demoContainer u-mt+">
@@ -110,6 +110,7 @@
                       message-title="{{item.messageTitle}}"
                       message="{{item.message}}"
                       auto-dismiss="{{item.autoDismiss}}"
+                      language="{{item.language}}"
                       action="{{item.action}}">
 
                     </px-alert-message>
@@ -180,28 +181,32 @@ window.addEventListener('WebComponentsReady', function() {
           "messageTitle":messageTitle[1],
           "message":message[1],
           "autoDismiss":autoDismiss[0],
-          "action":action[0]
+          "action":action[0],
+          "language":"en"
         },
         {
           "type":type[2],
           "messageTitle":messageTitle[2],
           "message":message[2],
           "autoDismiss":autoDismiss[1],
-          "action":action[2]
+          "action":action[2],
+          "language":"en"
         },
         {
           "type":type[1],
           "messageTitle":messageTitle[0],
           "message":message[0],
           "autoDismiss":autoDismiss[0],
-          "action":action[1]
+          "action":action[1],
+          "language":"zh-cn"
         },
         {
           "type":type[3],
           "messageTitle":messageTitle[3],
           "message":message[3],
           "autoDismiss":autoDismiss[0],
-          "action":action[0]
+          "action":action[0],
+          "language":"zh-cn"
         }
       ],
       indexPlusOne = function(num) {
