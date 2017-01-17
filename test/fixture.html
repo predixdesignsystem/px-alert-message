@@ -100,6 +100,16 @@
                 message="15"
                 action="dismiss">
             </px-alert-message>
+
+            <px-alert-message
+                id='multipleLanguageAlert'
+                type="custom"
+                language="zh-cn"
+                message-title="Custom Alert"
+                message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
+                action="https://www.gesoftware.com/predix">
+                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+            </px-alert-message>
         </div>
 
         <script>
@@ -110,6 +120,7 @@
             var longTitleAlert = document.getElementById('longTitleAlert');
             var longMessageAlert = document.getElementById('longMessageAlert');
             var noContentAlert = document.getElementById('noContentAlert');
+            var multipleLanguageAlert = document.getElementById('multipleLanguageAlert');
             var moreAlert = document.getElementById('moreAlert');
 
             describe('Alert attrs dont get changed', function() {
@@ -234,15 +245,17 @@
                   });
 
                   it(' if longTitleAlert truncates properly', function() {
+                      //if use localize function then #message height will >= #fullMessage
                       var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
                       var messageP  = longTitleAlert.querySelector('#message');
-                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) <=
+                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) >=
                              parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"))).equal(true);
                   });
                   it('truncates longMessageAlert properly', function() {
+                      //if use localize function then #message height will >= #fullMessage
                       var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
                       var messageP  = longMessageAlert.querySelector('#message');
-                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) <=
+                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) >=
                              parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"))).equal(true);
                   });
 
@@ -397,6 +410,16 @@
                       var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
                       assert.equal(fullMessageHeight,longMessageAlert.messsageTruncatedHeight);
                     });
+                });
+
+                describe('Multiple language zh-cn', function() {
+
+                  it('if language="zh-cn" ', function() {
+                    var moreBtnMessage = multipleLanguageAlert.querySelector('#showMoreButton');
+                      assert.equal(moreBtnMessage.textContent, "显示更多");
+                      //expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(true);
+                  });
+
                 });
             });
         </script>
