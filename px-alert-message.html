@@ -316,7 +316,6 @@ Custom property | Description | Default
          */
     _dismiss: function() {
       this.$.alert.classList.add('fade-out');
-      this.$.alert.classList.add('hidden');
     },
     /**
          * add hidden class to event.target
@@ -436,9 +435,8 @@ Custom property | Description | Default
       }
       else{
         if (this.action) {
-          this.callFunc = new Function('return this.domHost.'+ this.action+'(this.messageId)');
+          this.callFunc = new Function('return this.domHost.'+ this.action);
           this.callFunc();
-          console.log('_dismiss');
           this._dismiss();
 
         }
