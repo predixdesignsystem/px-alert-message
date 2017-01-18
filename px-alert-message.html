@@ -148,6 +148,7 @@ Custom property | Description | Default
              * - 'dismiss' - displays (x) to dismiss
              * - 'acknowledge' - displays (OK) to dismiss
              * - 'URL' - string containing http url to be opened, displays (Open).
+             * - 'FUNCTION' name of a function to be called when clicking on the button
              */
       action: {
         type: String,
@@ -315,6 +316,7 @@ Custom property | Description | Default
          */
     _dismiss: function() {
       this.$.alert.classList.add('fade-out');
+      this.$.alert.classList.add('hidden');
     },
     /**
          * add hidden class to event.target
@@ -423,13 +425,23 @@ Custom property | Description | Default
     /**
          * run when 'actionText' is clicked.
          * If action property is a URL then open it.
-         * Else dismiss the alert message
+         * If action property equals dimiss or acknowledge dismiss the alert message
+         * Else if acion is defined, call the function from the parent with the given name
          */
     _action: function() {
       if (this.action.indexOf('http') != -1) {
         window.open(this.action);
       } else if (this.action === 'dismiss' || this.action === 'acknowledge') {
         this._dismiss();
+      }
+      else{
+        if (this.action) {
+          this.callFunc = new Function('return this.domHost.'+ this.action+'(this.messageId)');
+          this.callFunc();
+          console.log('_dismiss');
+          this._dismiss();
+
+        }
       }
     },
     /**
@@ -439,7 +451,7 @@ Custom property | Description | Default
     _setActionText: function(action) {
       if (action === 'acknowledge') {
         return 'OK';
-      } else if (action.indexOf('http') != -1) {
+      } else if (action != 'dismiss' && action != 'acknowledge') {
         return 'Open';
       } else {
         return ''; // future custom button actions
