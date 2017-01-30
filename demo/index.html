@@ -11,25 +11,14 @@
 <link rel="import" href="../../px-demo/px-demo-interactive.html" />
 <link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
 
-<!-- Light theme -->
-<!--<link rel="import" href="../../px-theme/px-theme-styles.html">-->
-<!-- Dark theme -->
- <link rel="import" href="../../px-dark-theme/px-dark-theme-styles.html"> 
- <link rel="import" href="../../px-dark-demo-theme/px-dark-demo-theme-styles.html"> 
-
 <!-- Imports for this componnent -->
 <link rel="import" href="../../px-demo/css/px-demo-styles.html" />
-<link rel="import" href="../../px-alert-message.html" />
+<link rel="import" href="../px-alert-message.html" />
 
 <!-- Demo DOM module -->
 <dom-module id="local-element-demo">
   <template>
     <style include="px-demo-styles" is="custom-style"></style>
-    <!-- Light theme -->
-    <!--<style include="px-theme-styles" is="custom-style"></style>-->
-    <!-- Dark theme -->
-    <style include="px-dark-theme-styles" is="custom-style"></style>
-    <style include="px-dark-demo-theme-styles" is="custom-style"></style>
 
     <!-- Header -->
     <px-demo-header
@@ -118,28 +107,28 @@
         type: Array,
         value: function(){
           return [
-            { configName: "Success Message",
+            { configName: "Basic",
               type: "information",
               messageTitle: "Well done!",
               message: "You successfully completed a difficult task.",
               autoDismiss: "8000",
               action: "" },
 
-            { configName: "Long Message",
-              type: "error",
-              messageTitle: "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'.",
-              message: "We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message.",
-              autoDismiss: "0",
-              action: "dismiss" },
+            // { configName: "Long Message",
+            //   type: "error",
+            //   messageTitle: "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'.",
+            //   message: "We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message.",
+            //   autoDismiss: "0",
+            //   action: "dismiss" },
 
-            { configName: "Option 3",
+            { configName: "Action",
               type: "important",
               messageTitle: "Oh snap!",
               message: "Change a few things up.",
               autoDismiss: "0",
               action: "https://www.predix.io/" },
 
-            { configName: "Option 4",
+            { configName: "More Messages",
               type: "more",
               messageTitle: "",
               message: "15",
