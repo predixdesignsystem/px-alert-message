@@ -101,366 +101,366 @@ Custom property | Description | Default
       Polymer.AppLocalizeBehavior
     ],
     /**
-         * Properties block, expose attribute values to the DOM via 'reflect'
-         *
-         * @property properties
-         * @type Object
-         */
+     * Properties block, expose attribute values to the DOM via 'reflect'
+     *
+     * @property properties
+     * @type Object
+     */
     properties: {
-      /**
-             * The multiple language options, support en , zh-cn now
-             * @type String
-             * @default "en"
-             */
-      language: {
-        value: 'en',
-        type: String
-      },
-      /**
-             * defines the alert level, reflected in the icon.
-             * - 'important' - red triangle labeled 1
-             * - 'warning'- orange diamond labeled 2
-             * - 'error' - yellow square labeled 3
-             * - 'information' - blue circle labeled 4
-             * - 'custom' - allows a developer to specify HTML including images in place of the icon.
-             * - 'more' - allows for a message that shows that there are more messages.
-             *
-             * @default information
-             *
-             */
-      type: {
-        type: String,
-        reflect: true,
-        value: 'information'
-      },
-      /**
-             * The title of the message, displayed in bold.
-             *
-             */
-      messageTitle: {
-        type: String,
-        reflect: true
-      },
-      /**
-             * The message body
-             *
-             */
-      message: {
-        type: String
-      },
-      /**
-             * automatically dismisses the alert message after number specified
-             *
-             * unit: milliseconds
-             *
-             */
-      autoDismiss: {
-        type: Number,
-        reflect: true
-      },
-      /**
-             * User interaction on the right hand side of the message box.
-             * - 'dismiss' - displays (x) to dismiss
-             * - 'acknowledge' - displays (OK) to dismiss
-             * - 'URL' - string containing http url to be opened, displays (Open).
-             */
-      action: {
-        type: String,
-        reflect: true
-      },
-      /**
-             * An array to store ID values of timer in order to clear all timer once.
-             * @type Array
-             */
-      _timeouts: {
-        type: Array,
-        value: function() {
-          return [];
-        }
-      },
-      /**
-             * computed property. Displays the value of _setActionText() inside the action button
-             * @private
-             */
-      _actionText: {
-        type: String,
-        computed: '_setActionText(action)'
-      },
-      /**
-             * computed property. Returns true if action property is 'dismiss'
-             *
-             */
-      _showDismiss: {
-        type: String,
-        computed: '_dismissDisplay(action)'
-      },
-      /**
-             * computed property. Returns true if action property is not 'dismiss'
-             *
-             */
-      _showButton: {
-        type: String,
-        computed: '_buttonDisplay(action)'
-      },
-      /**
-             * computed property. Returns true if type property is 'custom'
-             *
-             */
-      _isCustom: {
-        type: String,
-        computed: '_isCustomType(type)'
-      },
-      /**
-             * computed property. Returns true if type property is not 'custom'
-             *
-             */
-      _isNotCustom: {
-        type: String,
-        computed: '_isNotCustomType(type)'
-      },
-      /**
-             * computed property. Returns true if type property is not 'more'
-             *
-             */
-      _isNotMore: {
-        type: String,
-        computed: '_isNotMoreType(type)'
-      },
-      /**
-             * stores the value to be displayed in the show more action text
-             * @type String
-             */
-      _showBtnText: {
-        type: String,
-        value: "Show More"
-      },
-      /**
-             * checks whether the _showMore() if false or _showLess() if true functions are called.
-             * @type Boolean
-             * @default false
-             */
-      _expandText: {
-        type: Boolean,
-        value: false
-      }
-    },
-    attached: function() {
-      this.loadResources(this.resolveUrl('locales.json'));
-      this.listen(this, 'animationend', '_hide');
-      //safari 8
-      this.listen(this, 'webkitAnimationEnd', '_hide');
-      if (this.autoDismiss && this.autoDismiss > 0) {
-        this.setAutoDismiss(this.autoDismiss);
-      }
-      /**
-             * for IE10 only: the attach callback is still too early for all text styles to have been applied
-             * this workaround allows for those styles to get applied, and then calling the message truncation function
-             * but, dom-change is too early for other browsers?
-             */
-      this.listen(this, 'dom-change', '_checkMessageLength');
-      /**
-             * for all browsers except ie10, attach callback is sufficient
-             */
-      this._checkMessageLength();
-      this.listen(this.$.showMoreButton, 'tap', '_isTextExpanded');
-    },
-    detached: function() {
-      this.unlisten(this, 'animationend', '_hide');
-      this.unlisten(this, 'dom-change', '_checkMessageLength');
-      this.unlisten(this.$.showMoreButton, 'tap', '_isTextExpanded');
+    /**
+     * The multiple language options, support en , zh-cn now
+     * @type String
+     * @default "en"
+     */
+    language: {
+      value: 'en',
+      type: String
     },
     /**
-         * Clear timer if needed and set the time to the autoDismiss property
-         *
-         */
-    setAutoDismiss: function(dismissAfter) {
-      var _this = this;
-      if (dismissAfter > 0) {
-        // if timer is set already, clear it
-        if (this._timeouts.length > 0) {
-          for (var i = 0; i < this._timeouts.length; i++) {
-            clearTimeout(this._timeouts[i]);
-          };
-          this._timeouts = [];
-        }
-        // store ID value of timer to clear once later
-        this._timeouts.push(setTimeout(function() {
-          _this._dismiss();
-        }, dismissAfter));
-        this._show();
+    * defines the alert level, reflected in the icon.
+    * - 'important' - red triangle labeled 1
+    * - 'warning'- orange diamond labeled 2
+    * - 'error' - yellow square labeled 3
+    * - 'information' - blue circle labeled 4
+    * - 'custom' - allows a developer to specify HTML including images in place of the icon.
+    * - 'more' - allows for a message that shows that there are more messages.
+    *
+    * @default information
+    *
+    */
+    type: {
+      type: String,
+      reflect: true,
+      value: 'information'
+    },
+    /**
+    * The title of the message, displayed in bold.
+    *
+    */
+    messageTitle: {
+      type: String,
+      reflect: true
+    },
+    /**
+    * The message body
+    *
+    */
+    message: {
+      type: String
+    },
+    /**
+    * automatically dismisses the alert message after number specified
+    *
+    * unit: milliseconds
+    *
+    */
+    autoDismiss: {
+      type: Number,
+      reflect: true
+    },
+    /**
+    * User interaction on the right hand side of the message box.
+    * - 'dismiss' - displays (x) to dismiss
+    * - 'acknowledge' - displays (OK) to dismiss
+    * - 'URL' - string containing http url to be opened, displays (Open).
+    */
+    action: {
+      type: String,
+      reflect: true
+    },
+    /**
+    * An array to store ID values of timer in order to clear all timer once.
+    * @type Array
+    */
+    _timeouts: {
+      type: Array,
+      value: function() {
+        return [];
       }
     },
     /**
-         * return true if action property is 'dismiss'
-         *
-         */
-    _dismissDisplay: function(action) {
-      return action === 'dismiss';
+    * computed property. Displays the value of _setActionText() inside the action button
+    * @private
+    */
+    _actionText: {
+      type: String,
+      computed: '_setActionText(action)'
     },
     /**
-         * return true if action property is NOT 'dismiss'
-         *
-         */
-    _buttonDisplay: function(action) {
-      return action !== 'dismiss';
+    * computed property. Returns true if action property is 'dismiss'
+    *
+    */
+    _showDismiss: {
+      type: String,
+      computed: '_dismissDisplay(action)'
     },
     /**
-         * return true if type property is 'custom'
-         *
-         */
-    _isCustomType: function(type) {
-      return (type === 'custom');
+    * computed property. Returns true if action property is not 'dismiss'
+    *
+    */
+    _showButton: {
+      type: String,
+      computed: '_buttonDisplay(action)'
     },
     /**
-         * return true if type property is NOT'custom'
-         *
-         */
-    _isNotCustomType: function(type) {
-      return (type !== 'custom');
+    * computed property. Returns true if type property is 'custom'
+    *
+    */
+    _isCustom: {
+      type: String,
+      computed: '_isCustomType(type)'
     },
     /**
-         * return true if type property is 'more'
-         *
-         */
-    _isNotMoreType: function(type) {
-      return (type !== 'more');
+    * computed property. Returns true if type property is not 'custom'
+    *
+    */
+    _isNotCustom: {
+      type: String,
+      computed: '_isNotCustomType(type)'
     },
     /**
-         * add fade-out class to this.$.alert
-         *
-         */
-    _dismiss: function() {
-      this.$.alert.classList.add('fade-out');
+    * computed property. Returns true if type property is not 'more'
+    *
+    */
+    _isNotMore: {
+      type: String,
+      computed: '_isNotMoreType(type)'
     },
     /**
-         * add hidden class to event.target
-         *
-         */
-    _hide: function(event) {
-      if (event.target.classList.contains('fade-out')) {
-        event.target.classList.add('hidden');
-        this.fire('px-alert-message-hidden');
+    * stores the value to be displayed in the show more action text
+    * @type String
+    */
+    _showBtnText: {
+      type: String,
+      value: "Show More"
+    },
+    /**
+     * checks whether the _showMore() if false or _showLess() if true functions are called.
+     * @type Boolean
+     * @default false
+     */
+    _expandText: {
+      type: Boolean,
+      value: false
+    }
+  },
+  attached: function() {
+    this.loadResources(this.resolveUrl('locales.json'));
+    this.listen(this, 'animationend', '_hide');
+    //safari 8
+    this.listen(this, 'webkitAnimationEnd', '_hide');
+    if (this.autoDismiss && this.autoDismiss > 0) {
+      this.setAutoDismiss(this.autoDismiss);
+    }
+    /**
+     * for IE10 only: the attach callback is still too early for all text styles to have been applied
+     * this workaround allows for those styles to get applied, and then calling the message truncation function
+     * but, dom-change is too early for other browsers?
+     */
+    this.listen(this, 'dom-change', '_checkMessageLength');
+    /**
+     * for all browsers except ie10, attach callback is sufficient
+     */
+    this._checkMessageLength();
+    this.listen(this.$.showMoreButton, 'tap', '_isTextExpanded');
+  },
+  detached: function() {
+    this.unlisten(this, 'animationend', '_hide');
+    this.unlisten(this, 'dom-change', '_checkMessageLength');
+    this.unlisten(this.$.showMoreButton, 'tap', '_isTextExpanded');
+  },
+  /**
+   * Clear timer if needed and set the time to the autoDismiss property
+   *
+   */
+  setAutoDismiss: function(dismissAfter) {
+    var _this = this;
+    if (dismissAfter > 0) {
+      // if timer is set already, clear it
+      if (this._timeouts.length > 0) {
+        for (var i = 0; i < this._timeouts.length; i++) {
+          clearTimeout(this._timeouts[i]);
+        };
+        this._timeouts = [];
       }
-    },
-    /**
-         * remove fade-out and hidden class from this.$.alert
-         *
-         */
-    _show: function() {
-      this.$.alert.classList.remove('fade-out');
-      this.$.alert.classList.remove('hidden');
-    },
-    /**
-         * called when the 'show more' action text is clicked
-         *
-         */
-    _isTextExpanded: function() {
-      this._expandText = !this._expandText;
-      if (this._expandText) {
-        this._showMore();
-      } else {
-        this._showLess();
-      }
-    },
-    /**
-         * Checking to see if the combined message length of title and message exceed the max height of the parent div.
-         */
-    _checkMessageLength: function() {
-      var messageDiv = this.$.fullMessage,
-        messageTextTitle,
-        messageText;
+      // store ID value of timer to clear once later
+      this._timeouts.push(setTimeout(function() {
+        _this._dismiss();
+      }, dismissAfter));
+      this._show();
+    }
+  },
+  /**
+   * return true if action property is 'dismiss'
+   *
+   */
+  _dismissDisplay: function(action) {
+    return action === 'dismiss';
+  },
+  /**
+   * return true if action property is NOT 'dismiss'
+   *
+   */
+  _buttonDisplay: function(action) {
+    return action !== 'dismiss';
+  },
+  /**
+   * return true if type property is 'custom'
+   *
+   */
+  _isCustomType: function(type) {
+    return (type === 'custom');
+  },
+  /**
+   * return true if type property is NOT'custom'
+   *
+   */
+  _isNotCustomType: function(type) {
+    return (type !== 'custom');
+  },
+  /**
+   * return true if type property is 'more'
+   *
+   */
+  _isNotMoreType: function(type) {
+    return (type !== 'more');
+  },
+  /**
+   * add fade-out class to this.$.alert
+   *
+   */
+  _dismiss: function() {
+    this.$.alert.classList.add('fade-out');
+  },
+  /**
+   * add hidden class to event.target
+   *
+   */
+  _hide: function(event) {
+    if (event.target.classList.contains('fade-out')) {
+      event.target.classList.add('hidden');
+      this.fire('px-alert-message-hidden');
+    }
+  },
+  /**
+   * remove fade-out and hidden class from this.$.alert
+   *
+   */
+  _show: function() {
+    this.$.alert.classList.remove('fade-out');
+    this.$.alert.classList.remove('hidden');
+  },
+  /**
+   * called when the 'show more' action text is clicked
+   *
+   */
+  _isTextExpanded: function() {
+    this._expandText = !this._expandText;
+    if (this._expandText) {
+      this._showMore();
+    } else {
+      this._showLess();
+    }
+  },
+  /**
+   * Checking to see if the combined message length of title and message exceed the max height of the parent div.
+   */
+  _checkMessageLength: function() {
+    var messageDiv = this.$.fullMessage,
+      messageTextTitle,
+      messageText;
 
-      // if the text fits, do nothing
-      if (this.type === "more" || messageDiv.scrollHeight <= messageDiv.offsetHeight) {
-        return;
-      }
-
-      //Unhide button
-      this.toggleClass('visuallyhidden', false, this.$.showMoreButton);
-
-      //save original message and title as a var for expanding the message in IE10, we have to run checkMessageLength multiple times for all styles to load. We don't want to overwrite the original message.
-      this._messageTitleOriginal = this._messageTitleOriginal || this.messageTitle;
-      this._messageOriginal = this._messageOriginal || this.message;
-
-      //split message into an array
-      messageTextTitle = this.messageTitle.split(' ');
-      messageText = this.message.split(' ');
-
-      //Run while message is too long and truncate it.
-      while (messageDiv.scrollHeight > messageDiv.offsetHeight) {
-        //first truncate the message, then truncate the title
-        if (messageText.length > 0) {
-          messageText.pop();
-          this.message = messageText.join(' ') + '...';
-        } else {
-          messageTextTitle.pop();
-          this.messageTitle = messageTextTitle.join(' ') + '...';
-          this.message = '';
-        }
-      }
-      //save short Message for shortening the message after it has been expanded
-      this.shortMessageTitle = this.messageTitle;
-      this.shortMessage = this.message;
-    },
-    /**
-         * run when 'show more' button is clicked to show full message
-         */
-    _showMore: function() {
-      this.messsageTruncatedHeight = this.$.fullMessage.offsetHeight;
-      //Safari draws from 0 therefore we need to create a min height to avoid jumping
-      this.$.fullMessage.style.minHeight = this.messsageTruncatedHeight + 'px';
-      this.$.fullMessage.style.height = this.messsageTruncatedHeight + 'px';
-      this.$.fullMessage.style.overflow = 'hidden';
-
-      this.toggleClass('collapsedMessage', false, this.$.fullMessage);
-      this.messageTitle = this._messageTitleOriginal;
-      this.message = this._messageOriginal;
-      this._showBtnText = 'Show Less';
-
-      this.$.fullMessage.style.height = this.$.message.offsetHeight + 'px';
-    },
-    /**
-         * run when 'show less' button is clicked to truncate message again
-         */
-    _showLess: function() {
-      this.$.fullMessage.style.height = this.messsageTruncatedHeight + 'px';
-      // Didnt include specfic brower transitionend events due to our brower support
-      this._showBtnText = 'Show More';
-      this.listen(this.$.fullMessage, 'transitionend', '_showLessAfterTransition');
-    },
-    /**
-         * helper function for _showLess, runs after css transition is completed
-         */
-    _showLessAfterTransition: function() {
-      this.toggleClass('collapsedMessage', true, this.$.fullMessage);
-      this._checkMessageLength();
-      this.unlisten(this.$.fullMessage, 'transitionend', '_showLessAfterTransition');
-    },
-    /**
-         * run when 'actionText' is clicked.
-         * If action property is a URL then open it.
-         * Else dismiss the alert message
-         */
-    _action: function() {
-      if (this.action.indexOf('http') != -1) {
-        window.open(this.action);
-      } else if (this.action === 'dismiss' || this.action === 'acknowledge') {
-        this._dismiss();
-      }
-    },
-    /**
-         * Sets the text of action buttons based on what the action property is
-         *
-         */
-    _setActionText: function(action) {
-      if (action === 'acknowledge') {
-        return 'OK';
-      } else if (action.indexOf('http') != -1) {
-        return 'Open';
-      } else {
-        return ''; // future custom button actions
-      }
+    // if the text fits, do nothing
+    if (this.type === "more" || messageDiv.scrollHeight <= messageDiv.offsetHeight) {
+      return;
     }
 
-  });
+    //Unhide button
+    this.toggleClass('visuallyhidden', false, this.$.showMoreButton);
+
+    //save original message and title as a var for expanding the message in IE10, we have to run checkMessageLength multiple times for all styles to load. We don't want to overwrite the original message.
+    this._messageTitleOriginal = this._messageTitleOriginal || this.messageTitle;
+    this._messageOriginal = this._messageOriginal || this.message;
+
+    //split message into an array
+    messageTextTitle = this.messageTitle.split(' ');
+    messageText = this.message.split(' ');
+
+    //Run while message is too long and truncate it.
+    while (messageDiv.scrollHeight > messageDiv.offsetHeight) {
+      //first truncate the message, then truncate the title
+      if (messageText.length > 0) {
+        messageText.pop();
+        this.message = messageText.join(' ') + '...';
+      } else {
+        messageTextTitle.pop();
+        this.messageTitle = messageTextTitle.join(' ') + '...';
+        this.message = '';
+      }
+    }
+    //save short Message for shortening the message after it has been expanded
+    this.shortMessageTitle = this.messageTitle;
+    this.shortMessage = this.message;
+  },
+  /**
+   * run when 'show more' button is clicked to show full message
+   */
+  _showMore: function() {
+    this.messsageTruncatedHeight = this.$.fullMessage.offsetHeight;
+    //Safari draws from 0 therefore we need to create a min height to avoid jumping
+    this.$.fullMessage.style.minHeight = this.messsageTruncatedHeight + 'px';
+    this.$.fullMessage.style.height = this.messsageTruncatedHeight + 'px';
+    this.$.fullMessage.style.overflow = 'hidden';
+
+    this.toggleClass('collapsedMessage', false, this.$.fullMessage);
+    this.messageTitle = this._messageTitleOriginal;
+    this.message = this._messageOriginal;
+    this._showBtnText = 'Show Less';
+
+    this.$.fullMessage.style.height = this.$.message.offsetHeight + 'px';
+  },
+  /**
+   * run when 'show less' button is clicked to truncate message again
+   */
+  _showLess: function() {
+    this.$.fullMessage.style.height = this.messsageTruncatedHeight + 'px';
+    // Didnt include specfic brower transitionend events due to our brower support
+    this._showBtnText = 'Show More';
+    this.listen(this.$.fullMessage, 'transitionend', '_showLessAfterTransition');
+  },
+  /**
+   * helper function for _showLess, runs after css transition is completed
+   */
+  _showLessAfterTransition: function() {
+    this.toggleClass('collapsedMessage', true, this.$.fullMessage);
+    this._checkMessageLength();
+    this.unlisten(this.$.fullMessage, 'transitionend', '_showLessAfterTransition');
+  },
+  /**
+   * run when 'actionText' is clicked.
+   * If action property is a URL then open it.
+   * Else dismiss the alert message
+   */
+  _action: function() {
+    if (this.action.indexOf('http') != -1) {
+      window.open(this.action);
+    } else if (this.action === 'dismiss' || this.action === 'acknowledge') {
+      this._dismiss();
+    }
+  },
+  /**
+   * Sets the text of action buttons based on what the action property is
+   *
+   */
+  _setActionText: function(action) {
+    if (action === 'acknowledge') {
+      return 'OK';
+    } else if (action.indexOf('http') != -1) {
+      return 'Open';
+    } else {
+      return ''; // future custom button actions
+    }
+  }
+
+});
 </script>
