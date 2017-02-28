@@ -42,16 +42,10 @@ Finally, use the component in your application:
     auto-dismiss="5000">
 </px-alert-message>
 ```
-More, multiple-language support:
 
-language = "en"
-
-Currently we only support English(en) and simplified Chinese(zh-cn)
-
-<br />
 <hr />
 
-## documentation
+## Documentation
 
 Read the full API and view the demo [here](https://predixdev.github.io/px-alert-message).
 
