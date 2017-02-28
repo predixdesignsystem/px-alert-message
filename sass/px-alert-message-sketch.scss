@@ -28,7 +28,7 @@ Predix branding rules go in px-alert-message-predix.scss, not in this file.
 
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
-@import "px-viewport-design/_base.viewport.scss";
+@import "px-viewport-design/_base.viewport.scss"; 
 $inuit-enable-btn--bare: true;
 @import "px-buttons-design/_objects.buttons.scss";
 $actionable: true;
@@ -80,7 +80,7 @@ $actionable: true;
               height:  1.8rem;
               width:  1.8rem;
             }
-        }
+        } 
     }
     .message {
         flex: 2;
@@ -104,7 +104,7 @@ $actionable: true;
         }
         span:first-child {
             font-weight: bold;
-        }
+        } 
     }
     .action {
         width: auto;

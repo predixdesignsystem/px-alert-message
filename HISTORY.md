@@ -1,3 +1,7 @@
+v0.8.4
+==================
+* updated to px-demo 
+
 v0.8.3
 ==================
 * Update colors design to pick up new colors
@@ -39,7 +43,6 @@ v0.7.18
 * changing all devDeps to ^
 
 v0.7.17
-==================
 * Update px-theme to 2.0.1 and update test fixtures
 
 v0.7.16
