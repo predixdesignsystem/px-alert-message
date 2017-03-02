@@ -10,8 +10,8 @@
         <script src="../bower_components/web-component-tester/browser.js"></script>
         <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
         <link rel="import" href="../px-alert-message.html"/>
-        <!-- <link rel="import" href="../../px-theme/px-theme-styles.html">
-        <style include="px-theme-styles" is="custom-style"></style> -->
+        <link rel="import" href="../../px-theme/px-theme-styles.html">
+        <style include="px-theme-styles" is="custom-style"></style>
         <style media="screen">
             .alert-message-container {
                 position: fixed;
@@ -203,17 +203,29 @@
                 },1000);
               });
 
-              it('has the class hidden applied', function() {
-                expect(closeBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
+              it('has the class hidden applied', function(done) {
+                flush(function(){
+                  expect(closeBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
+                  done();
+                })
               });
-              it('has the class hidden applied', function() {
-                expect(okBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
+              it('has the class hidden applied', function(done) {
+                flush(function(){
+                  expect(okBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
+                  done();
+                });
               });
-              it('hidden event has been fired', function() {
-                assert(closeBtnHiddenEvent, true);
+              it('hidden event has been fired', function(done) {
+                flush(function(){
+                  assert(closeBtnHiddenEvent, true);
+                  done();
+                });
               });
-              it('hidden event has been fired', function() {
-                assert(okBtnHiddenEvent, true);
+              it('hidden event has been fired', function(done) {
+                flush(function(){
+                  assert(okBtnHiddenEvent, true);
+                  done();
+                });
               });
             });
 
