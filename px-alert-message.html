@@ -252,21 +252,14 @@ Custom property | Description | Default
     if (this.autoDismiss && this.autoDismiss > 0) {
       this.setAutoDismiss(this.autoDismiss);
     }
-    /**
-     * for IE10 only: the attach callback is still too early for all text styles to have been applied
-     * this workaround allows for those styles to get applied, and then calling the message truncation function
-     * but, dom-change is too early for other browsers?
-     */
-    this.listen(this, 'dom-change', '_checkMessageLength');
-    /**
-     * for all browsers except ie10, attach callback is sufficient
-     */
+
+    this.listen(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this._checkMessageLength();
     this.listen(this.$.showMoreButton, 'tap', '_isTextExpanded');
   },
   detached: function() {
     this.unlisten(this, 'animationend', '_hide');
-    this.unlisten(this, 'dom-change', '_checkMessageLength');
+    this.unlisten(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this.unlisten(this.$.showMoreButton, 'tap', '_isTextExpanded');
   },
   /**
