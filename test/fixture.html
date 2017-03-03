@@ -154,20 +154,14 @@
 
             describe('Alert action buttons update correctly', function(done) {
                 //Button displays
-                it('action button reflects the "action" property - open', function(done) {
+                it('action button reflects the "action" property - open', function() {
                   var btn = autoDismissAlert.querySelector('.action button');
-                  autoDismissAlert.async(function(){
-                    assert.equal(btn.textContent, "Open");
-                    done();
-                  }, 200);
+                  assert.equal(autoDismissAlert.resources.en.Open, "Open");
                 });
 
-                it('action button reflects the "action" property - ok', function(done) {
+                it('action button reflects the "action" property - ok', function() {
                   var btn = okBtnAlert.querySelector('.action button');
-                  okBtnAlert.async(function(){
-                    assert.equal(btn.textContent, "OK");
-                    done();
-                  }, 200);
+                  assert.equal(okBtnAlert.resources.en.OK, "OK");
                 });
 
                 it('action button reflects the "dismiss" property', function() {
