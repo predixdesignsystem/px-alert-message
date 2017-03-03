@@ -4,9 +4,9 @@
     'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs
     See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<link async rel="import" href="../polymer/polymer.html"/>
+<link async rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
+<link defer rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 <!--
 Element providing message notifications.
 
@@ -40,7 +40,7 @@ Custom property | Description | Default
 @demo demo.html
 -->
 
-<link rel="import" href="css/px-alert-message-styles.html">
+<link defer rel="import" href="css/px-alert-message-styles.html">
 
 <dom-module id="px-alert-message">
   <template>

@@ -4,7 +4,7 @@
     "local": {
       "browsers": [
         "chrome"
-      I]
+      ]
     },
     "sauce": {
       "disabled": true,
