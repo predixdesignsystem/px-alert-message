@@ -113,6 +113,7 @@
         </div>
 
         <script>
+        document.addEventListener("WebComponentsReady", function() {
             var basicAlert = document.getElementById('basicAlert');
             var autoDismissAlert = document.getElementById('autoDismissAlert');
             var closeBtnAlert = document.getElementById('closeBtnAlert');
@@ -440,6 +441,7 @@
 
                 });
             });
+          });
         </script>
     </body>
 </html>
