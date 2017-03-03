@@ -155,19 +155,19 @@
             describe('Alert action buttons update correctly', function(done) {
                 //Button displays
                 it('action button reflects the "action" property - open', function(done) {
-                  flush(function(){
-                    var btn = autoDismissAlert.querySelector('.action button');
+                  var btn = autoDismissAlert.querySelector('.action button');
+                  autoDismissAlert.async(function(){
                     assert.equal(btn.textContent, "Open");
                     done();
-                  })
+                  }, 200);
                 });
 
                 it('action button reflects the "action" property - ok', function(done) {
-                  flush(function(){
-                    var btn = okBtnAlert.querySelector('.action button');
+                  var btn = okBtnAlert.querySelector('.action button');
+                  okBtnAlert.async(function(){
                     assert.equal(btn.textContent, "OK");
                     done();
-                  });
+                  }, 200);
                 });
 
                 it('action button reflects the "dismiss" property', function() {
