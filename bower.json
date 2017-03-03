@@ -1,6 +1,6 @@
 {
   "name": "px-alert-message",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "main": [
     "px-alert-message.html"
   ],
@@ -25,7 +25,6 @@
     "px-alert-message.png"
   ],
   "dependencies": {
-    "iron-flex-layout": "PolymerElements/iron-flex-layout#~1.0.3",
     "polymer": "^1.6.1",
     "px-theme": "^2.0.1",
     "px-buttons-design": "^1.1.0",
