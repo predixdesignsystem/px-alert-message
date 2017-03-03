@@ -1,3 +1,7 @@
+v0.8.5
+==================
+* merge PR that removed iron-flex and lowered the case in the demo page.
+
 v0.8.4
 ==================
 * updated to px-demo 
