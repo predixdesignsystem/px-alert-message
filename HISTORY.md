@@ -1,10 +1,11 @@
-v0.8.5
+v0.9.0
 ==================
+* Add localization support for simplified Chinese
 * merge PR that removed iron-flex and lowered the case in the demo page.
 
 v0.8.4
 ==================
-* updated to px-demo 
+* updated to px-demo
 
 v0.8.3
 ==================
