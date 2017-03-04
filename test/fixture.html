@@ -153,17 +153,6 @@
             });
 
             describe('Alert action buttons update correctly', function(done) {
-                //Button displays
-                it('action button reflects the "action" property - open', function() {
-                  var btn = autoDismissAlert.querySelector('.action button');
-                  assert.equal(autoDismissAlert.resources.en.Open, "Open");
-                });
-
-                it('action button reflects the "action" property - ok', function() {
-                  var btn = okBtnAlert.querySelector('.action button');
-                  assert.equal(okBtnAlert.resources.en.OK, "OK");
-                });
-
                 it('action button reflects the "dismiss" property', function() {
                     var icon = closeBtnAlert.querySelector('.action .dismiss > iron-icon');
                     expect(icon).to.exist;
