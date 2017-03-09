@@ -1,3 +1,9 @@
+v0.9.1
+==================
+* Simplify show more / show less behavior
+* Fix dynamic props (#19, #25)
+* Add localized example to demo.html
+
 v0.9.0
 ==================
 * Add localization support for simplified Chinese

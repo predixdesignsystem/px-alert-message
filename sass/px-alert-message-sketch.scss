@@ -37,85 +37,90 @@ $actionable: true;
 /** these should be more abstract than residing within this component */
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes fadeout {
-    from {
-        opacity: 1;
-        max-height: $inuit-base-spacing-unit--small * 10;
-        min-height: 0px;
-    }
-    to   {
-        opacity: 0;
-        max-height: 0px;
-        min-height: 0px;
-        padding-top: 0px;
-        padding-bottom: 0px;
-    }
+  from {
+    opacity: 1;
+    max-height: $inuit-base-spacing-unit--small * 10;
+    min-height: 0px;
+  }
+  to   {
+    opacity: 0;
+    max-height: 0px;
+    min-height: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
 }
 
 // Component
 .alert-message {
-    width: $inuit-base-spacing-unit--small * 40;
-    margin: $inuit-base-spacing-unit--tiny;
-    padding: $inuit-base-spacing-unit--small;
-    min-height: $inuit-base-spacing-unit--small * 5;
-    animation: fadein .5s;
-    transition: max-height 1;
-    word-wrap: break-word;
-    word-break: break-word;
-    &.fade-out {
-        animation: fadeout .5s;
-        max-height: 0px;
-    }
-    .severity {
-        #icon {
-            position: relative;
-            height:  1.9rem;
-            width:  1.9rem;
-            //The square needs to be visually smaller
-            &.error {
-              height:  1.8rem;
-              width:  1.8rem;
-            }
-        } 
-    }
-    .message {
-        flex: 2;
-        margin-left: $inuit-base-spacing-unit--small;
-        margin-right: $inuit-base-spacing-unit--small;
-        transition: height 0.3s ease-in-out;
-        line-height: $inuit-base-line-height * 0.90;
-        font-size: $inuit-base-font-size  ;
-        min-height: $inuit-base-line-height;
-        p {
-            padding: 0;
-            margin: 0;
-        }
-        p.more {
-            text-align: center;
-            font-size: 1.4rem;
-            margin-left:  $inuit-base-spacing-unit--large;
-        }
-        &.collapsedMessage{
-          max-height: $inuit-base-line-height * 3;
-        }
-        span:first-child {
-            font-weight: bold;
-        } 
-    }
-    .action {
-        width: auto;
-        cursor: pointer;
-      .dismiss {
-        --iron-icon-height: $inuit-base-font-size;
-        --iron-icon-width: $inuit-base-font-size;
-        margin-bottom: calculateRem(2px);
-        margin-left: calculateRem(4px);
+  width: $inuit-base-spacing-unit--small * 40;
+  margin: $inuit-base-spacing-unit--tiny;
+  padding: $inuit-base-spacing-unit--small;
+  min-height: $inuit-base-spacing-unit--small * 5;
+  animation: fadein .5s;
+  word-wrap: break-word;
+  word-break: break-word;
+  &.fade-out {
+    animation: fadeout .5s;
+    max-height: 0px;
+  }
+  .severity {
+    #icon {
+      position: relative;
+      height:  1.9rem;
+      width:  1.9rem;
+      //The square needs to be visually smaller
+      &.error {
+        height:  1.8rem;
+        width:  1.8rem;
       }
+    } 
+  }
+  .messageColumn {
+    flex: 2;
+    margin-left: $inuit-base-spacing-unit--small;
+    margin-right: $inuit-base-spacing-unit--small;
+  }
+
+  .message {
+    transition: max-height 1s ease-in-out; /* this isn't working for some reason */
+    line-height: $inuit-base-line-height;
+    font-size: $inuit-base-font-size;
+    padding: 0;
+    margin: 0;
+
+    &.more {
+      text-align: center;
+      font-size: 1.4rem;
+      margin-left:  $inuit-base-spacing-unit--large;
     }
+    &.collapsedMessage{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;                     /* number of lines to show */
+      max-height: $inuit-base-line-height * 3;   /* fallback */
+    }
+    span:first-child {
+      font-weight: bold;
+    } 
+  }
+  .action {
+    width: auto;
+    cursor: pointer;
+    .dismiss {
+    --iron-icon-height: $inuit-base-font-size;
+    --iron-icon-width: $inuit-base-font-size;
+    margin-bottom: calculateRem(2px);
+    margin-left: calculateRem(4px);
+    }
+  }
 }
 
 // Trumps

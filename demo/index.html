@@ -114,12 +114,12 @@
               autoDismiss: "8000",
               action: "" },
 
-            // { configName: "Long Message",
-            //   type: "error",
-            //   messageTitle: "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'.",
-            //   message: "We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message.",
-            //   autoDismiss: "0",
-            //   action: "dismiss" },
+            { configName: "Long Message",
+              type: "error",
+              messageTitle: "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking the 'Show More' link.",
+              message: "We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message.",
+              autoDismiss: "0",
+              action: "dismiss" },
 
             { configName: "Action",
               type: "important",
@@ -163,8 +163,8 @@
         inputPlaceholder: 'Message'
       },
       autoDismiss: {
-        type: String,
-        defaultValue: 'autoDismiss',
+        type: Number,
+        defaultValue: '0',
         inputType: 'number',
         inputPlaceholder: '0'
       },
