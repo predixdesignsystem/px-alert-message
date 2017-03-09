@@ -1,3 +1,7 @@
+v0.9.2
+==================
+* fixed tests for new expand/collapse
+
 v0.9.1
 ==================
 * Simplify show more / show less behavior

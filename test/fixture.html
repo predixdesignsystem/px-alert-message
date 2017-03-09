@@ -222,12 +222,11 @@
 
             describe('Truncation features', function() {
                 describe('Truncation shortens message', function() {
-                  it('ow more" btn is hidden on basic alert', function() {
+                  it('"show more" btn is hidden on basic alert', function() {
                     var moreBtn = basicAlert.querySelector('#showMoreButton');
                       var moreBtn = basicAlert.querySelector('#showMoreButton');
                       expect(moreBtn.classList.contains('visuallyhidden')).equal(true);
                   });
-
                   it('show more" btn is not hidden on longTitleAlert alert', function() {
                       var moreBtn = longTitleAlert.querySelector('#showMoreButton');
                       expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
@@ -236,50 +235,19 @@
                       var moreBtn = longMessageAlert.querySelector('#showMoreButton');
                       expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
                   });
-
-                  it(' if fullMessage has a max height of 3.7rem', function() {
-                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
-                      assert.closeTo(parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("max-height")),60,3,'they are close');
+                  it(' if message has a max height of around 60px', function() {
+                      var MessageDiv = longTitleAlert.querySelector('#message');
+                      assert.closeTo(parseInt(window.getComputedStyle(MessageDiv,null).getPropertyValue("max-height")),60,3,'they are close');
                   });
-                  it('fullMessage has a max height of 3.7rem', function() {
-                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
-                      assert.closeTo(parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("max-height")),60,3,'they are close');
-                  });
-
                   it(' if longTitleAlert truncates properly', function() {
-                      //if use localize function then #message height will >= #fullMessage
-                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
-                      var messageP  = longTitleAlert.querySelector('#message');
-                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) >=
-                             parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"))).equal(true);
+                      var MessageDiv = longTitleAlert.querySelector('#message');
+                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
                   });
                   it('truncates longMessageAlert properly', function() {
-                      //if use localize function then #message height will >= #fullMessage
-                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
-                      var messageP  = longMessageAlert.querySelector('#message');
-                      expect(parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height")) >=
-                             parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"))).equal(true);
+                      var MessageDiv = longMessageAlert.querySelector('#message');
+                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
                   });
 
-                  it('should truncate a long title', function() {
-                      var messageP  = longTitleAlert.querySelector('#message');
-                      var currentTitle,originalTitle,currentMessage;
-                      originalTitle = longTitleAlert._messageTitleOriginal;
-                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
-                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
-                      assert.isBelow(currentTitle.split(' ').length,originalTitle.split(' ').length );
-                      assert.equal(currentMessage, '');
-                  });
-                  it('should truncate a long message', function() {
-                      var messageP  = longMessageAlert.querySelector('#message');
-                      var currentTitle,originalTitle,currentMessage,originalMessage;
-                      originalTitle = longMessageAlert._messageTitleOriginal;
-                      originalMessage = longMessageAlert._messageOriginal;
-                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
-                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
-                      assert.equal(originalTitle , currentTitle);
-                      assert.isBelow(currentMessage.split(' ').length, originalMessage.split(' ').length);
-                  });
                 });
 
 
@@ -295,10 +263,10 @@
                     },1000);
                   });
                   it('if the collapsedMessage class is removed from longTitleAlert', function() {
-                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(false);
+                      expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
                   });
                   it('if the collapsedMessage class is removed from longMessageAlert', function() {
-                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(false);
+                      expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
                   });
 
                   it('if the "show more" says "show less"', function() {
@@ -309,44 +277,15 @@
                       var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
                       assert.equal(moreBtnMessage.textContent, "Show Less");
                   });
-
-                  it('if the expanded title & message is equal to the orginial title & message ', function() {
-                      var messageP  = longTitleAlert.querySelector('#message');
-                      var currentTitle,originalTitle,currentMessage,originalMessage;
-                      originalTitle = longTitleAlert._messageTitleOriginal;
-                      originalMessage = longTitleAlert._messageOriginal;
-                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
-                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
-                      assert.equal(originalTitle , currentTitle);
-                      assert.equal(originalMessage , currentMessage);
+                  it(' if longTitleAlert expands properly', function() {
+                      var MessageDiv = longTitleAlert.querySelector('#message');
+                      assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
                   });
-                  it('if the expanded title & message is equal to the orginial title & message ', function() {
-                      var messageP  = longMessageAlert.querySelector('#message');
-                      var currentTitle,originalTitle,currentMessage,originalMessage;
-                      originalTitle = longMessageAlert._messageTitleOriginal;
-                      originalMessage = longMessageAlert._messageOriginal;
-                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
-                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
-                      assert.equal(originalTitle , currentTitle);
-                      assert.equal(originalMessage , currentMessage);
+                  it('expands longMessageAlert properly', function() {
+                      var MessageDiv = longMessageAlert.querySelector('#message');
+                      assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
                   });
 
-                  it('Message height has grown for longTitle', function() {
-                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
-                      var messageP  = longTitleAlert.querySelector('#message');
-                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
-                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
-                      expect(fullMessageHeight).to.be.closeTo(mpHeight,1)
-                      assert.isAbove(mpHeight,longTitleAlert.messsageTruncatedHeight);
-                  });
-                  it('Message height has grown for longMessage', function() {
-                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
-                      var messageP  = longMessageAlert.querySelector('#message');
-                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
-                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
-                      expect(fullMessageHeight).to.be.closeTo(mpHeight,1)
-                      assert.isAbove(mpHeight,longMessageAlert.messsageTruncatedHeight);
-                  });
                 });
 
 
@@ -362,10 +301,10 @@
                     },500);
                   });
                   it('reapplies the collapsedMessage class from longTitleAlert', function() {
-                      expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(true);
+                      expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
                   });
                   it('reapplies the collapsedMessage class from longMessageAlert', function() {
-                      expect(longMessageAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(true);
+                      expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
                   });
 
                   it('say "show more" instead of "show less"', function() {
@@ -376,42 +315,15 @@
                       var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
                       assert.equal(moreBtnMessage.textContent, "Show More");
                   });
-
-                  it('displays the truncated title message ', function() {
-                      var messageP  = longTitleAlert.querySelector('#message');
-                      var currentTitle,truncatedTitle,currentMessage,truncatedMessage;
-                      truncatedTitle = longTitleAlert.shortMessageTitle;
-                      truncatedMessage = longTitleAlert.shortMessage;
-                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
-                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
-                      assert.equal(truncatedTitle , currentTitle);
-                      assert.equal(truncatedMessage , currentMessage);
+                  it(' if longTitleAlert truncates properly', function() {
+                      var MessageDiv = longTitleAlert.querySelector('#message');
+                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
                   });
-                  it('displays the truncated title message ', function() {
-                      var messageP  = longMessageAlert.querySelector('#message');
-                      var currentTitle,truncatedTitle,currentMessage,truncatedMessage;
-                      truncatedTitle = longMessageAlert.shortMessageTitle;
-                      truncatedMessage = longMessageAlert.shortMessage;
-                      currentTitle = messageP.querySelectorAll('span')[0].textContent;
-                      currentMessage = messageP.querySelectorAll('span')[1].textContent;
-                      assert.equal(truncatedTitle , currentTitle);
-                      assert.equal(truncatedMessage , currentMessage);
+                  it('truncates longMessageAlert properly', function() {
+                      var MessageDiv = longMessageAlert.querySelector('#message');
+                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
                   });
 
-                  it('Message height has shrunk for longTitle', function() {
-                      var fullMessageDiv = longTitleAlert.querySelector('#fullMessage');
-                      var messageP  = longTitleAlert.querySelector('#message');
-                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
-                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
-                      assert.equal(fullMessageHeight,longTitleAlert.messsageTruncatedHeight);
-                  });
-                  it('Message height has shrunk for longMessage', function() {
-                      var fullMessageDiv = longMessageAlert.querySelector('#fullMessage');
-                      var messageP  = longMessageAlert.querySelector('#message');
-                      var mpHeight = parseInt(window.getComputedStyle(messageP,null).getPropertyValue("height"));
-                      var fullMessageHeight = parseInt(window.getComputedStyle(fullMessageDiv,null).getPropertyValue("height"));
-                      assert.equal(fullMessageHeight,longMessageAlert.messsageTruncatedHeight);
-                    });
                 });
 
                 describe('Multiple language zh-cn', function() {
@@ -419,7 +331,6 @@
                   it('if language="zh-cn" ', function() {
                     var moreBtnMessage = multipleLanguageAlert.querySelector('#showMoreButton');
                       assert.equal(moreBtnMessage.textContent, "显示更多");
-                      //expect(longTitleAlert.querySelector('#fullMessage').classList.contains('collapsedMessage')).equal(true);
                   });
 
                 });
