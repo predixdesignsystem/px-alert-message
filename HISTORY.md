@@ -1,3 +1,8 @@
+v0.9.3
+==================
+* add localization demo
+* update documentation
+
 v0.9.2
 ==================
 * fixed tests for new expand/collapse

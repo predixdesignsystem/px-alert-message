@@ -23,10 +23,10 @@
     <!-- Header -->
     <px-demo-header
         module-name="px-alert-message"
-        description="Alert Messages appear in a queue within the message container.Each message consists of an icon, title,
-          body, and action. See Alert Icons for more on the default icons available – a custom icon can also be defined.
-          The title appears in bold, whereas the message body text does not.The action on the right will either appear
-          as an “X” for dismissing the alert, an “OK” button for acknowledging, or an “Open” button if a URL is specified.
+        description="Alert Messages appear in a queue within the message container. Each message consists of an icon, title,
+          body, and action. See Alert Icons for more on the default icons available –- a custom icon can also be defined.
+          The title appears in bold, whereas the message body text does not. The action on the right will appear
+          as an “X” for dismissing the alert, an “OK” button for acknowledging it, or an “Open” button if a URL is specified.
           If Auto Dismiss is enabled, the alert will disappear on its own after a configurable delay period. The
           text on the alert messages should be kept short, ideally around three lines.">
     </px-demo-header>
@@ -47,7 +47,8 @@
               message-title="{{props.messageTitle.value}}"
               message="{{props.message.value}}"
               auto-dismiss="{{props.autoDismiss.value}}"
-              action="{{props.action.value}}">
+              action="{{props.action.value}}"
+              language="{{props.language.value}}">
           </px-alert-message>
 
       </px-demo-component>
@@ -112,28 +113,40 @@
               messageTitle: "Well done!",
               message: "You successfully completed a difficult task.",
               autoDismiss: "8000",
-              action: "" },
+              action: "",
+              language: "en" },
 
             { configName: "Long Message",
               type: "error",
               messageTitle: "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking the 'Show More' link.",
-              message: "We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message.",
+              message: "We understand that sometimes long messages are needed but it is not a best practice to have more than three lines of text in the alert message.",
               autoDismiss: "0",
-              action: "dismiss" },
+              action: "dismiss",
+              language: "en" },
 
             { configName: "Action",
               type: "important",
               messageTitle: "Oh snap!",
               message: "Change a few things up.",
               autoDismiss: "0",
-              action: "https://www.predix.io/" },
+              action: "https://www.predix.io/",
+              language: "en" },
 
             { configName: "More Messages",
               type: "more",
               messageTitle: "",
               message: "15",
               autoDismiss: "0",
-              action: "dismiss" }
+              action: "dismiss",
+              language: "en" },
+
+            { configName: "Localization",
+              type: "information",
+              messageTitle: "很好！",
+              message: "你都做完了。",
+              autoDismiss: "0",
+              action: "acknowledge",
+              language: "zh-cn" }
 
           ]
         }
@@ -173,6 +186,12 @@
         defaultValue: 'dismiss',
         inputType: 'dropdown',
         inputChoices: ['dismiss', 'acknowledge', 'https://www.predix.io/', 'https://www.google.com/']
+      },
+      language: {
+        type: String,
+        defaultValue: 'en',
+        inputType: 'dropdown',
+        inputChoices: ['en', 'zh-cn']
       }
     },
 

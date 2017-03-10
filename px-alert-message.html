@@ -8,9 +8,8 @@
 <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
 <!--
-Element providing message notifications.
 
-##### Usage
+### Usage
 
     <px-alert-message
         type="important"
@@ -94,7 +93,7 @@ Custom property | Description | Default
 
     is: 'px-alert-message',
     /**
-    * use app-localize-behavior to realize internationalization
+    * Use app-localize-behavior to implement localization
     */
     behaviors: [
       Polymer.AppLocalizeBehavior
@@ -107,7 +106,9 @@ Custom property | Description | Default
      */
     properties: {
     /**
-     * The multiple language options, support en , zh-cn now
+     * The currently selected language (chosen from a dropdown menu). See locales.json for available translations.
+     *
+     * Note: selected language does not affect the message text itself.
      * @type String
      * @default "en"
      */
@@ -116,13 +117,13 @@ Custom property | Description | Default
       type: String
     },
     /**
-    * defines the alert level, reflected in the icon.
+    * Defines the alert level, reflected in the icon:
     * - 'important' - red triangle labeled 1
     * - 'warning'- orange diamond labeled 2
     * - 'error' - yellow square labeled 3
     * - 'information' - blue circle labeled 4
-    * - 'custom' - allows a developer to specify HTML including images in place of the icon.
-    * - 'more' - allows for a message that shows that there are more messages.
+    * - 'custom' - allows a developer to specify HTML including images in place of the icon
+    * - 'more' - allows for a message indicating that there are more messages in the queue. See https://www.predix-ui.com/px-alert-message/px-alert-message/demo.html for an example
     *
     * @default information
     *
@@ -142,7 +143,7 @@ Custom property | Description | Default
       observer: '_checkMessageLength'
     },
     /**
-    * The message body
+    * The message body.
     *
     */
     message: {
@@ -150,9 +151,9 @@ Custom property | Description | Default
       observer: '_checkMessageLength'
     },
     /**
-    * automatically dismisses the alert message after number specified
+    * Automatically dismisses the alert message after a specified amount of time.
     *
-    * unit: milliseconds
+    * Unit: milliseconds
     *
     */
     autoDismiss: {
@@ -161,7 +162,7 @@ Custom property | Description | Default
       observer: 'setAutoDismiss'
     },
     /**
-    * User interaction on the right hand side of the message box.
+    * User interaction on the right hand side of the message box:
     * - 'dismiss' - displays (x) to dismiss
     * - 'acknowledge' - displays (OK) to dismiss
     * - 'URL' - string containing http url to be opened, displays (Open).
