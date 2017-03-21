@@ -152,11 +152,14 @@
                 });
             });
 
-            describe('Alert action buttons update correctly', function(done) {
+            describe('Alert action buttons update correctly', function() {
               //Button displays
-                it('action button reflects the "action" property  open', function() {
-                  var btn = autoDismissAlert.querySelector('.action button');
-                  assert.equal(btn.textContent, "Open");
+                it('action button reflects the "action" property  open', function(done) {
+                  flush(function(){
+                    var btn = autoDismissAlert.querySelector('.action button');
+                    assert.equal(btn.textContent, "Open");
+                    done();
+                  });
                 });
 
                 it('action button reflects the "action" property  ok', function() {
