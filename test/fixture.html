@@ -33,6 +33,20 @@
         </px-alert-message>
       </template>
     </test-fixture>
+
+    <test-fixture id="PxDismissAlertMessage">
+      <template>
+        <px-alert-message
+            id="autoDismissAlert"
+            type="information"
+            message-title="Heads up!"
+            message="This definitely needs your attention."
+            action="https://www.gesoftware.com/predix"
+            auto-dismiss="1500">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
     <script src="px-alert-message-custom-tests.js"></script>
   </body>
 </html>
