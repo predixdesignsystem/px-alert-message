@@ -1,355 +1,38 @@
 <!doctype html>
-
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>px-alert-message Demo</title>
-        <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-        <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-        <script src="../bower_components/web-component-tester/browser.js"></script>
-        <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-        <link rel="import" href="../px-alert-message.html"/>
-        <link rel="import" href="../../px-theme/px-theme-styles.html">
-        <style include="px-theme-styles" is="custom-style"></style>
-        <style media="screen">
-            .alert-message-container {
-                position: fixed;
-                top: 15px;
-                right: 15px;
-                z-index: 1020;
-            }
-        </style>
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Web Component Test : Fixture for px-alert-message</title>
 
-    <body>
+    <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <!-- web-component-tester automatically provides local copy of brower.js below
+         for any URL ending with "/web-component-tester/browser.js"
+         when wct is run from the command line -->
+    <script src="../web-component-tester/browser.js"></script>
+    <link rel="import" href="../px-alert-message.html" />
+    <!-- Retain this link for px-theme.html -->
+    <!-- px-theme is needed for WCT to run without errors -->
+    <link rel="import" href="../bower_components/px-theme/px-theme-styles.html"/>
 
-        <h3>Demo</h3>
+    <script src="../../test-fixture/test-fixture-mocha.js"></script>
+    <link href="../../test-fixture/test-fixture.html" rel="import">
+  </head>
 
-        <p>
-            Although related, examples are /not/ the same as the test fixtures.
-            Tests are tests, examples are examples.
-        </p>
+  <body>
+    <style include="px-theme-styles" is="custom-style"></style>
 
-        <p>
-            Also see the <a href="../index.html">documentation</a> and the <a href="../demo.html">UI demo</a>.
-        </p>
-
-        <div class="alert-message-container">
-            <!-- instance 1, "predix" theme -->
-            <px-alert-message
-                id="autoDismissAlert"
-                type="information"
-                message-title="Heads up!"
-                message="This definitely needs your attention."
-                action="https://www.gesoftware.com/predix"
-                auto-dismiss="1500">
-            </px-alert-message>
-            <px-alert-message
-                id="basicAlert"
-                type="error"
-                message-title="Well done!"
-                message="You successfully read this.">
-            </px-alert-message>
-
-            <px-alert-message
-                id='closeBtnAlert'
-                type="warning"
-                message-title="Oh snap!"
-                message="Change a few things up."
-                action="dismiss">
-            </px-alert-message>
-
-            <px-alert-message
-                id='okBtnAlert'
-                type="important"
-                message-title="Warning!"
-                message="Best check yourself."
-                action="acknowledge">
-            </px-alert-message>
-
-
-
-            <px-alert-message
-                id='longTitleAlert'
-                type="information"
-                message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do."
-                message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
-                action="https://www.gesoftware.com/predix">
-            </px-alert-message>
-
-            <px-alert-message
-                id='longMessageAlert'
-                type="custom"
-                message-title="Custom Alert"
-                message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
-                action="https://www.gesoftware.com/predix">
-                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
-            </px-alert-message>
-
-            <px-alert-message
-                id='noContentAlert'
-                type="information"
-                message-title=" "
-                message=" "
-                action="https://www.gesoftware.com/predix">
-            </px-alert-message>
-
-            <px-alert-message
-                type="moreAlert"
-                message="15"
-                action="dismiss">
-            </px-alert-message>
-
-            <px-alert-message
-                id='multipleLanguageAlert'
-                type="custom"
-                language="zh-cn"
-                message-title="Custom Alert"
-                message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
-                action="https://www.gesoftware.com/predix">
-                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
-            </px-alert-message>
-        </div>
-
-        <script>
-        document.addEventListener("WebComponentsReady", function() {
-            var basicAlert = document.getElementById('basicAlert');
-            var autoDismissAlert = document.getElementById('autoDismissAlert');
-            var closeBtnAlert = document.getElementById('closeBtnAlert');
-            var okBtnAlert = document.getElementById('okBtnAlert');
-            var longTitleAlert = document.getElementById('longTitleAlert');
-            var longMessageAlert = document.getElementById('longMessageAlert');
-            var noContentAlert = document.getElementById('noContentAlert');
-            var multipleLanguageAlert = document.getElementById('multipleLanguageAlert');
-            var moreAlert = document.getElementById('moreAlert');
-
-            describe('Alert attrs dont get changed', function() {
-                //info isn't be manipulated
-                it('reflects the "type" property', function() {
-                    assert.equal(autoDismissAlert.type, "information");
-                });
-
-                it('reflects the "title" property', function() {
-                    assert.equal(autoDismissAlert.messageTitle, "Heads up!");
-                });
-
-                it('reflects the "message" property', function() {
-                    assert.equal(autoDismissAlert.message, "This definitely needs your attention.");
-                });
-
-                it('reflects the "action" property', function() {
-                    assert.equal(autoDismissAlert.action, "https://www.gesoftware.com/predix");
-                });
-
-                it('reflects the "auto-dismiss" property and its a number', function() {
-                    assert.equal(autoDismissAlert.autoDismiss, 1500);
-                });
-
-                it('alert is not hidden', function() {
-                    var wrapper = document.querySelector('#alert');
-                    expect(wrapper.classList.contains('hidden')).to.equal(false);
-                });
-            });
-
-            describe('Alert action buttons update correctly', function() {
-              //Button displays
-                it('action button reflects the "action" property  open', function(done) {
-                  flush(function(){
-                    var btn = autoDismissAlert.querySelector('.action button');
-                    assert.equal(btn.textContent, "Open");
-                    done();
-                  });
-                });
-
-                it('action button reflects the "action" property  ok', function() {
-                  var btn = okBtnAlert.querySelector('.action button');
-                  assert.equal(okBtnAlert.resources.en.OK, "OK");
-                });
-
-                it('action button reflects the "dismiss" property', function() {
-                    var icon = closeBtnAlert.querySelector('.action .dismiss > iron-icon');
-                    expect(icon).to.exist;
-                });
-
-                it('action section does not exist', function() {
-                    var actionBtn = basicAlert.querySelector('.action');
-                    expect(actionBtn).to.not.exist;
-                });
-            });
-
-
-            describe('Alert Dismiss', function() {
-              it('does not have the class hidden applied',function() {
-                flush(function(){
-                  expect(autoDismissAlert.querySelector('#alert').classList.contains('hidden')).equal(false);
-                });
-              });
-
-              var closeBtnHiddenEvent = false;
-              var okBtnHiddenEvent = false;
-
-              before(function(done){
-
-                closeBtnAlert.addEventListener('px-alert-message-hidden', function() {
-                  closeBtnHiddenEvent = true;
-                });
-
-                okBtnAlert.addEventListener('px-alert-message-hidden', function() {
-                  okBtnHiddenEvent = true;
-                });
-
-                closeBtnAlert.querySelector('.action .dismiss').click();
-                okBtnAlert.querySelector('.action button').click();
-                //wait for alert to dismiss
-                setTimeout(function(){
-                  done();
-                },1000);
-              });
-
-              it('has the class hidden applied', function(done) {
-                flush(function(){
-                  expect(closeBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
-                  done();
-                })
-              });
-              it('has the class hidden applied', function(done) {
-                flush(function(){
-                  expect(okBtnAlert.querySelector('#alert').classList.contains('hidden')).equal(true);
-                  done();
-                });
-              });
-              it('hidden event has been fired', function(done) {
-                flush(function(){
-                  assert(closeBtnHiddenEvent, true);
-                  done();
-                });
-              });
-              it('hidden event has been fired', function(done) {
-                flush(function(){
-                  assert(okBtnHiddenEvent, true);
-                  done();
-                });
-              });
-            });
-
-
-            describe('Truncation features', function() {
-                describe('Truncation shortens message', function() {
-                  it('"show more" btn is hidden on basic alert', function() {
-                    var moreBtn = basicAlert.querySelector('#showMoreButton');
-                      var moreBtn = basicAlert.querySelector('#showMoreButton');
-                      expect(moreBtn.classList.contains('visuallyhidden')).equal(true);
-                  });
-                  it('show more" btn is not hidden on longTitleAlert alert', function() {
-                      var moreBtn = longTitleAlert.querySelector('#showMoreButton');
-                      expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
-                  });
-                  it('show more" btn is not hidden on longMessageAlert alert', function() {
-                      var moreBtn = longMessageAlert.querySelector('#showMoreButton');
-                      expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
-                  });
-                  it(' if message has a max height of around 60px', function() {
-                      var MessageDiv = longTitleAlert.querySelector('#message');
-                      assert.closeTo(parseInt(window.getComputedStyle(MessageDiv,null).getPropertyValue("max-height")),60,3,'they are close');
-                  });
-                  it(' if longTitleAlert truncates properly', function() {
-                      var MessageDiv = longTitleAlert.querySelector('#message');
-                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
-                  });
-                  it('truncates longMessageAlert properly', function() {
-                      var MessageDiv = longMessageAlert.querySelector('#message');
-                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
-                  });
-
-                });
-
-
-                describe('Message expands after click', function() {
-                  before(function(done){
-                    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-                    moreBtnTitle.click();
-                    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-                    moreBtnMessage.click();
-                    //wait for message to expand
-                    setTimeout(function(){
-                      done();
-                    },1000);
-                  });
-                  it('if the collapsedMessage class is removed from longTitleAlert', function() {
-                      expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
-                  });
-                  it('if the collapsedMessage class is removed from longMessageAlert', function() {
-                      expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
-                  });
-
-                  it('if the "show more" says "show less"', function() {
-                      var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-                      assert.equal(moreBtnTitle.textContent, "Show Less");
-                  });
-                  it('if the "show more" says "show less"', function() {
-                      var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-                      assert.equal(moreBtnMessage.textContent, "Show Less");
-                  });
-                  it(' if longTitleAlert expands properly', function() {
-                      var MessageDiv = longTitleAlert.querySelector('#message');
-                      assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
-                  });
-                  it('expands longMessageAlert properly', function() {
-                      var MessageDiv = longMessageAlert.querySelector('#message');
-                      assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
-                  });
-
-                });
-
-
-                describe('Message collapses after click', function() {
-                  before(function(done){
-                    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-                    moreBtnTitle.click();
-                    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-                    moreBtnMessage.click();
-                    //wait for message to expand
-                    setTimeout(function(){
-                      done();
-                    },500);
-                  });
-                  it('reapplies the collapsedMessage class from longTitleAlert', function() {
-                      expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
-                  });
-                  it('reapplies the collapsedMessage class from longMessageAlert', function() {
-                      expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
-                  });
-
-                  it('say "show more" instead of "show less"', function() {
-                      var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-                      assert.equal(moreBtnTitle.textContent, "Show More");
-                  });
-                  it('say "show more" instead of "show less"', function() {
-                      var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-                      assert.equal(moreBtnMessage.textContent, "Show More");
-                  });
-                  it(' if longTitleAlert truncates properly', function() {
-                      var MessageDiv = longTitleAlert.querySelector('#message');
-                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
-                  });
-                  it('truncates longMessageAlert properly', function() {
-                      var MessageDiv = longMessageAlert.querySelector('#message');
-                      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
-                  });
-
-                });
-
-                describe('Multiple language zh-cn', function() {
-
-                  it('if language="zh-cn" ', function() {
-                    var moreBtnMessage = multipleLanguageAlert.querySelector('#showMoreButton');
-                      assert.equal(moreBtnMessage.textContent, "显示更多");
-                  });
-
-                });
-            });
-          });
-        </script>
-    </body>
+    <test-fixture id="PxBasicAlertMessage">
+      <template>
+        <px-alert-message
+            id="basicAlert"
+            type="error"
+            message-title="Well done!"
+            message="You successfully read this.">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+    <script src="px-alert-message-custom-tests.js"></script>
+  </body>
 </html>

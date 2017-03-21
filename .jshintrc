@@ -32,6 +32,7 @@
     "angular": false,
     "Polymer": false,
     "assert": false,
-    "flush": false
+    "flush": false,
+    "fixture": false
   }
 }

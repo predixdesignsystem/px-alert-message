@@ -205,14 +205,18 @@ Custom property | Description | Default
     _expandText: {
       type: Boolean,
       value: false
+    },
+
+    hideLocalize: {
+      type: Array,
+      value: function() {
+        return ['localize','resources','useKeyIfMissing','formats','pathToResources','loadResources','app-localize-resources-error','app-localize-resources-loaded']
+      }
     }
   },
   attached: function() {
     this.loadResources(this.resolveUrl('locales.json'));
     this.listen(this, 'animationend', '_hide');
-    //safari 8
-    this.listen(this, 'webkitAnimationEnd', '_hide');
-
     this.listen(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this._checkMessageLength();
     this.listen(this.$.showMoreButton, 'tap', '_toggleExpansion');
