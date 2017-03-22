@@ -25,7 +25,6 @@ describe('Alert action buttons update correctly', function() {
         var btn = alertMessageEl.querySelector('.action button');
         assert.equal(btn.textContent, "OK");
         assert.equal(alertMessageEl.resources.en.OK, "OK");
-        // done();
       });
     });
     alertMessageEl.loadResources('../locales.json');
@@ -54,7 +53,6 @@ describe('Multiple language zh-cn', function() {
     multipleLanguageAlert.addEventListener('app-localize-resources-loaded', function() {
       var moreBtnMessage = multipleLanguageAlert.querySelector('#showMoreButton');
       assert.equal(moreBtnMessage.textContent, "显示更多");
-      // done();
     });
 
     multipleLanguageAlert.loadResources('../locales.json');
