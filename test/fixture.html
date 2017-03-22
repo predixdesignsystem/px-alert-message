@@ -73,7 +73,34 @@
       </template>
     </test-fixture>
 
+    <px-alert-message
+      id='longTitleAlertStateful'
+      type="information"
+      message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do."
+      message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
+      action="https://www.gesoftware.com/predix">
+    </px-alert-message>
+
+    <px-alert-message
+        id='longMessageAlertStateful'
+        type="custom"
+        message-title="Custom Alert"
+        message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
+        action="https://www.gesoftware.com/predix">
+        <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+    </px-alert-message>
+
+    <px-alert-message
+        id="autoDismissAlertStateful"
+        type="information"
+        message-title="Heads up!"
+        message="This definitely needs your attention."
+        action="https://www.gesoftware.com/predix"
+        auto-dismiss="1500">
+    </px-alert-message>
+
     <script src="px-alert-message-custom-tests.js"></script>
     <script src="px-alert-message-truncation-tests.js"></script>
+    <script src="px-alert-message-dismiss-tests.js"></script>
   </body>
 </html>

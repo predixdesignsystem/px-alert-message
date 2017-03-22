@@ -28,7 +28,7 @@ describe('Truncation shortens message', function() {
       var MessageDiv = longTitleAlert.querySelector('#message');
       expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
   });
-  
+
   it('truncates longMessageAlert properly', function() {
       var longMessageAlert = fixture('PxLongTitleAlert');
       var MessageDiv = longMessageAlert.querySelector('#message');
@@ -38,76 +38,79 @@ describe('Truncation shortens message', function() {
 });
 
 
-// describe('Message expands after click', function() {
-//   before(function(done){
-//     var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-//     moreBtnTitle.click();
-//     var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-//     moreBtnMessage.click();
-//     //wait for message to expand
-//     setTimeout(function(){
-//       done();
-//     },1000);
-//   });
-//   it('if the collapsedMessage class is removed from longTitleAlert', function() {
-//       expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
-//   });
-//   it('if the collapsedMessage class is removed from longMessageAlert', function() {
-//       expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
-//   });
-//
-//   it('if the "show more" says "show less"', function() {
-//       var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-//       assert.equal(moreBtnTitle.textContent, "Show Less");
-//   });
-//   it('if the "show more" says "show less"', function() {
-//       var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-//       assert.equal(moreBtnMessage.textContent, "Show Less");
-//   });
-//   it(' if longTitleAlert expands properly', function() {
-//       var MessageDiv = longTitleAlert.querySelector('#message');
-//       assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
-//   });
-//   it('expands longMessageAlert properly', function() {
-//       var MessageDiv = longMessageAlert.querySelector('#message');
-//       assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
-//   });
-// });
-//
-//
-// describe('Message collapses after click', function() {
-//   before(function(done){
-//     var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-//     moreBtnTitle.click();
-//     var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-//     moreBtnMessage.click();
-//     //wait for message to expand
-//     setTimeout(function(){
-//       done();
-//     },500);
-//   });
-//   it('reapplies the collapsedMessage class from longTitleAlert', function() {
-//       expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
-//   });
-//   it('reapplies the collapsedMessage class from longMessageAlert', function() {
-//       expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
-//   });
-//
-//   it('say "show more" instead of "show less"', function() {
-//       var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-//       assert.equal(moreBtnTitle.textContent, "Show More");
-//   });
-//   it('say "show more" instead of "show less"', function() {
-//       var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-//       assert.equal(moreBtnMessage.textContent, "Show More");
-//   });
-//   it(' if longTitleAlert truncates properly', function() {
-//       var MessageDiv = longTitleAlert.querySelector('#message');
-//       expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
-//   });
-//   it('truncates longMessageAlert properly', function() {
-//       var MessageDiv = longMessageAlert.querySelector('#message');
-//       expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
-//   });
-//
-// });
+describe('Message expands after click', function() {
+  var longTitleAlert = document.querySelector('#longTitleAlertStateful');
+  var longMessageAlert = document.querySelector('#longMessageAlertStateful');
+  before(function(done){
+    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+    moreBtnTitle.click();
+    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+    moreBtnMessage.click();
+    //wait for message to expand
+    setTimeout(function(){
+      done();
+    },1000);
+  });
+  it('if the collapsedMessage class is removed from longTitleAlert', function() {
+    expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
+  });
+  it('if the collapsedMessage class is removed from longMessageAlert', function() {
+    expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
+  });
+  it('if the "show more" says "show less"', function() {
+    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+    assert.equal(moreBtnTitle.textContent, "Show Less");
+  });
+  it('if the "show more" says "show less"', function() {
+    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+    assert.equal(moreBtnMessage.textContent, "Show Less");
+  });
+  it(' if longTitleAlert expands properly', function() {
+    var MessageDiv = longTitleAlert.querySelector('#message');
+    assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
+  });
+  it('expands longMessageAlert properly', function() {
+    var MessageDiv = longMessageAlert.querySelector('#message');
+    assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
+  });
+});
+
+describe('Message collapses after click', function() {
+  var longTitleAlert = document.querySelector('#longTitleAlertStateful');
+  var longMessageAlert = document.querySelector('#longMessageAlertStateful');
+
+  before(function(done){
+    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+    moreBtnTitle.click();
+    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+    moreBtnMessage.click();
+    //wait for message to expand
+    setTimeout(function(){
+      done();
+    },500);
+  });
+  it('reapplies the collapsedMessage class from longTitleAlert', function() {
+      expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
+  });
+  it('reapplies the collapsedMessage class from longMessageAlert', function() {
+      expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
+  });
+
+  it('say "show more" instead of "show less"', function() {
+      var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
+      assert.equal(moreBtnTitle.textContent, "Show More");
+  });
+  it('say "show more" instead of "show less"', function() {
+      var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
+      assert.equal(moreBtnMessage.textContent, "Show More");
+  });
+  it(' if longTitleAlert truncates properly', function() {
+      var MessageDiv = longTitleAlert.querySelector('#message');
+      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
+  });
+  it('truncates longMessageAlert properly', function() {
+      var MessageDiv = longMessageAlert.querySelector('#message');
+      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
+  });
+
+});
