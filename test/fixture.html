@@ -26,10 +26,10 @@
     <test-fixture id="PxBasicAlertMessage">
       <template>
         <px-alert-message
-            id="basicAlert"
-            type="error"
-            message-title="Well done!"
-            message="You successfully read this.">
+          id="basicAlert"
+          type="error"
+          message-title="Well done!"
+          message="You successfully read this.">
         </px-alert-message>
       </template>
     </test-fixture>
@@ -37,12 +37,12 @@
     <test-fixture id="PxAutoDismissAlert">
       <template>
         <px-alert-message
-            id="autoDismissAlert"
-            type="information"
-            message-title="Heads up!"
-            message="This definitely needs your attention."
-            action="https://www.gesoftware.com/predix"
-            auto-dismiss="1500">
+          id="autoDismissAlert"
+          type="information"
+          message-title="Heads up!"
+          message="This definitely needs your attention."
+          action="https://www.gesoftware.com/predix"
+          auto-dismiss="1500">
         </px-alert-message>
       </template>
     </test-fixture>
@@ -50,17 +50,30 @@
     <test-fixture id="PxMultipleLanguageAlert">
       <template>
         <px-alert-message
-            id='multipleLanguageAlert'
-            type="custom"
-            language="zh-cn"
-            message-title="Custom Alert"
-            message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
-            action="https://www.gesoftware.com/predix">
-            <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+          id='multipleLanguageAlert'
+          type="custom"
+          language="zh-cn"
+          message-title="Custom Alert"
+          message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
+          action="https://www.gesoftware.com/predix">
+          <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxLongTitleAlert">
+      <template>
+        <px-alert-message
+          id='longTitleAlert'
+          type="information"
+          message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do."
+          message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
+          action="https://www.gesoftware.com/predix">
         </px-alert-message>
       </template>
     </test-fixture>
 
     <script src="px-alert-message-custom-tests.js"></script>
+    <script src="px-alert-message-truncation-tests.js"></script>
   </body>
 </html>
