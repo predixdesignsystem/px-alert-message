@@ -33,6 +33,7 @@
     "Polymer": false,
     "assert": false,
     "flush": false,
-    "fixture": false
+    "fixture": false,
+    "done": false
   }
 }
