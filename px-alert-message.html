@@ -6,7 +6,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html">
+<link rel="import" href="../px-localize-behavior/px-localize-behavior.html">
 <!--
 
 ### Usage
@@ -96,7 +96,7 @@ Custom property | Description | Default
     * Use app-localize-behavior to implement localization
     */
     behaviors: [
-      Polymer.AppLocalizeBehavior
+      PxLocalizeBehavior
     ],
     /**
      * Properties block, expose attribute values to the DOM via 'reflect'
@@ -215,7 +215,6 @@ Custom property | Description | Default
     }
   },
   attached: function() {
-    this.loadResources(this.resolveUrl('locales.json'));
     this.listen(this, 'animationend', '_hide');
     this.listen(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this._checkMessageLength();
