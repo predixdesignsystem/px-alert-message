@@ -1,3 +1,7 @@
+v0.9.5
+==================
+* temporarily remove Safari 9 testing
+
 v0.9.4
 ==================
 * cutover to PxLocalizeBehavior

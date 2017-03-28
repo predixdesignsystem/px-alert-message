@@ -16,7 +16,8 @@
         message-title="Heads up!"
         message="This definitely needs our attention."
         action="https://www.predix.io/"
-        auto-dismiss="5000">
+        auto-dismiss="5000"
+        language="en">
     </px-alert-message>
 
 ### Styling
@@ -93,7 +94,7 @@ Custom property | Description | Default
 
     is: 'px-alert-message',
     /**
-    * Use app-localize-behavior to implement localization
+    * Use extension of app-localize-behavior to implement localization.
     */
     behaviors: [
       PxLocalizeBehavior
@@ -106,7 +107,7 @@ Custom property | Description | Default
      */
     properties: {
     /**
-     * The currently selected language (chosen from a dropdown menu). See locales.json for available translations.
+     * The currently selected language (chosen from a dropdown menu). See px-localize-behavior for available languages.
      *
      * Note: selected language does not affect the message text itself.
      * @type String
