@@ -61,7 +61,7 @@
     </px-demo-interactive>
 
     <!-- API Viewer -->
-    <px-demo-api-viewer source="px-alert-message"></px-demo-api-viewer>
+    <px-demo-api-viewer source="px-alert-message" hide="{{hideLocalize}}"></px-demo-api-viewer>
 
     <!-- Footer -->
     <px-demo-footer></px-demo-footer>
@@ -150,7 +150,13 @@
 
           ]
         }
+      },
+      hideLocalize: {
+      type: Array,
+      value: function() {
+        return ['localize','resources','useKeyIfMissing','formats','pathToResources','loadResources','app-localize-resources-error','app-localize-resources-loaded']
       }
+    }
     },
 
     /**

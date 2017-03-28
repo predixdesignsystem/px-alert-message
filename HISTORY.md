@@ -1,3 +1,7 @@
+v0.9.6
+==================
+* move hideLocalize to demo page
+
 v0.9.5
 ==================
 * temporarily remove Safari 9 testing
