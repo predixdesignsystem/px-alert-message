@@ -58,7 +58,7 @@ $actionable: true;
 
 // Component
 .alert-message {
-  width: $inuit-base-spacing-unit--small * 40;
+  width: var(--px-alert-message-width, $inuit-base-spacing-unit--small * 40);
   margin: $inuit-base-spacing-unit--tiny;
   padding: $inuit-base-spacing-unit--small;
   min-height: $inuit-base-spacing-unit--small * 5;
