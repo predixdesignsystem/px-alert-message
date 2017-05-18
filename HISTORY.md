@@ -1,3 +1,7 @@
+v1.0.0
+======
+* use app-localize-behavior for localization
+
 v0.9.6
 ==================
 * move hideLocalize to demo page

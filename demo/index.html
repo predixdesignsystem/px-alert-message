@@ -47,8 +47,7 @@
               message-title="{{props.messageTitle.value}}"
               message="{{props.message.value}}"
               auto-dismiss="{{props.autoDismiss.value}}"
-              action="{{props.action.value}}"
-              language="{{props.language.value}}">
+              action="{{props.action.value}}">
           </px-alert-message>
 
       </px-demo-component>
@@ -138,16 +137,7 @@
               message: "15",
               autoDismiss: "0",
               action: "dismiss",
-              language: "en" },
-
-            { configName: "Localization",
-              type: "information",
-              messageTitle: "很好！",
-              message: "你都做完了。",
-              autoDismiss: "0",
-              action: "acknowledge",
-              language: "zh-cn" }
-
+              language: "en" }
           ]
         }
       },
@@ -192,12 +182,6 @@
         defaultValue: 'dismiss',
         inputType: 'dropdown',
         inputChoices: ['dismiss', 'acknowledge', 'https://www.predix.io/', 'https://www.google.com/']
-      },
-      language: {
-        type: String,
-        defaultValue: 'en',
-        inputType: 'dropdown',
-        inputChoices: ['de','en','es','fr','zh-cn']
       }
     },
 

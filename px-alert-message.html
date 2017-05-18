@@ -6,7 +6,7 @@
 -->
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
-<link rel="import" href="../px-localize-behavior/px-localize-behavior.html">
+<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 <!--
 
 ### Usage
@@ -70,7 +70,7 @@ Custom property | Description | Default
           <span>{{ messageTitle }}</span>
           <span>{{ message }}</span>
         </div>
-        <span id="showMoreButton" class="actionable visuallyhidden">{{localize(_showBtnText)}}</span>
+        <span id="showMoreButton" class="actionable visuallyhidden">[[localize("Show More")]]</span>
       </div>
       <template is="dom-if" if="{{ action }}">
         <div class="action">
@@ -80,7 +80,7 @@ Custom property | Description | Default
             </button>
           </template>
           <template is="dom-if" if="{{ !_isTrue(action, 'dismiss') }}">
-            <button class="btn" on-click="_action">{{localize(_actionText)}}</button>
+            <button class="btn" on-click="_action">[[localize(_actionText)]]</button>
           </template>
         </div>
       </template>
@@ -97,7 +97,7 @@ Custom property | Description | Default
     * Use extension of app-localize-behavior to implement localization.
     */
     behaviors: [
-      PxLocalizeBehavior
+       Polymer.AppLocalizeBehavior
     ],
     /**
      * Properties block, expose attribute values to the DOM via 'reflect'
@@ -107,16 +107,36 @@ Custom property | Description | Default
      */
     properties: {
     /**
-     * The currently selected language (chosen from a dropdown menu). See px-localize-behavior for available languages.
-     *
-     * Note: selected language does not affect the message text itself.
-     * @type String
-     * @default "en"
-     */
-    language: {
-      value: 'en',
-      type: String
-    },
+       * A valid IETF language tag as a string that `px-localize-behavior` will
+       * use to localize this component. Refer to px-localize-behavior for currently supported languages.
+       *
+       * See https://github.com/PolymerElements/app-localize-behavior for API
+       * documentation and more information.
+       */
+      language: {
+        type: String,
+        value: 'en'
+      },
+      /**
+      * Use the key for localization if value for  language is missing. Should
+      * always be true for  our components
+      */
+      useKeyIfMissing: {
+        type: Boolean,
+        value: true
+      },
+      resources: {
+        type: Object,
+        value: function() {
+          return {
+            'en': {
+              "Show More": "Show More",
+              "OK": "OK",
+              "Open": "Open"
+            }
+          }
+        }
+      },
     /**
     * Defines the alert level, reflected in the icon:
     * - 'important' - red triangle labeled 1
@@ -189,14 +209,6 @@ Custom property | Description | Default
     _actionText: {
       type: String,
       computed: '_setActionText(action)'
-    },
-    /**
-    * stores the value to be displayed in the show more action text
-    * @type String
-    */
-    _showBtnText: {
-      type: String,
-      value: "Show More"
     },
     /**
      * checks whether the _showMore() if false or _showLess() if true functions are called.
