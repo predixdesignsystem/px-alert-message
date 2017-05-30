@@ -70,7 +70,7 @@ Custom property | Description | Default
           <span>{{ messageTitle }}</span>
           <span>{{ message }}</span>
         </div>
-        <span id="showMoreButton" class="actionable visuallyhidden">[[localize("Show More")]]</span>
+        <span id="showMoreButton" class="actionable visuallyhidden">[[localize(_showBtnText)]]</span>
       </div>
       <template is="dom-if" if="{{ action }}">
         <div class="action">
@@ -218,7 +218,15 @@ Custom property | Description | Default
     _expandText: {
       type: Boolean,
       value: false
-    }
+    },
+    /**
+     * stores the value to be displayed in the show more/show less action text
+     * @type String
+     */
+     _showBtnText: {
+       type: String,
+       value: "Show More"
+     }
   },
   attached: function() {
     this.listen(this, 'animationend', '_hide');
