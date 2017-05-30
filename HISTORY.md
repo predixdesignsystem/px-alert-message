@@ -1,5 +1,6 @@
 v1.0.0
 ======
+* update dependencies and colors for design refresh
 * use app-localize-behavior for localization
 
 v0.9.6
