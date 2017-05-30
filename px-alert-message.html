@@ -5,7 +5,7 @@
     See https://github.com/jreichenberg/grunt-dep-serve#why-do-we-need-this
 -->
 <link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-polymer-font-awesome/polymer-font-awesome.html"/>
+<link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
 <!--
 
@@ -76,7 +76,7 @@ Custom property | Description | Default
         <div class="action">
           <template is="dom-if" if="{{ _isTrue(action, 'dismiss') }}">
             <button class="btn btn--bare dismiss" on-click="_dismiss">
-              <iron-icon icon="fa:fa-times"></iron-icon>
+              <iron-icon icon="px:close"></iron-icon>
             </button>
           </template>
           <template is="dom-if" if="{{ !_isTrue(action, 'dismiss') }}">
