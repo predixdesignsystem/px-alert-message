@@ -322,14 +322,14 @@ Custom property | Description | Default
    * run when 'show more' button is clicked to show full message
    */
   _showMore: function() {
-    this._showBtnText = 'Show Less';
+    this._showBtnText = this.localize('Show Less');
     this.toggleClass('collapsedMessage', false, this.$.message);
   },
   /**
    * run when 'show less' button is clicked to truncate message again
    */
   _showLess: function() {
-    this._showBtnText = 'Show More';
+    this._showBtnText = this.localize('Show More');
     this.toggleClass('collapsedMessage', true, this.$.message);
   },
   /**
