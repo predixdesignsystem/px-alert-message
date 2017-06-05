@@ -1,3 +1,7 @@
+v0.9.7
+==================
+* fix svg size for important to fix show more/less
+
 v0.9.6
 ==================
 * move hideLocalize to demo page
