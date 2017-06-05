@@ -2,6 +2,12 @@ v1.0.0
 ======
 * update dependencies, colors, and icons for design refresh
 * use app-localize-behavior for localization
+* pull in fix from v0.9.7
+* simplify sass files
+
+v0.9.7
+==================
+* fix svg size for important to fix show more/less
 
 v0.9.6
 ==================
