@@ -55,6 +55,10 @@ $actionable: true;
   border: 1px solid var(--px-alert-message-icon-outline-color, $white);
 }
 
+:focus:not(.focus-ring) {
+  outline: none;
+}
+
 .alert-message {
   width: $inuit-base-spacing-unit--small * 40;
   margin: $inuit-base-spacing-unit--tiny;
@@ -66,7 +70,7 @@ $actionable: true;
   background-color: var(--px-alert-message-background-color, $gray2);
   opacity: 1;
   button, a {
-      outline: none;
+      // outline: none;
   }
   &.fade-out {
     animation: fadeout .5s;
@@ -178,7 +182,7 @@ $actionable: true;
     cursor: pointer;
     .dismiss {
       color: var(--px-alert-message-dismiss-icon-color, $gray8);
-      outline: none;
+      // outline: none;
       --iron-icon-height: $inuit-base-font-size;
       --iron-icon-width: $inuit-base-font-size;
       margin-bottom: calculateRem(2px);
