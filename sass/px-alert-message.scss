@@ -9,7 +9,6 @@
  */
 
 // Settings
-@import "px-colors-design/_settings.colors.scss";
 
 // Generic
 @import "px-normalize-design/_generic.normalize.scss";
@@ -23,6 +22,7 @@ $inuit-enable-btn--bare: true;
 @import "px-buttons-design/_objects.buttons.scss";
 $actionable: true;
 @import "px-actionable-text-icons/_objects.actionable.scss";
+@import "px-shadows-design/_objects.shadows.scss";
 
 @keyframes fadein {
   from { opacity: 0; }
@@ -45,25 +45,25 @@ $actionable: true;
 }
 
 // Component
-
-@mixin iconCommon {
-  color: var(--px-alert-message-icon-text-color, $white);
-  text-align: center;
-  vertical-align: middle;
-  line-height: 30px;
-  font-weight: bold;
-  border: 1px solid var(--px-alert-message-icon-outline-color, $white);
+:host {
+  --px-alert-label-background-color--important: white;
+  --px-alert-label-text-color--important: black;
+  --px-alert-label-background-color--error: white;
+  --px-alert-label-text-color--error: black;
+  --px-alert-label-background-color--warning: white;
+  --px-alert-label-text-color--warning: black;
+  --px-alert-label-background-color--information: white;
+  --px-alert-label-text-color--information: black;
 }
-
 .alert-message {
   width: $inuit-base-spacing-unit--small * 40;
   margin: $inuit-base-spacing-unit--tiny;
   padding: $inuit-base-spacing-unit--small;
-  min-height: $inuit-base-spacing-unit--small * 5;
+  min-height: $inuit-base-spacing-unit--small * 6;
   animation: fadein .5s;
   word-wrap: break-word;
   word-break: break-word;
-  background-color: var(--px-alert-message-background-color, $gray2);
+  background-color: var(--px-alert-message-background-color, white);
   opacity: 1;
   button, a {
       outline: none;
@@ -72,84 +72,36 @@ $actionable: true;
     animation: fadeout .5s;
     max-height: 0px;
   }
-  .severity {
-    #icon {
-      position: relative;
-      height:  1.9rem;
-      width:  1.9rem;
-      //The square needs to be visually smaller
-      &.error {
-        height:  1.8rem;
-        width:  1.8rem;
-        background-color: var(--px-alert-message-error-color, $status-yellow3);
-        @include iconCommon;
-        span:before {
-            content: '3';
-            position: absolute;
-            top: -2px;
-            left: 9px;
-        }
-      }
-      &.custom {
-        ::content img {
-            width: 100%;
-            max-width: 100%;
-        }
-      }
-      &.important {
-        @include iconCommon;
-        border: none;
-        span:before {
-          content: '1';
-          position: absolute;
-          top: 2px;
-          left: 11px;
-        }
-        .svg-canvas {
-          display: block !important;
-          position: absolute;
-          top: 0px;
-        }
-      }
-      &.warning {
-        height: 24px !important;
-        width: 24px !important;
-        left: 2px;
-        margin-right: 5px;
-        background-color: var(--px-alert-message-warning-color, $status-orange3);
-        transform: rotate(45deg);
-        @include iconCommon;
-        span {
-          display: block;
-          position: relative;
-          padding-left: 2px;
-          line-height: 24px;
-          transform: rotate(-45deg);
-        }
-        span:before {
-          content: '2';
-        }
-      }
-      &.information {
-        background-color: var(--px-alert-message-info-color, $status-blue3);
-        border-radius: 40px;
-        @include iconCommon;
-        span:before {
-          content: '4';
-          position: absolute;
-          top: -1px;
-          left: 9px;
-        }
-      }
-    }
-  }
   .messageColumn {
     flex: 2;
     margin-left: $inuit-base-spacing-unit--small;
     margin-right: $inuit-base-spacing-unit--small;
   }
+  .severity {
+    min-height: 4rem;
+    min-width: 4rem;
+    max-width: 4rem;
+    margin-left: -0.6666rem;
+    margin-top: -0.6666rem;
+    margin-bottom: -0.6666rem;
+    padding-top: 1rem;
+    overflow: hidden;
+    &.important {
+      background-color: var(--px-alert-message-color--important, red);
+    }
+    &.information {
+      background-color: var(--px-alert-message-color--information, blue);
+    }
+    &.warning {
+      background-color: var(--px-alert-message-color--warning, orange);
+    }
+    &.error {
+      background-color: var(--px-alert-message-color--error, yellow);
+    }
+  }
 
   .message {
+    color: var(--px-alert-message-text-color, black);
     transition: max-height 1s ease-in-out; /* this isn't working for some reason */
     line-height: $inuit-base-line-height;
     font-size: $inuit-base-font-size;
@@ -177,7 +129,7 @@ $actionable: true;
     width: auto;
     cursor: pointer;
     .dismiss {
-      color: var(--px-alert-message-dismiss-icon-color, $gray8);
+      color: var(--px-alert-message-dismiss-icon-color, gray);
       outline: none;
       --iron-icon-height: $inuit-base-font-size;
       --iron-icon-width: $inuit-base-font-size;
@@ -185,21 +137,6 @@ $actionable: true;
       margin-left: calculateRem(4px);
     }
   }
-}
-
-//part of the icons
-.svg-triangle polygon {
-  fill: var(--px-alert-message-alert-color, $status-red3);
-  stroke: var(--px-alert-message-icon-outline-color, $white);
-  stroke-width: 1;
-}
-.svg-triangle{
-  margin: 0 auto;
-  width: 30px;
-  height: 30px;
-}
-.svg-canvas {
-    display: none;
 }
 
 // Trumps

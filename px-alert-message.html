@@ -7,6 +7,7 @@
 <link rel="import" href="../polymer/polymer.html"/>
 <link rel="import" href="../px-polymer-font-awesome/px-icon-set.html"/>
 <link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
+<link rel="import" href="../px-alert-label/px-alert-label.html"/>
 <!--
 
 ### Usage
@@ -23,16 +24,15 @@
 ### Styling
 The following custom properties are available for styling:
 
-Custom property | Description | Default
-----------------|-------------|----------
-`--px-alert-message-background-color` | Background color for the alert message | `$gray3`
-`--px-alert-message-icon-outline-color` | Color of the alert icon outline | `$white`
-`--px-alert-message-icon-text-color` | Color of the alert icon numeric text | `$white`
-`--px-alert-message-alert-color` | Background color for priority 1 alert icons | `$alert-red`
-`--px-alert-message-warning-color` | Background color for priority 2 alert icons | `$alert-orange`
-`--px-alert-message-error-color` | Background color for priority 3 alert icons | `$alert-yellow`
-`--px-alert-message-info-color` | Background color for priority 4 alert icons | `$alert-blue`
-`--px-alert-message-dismiss-icon-color` | Color of the dismiss icon | `$gray6`
+Custom property | Description
+----------------|-------------
+`--px-alert-message-background-color` | Background color for the body of the alert
+`--px-alert-message-text-color` | Text color for the title and message
+`--px-alert-message-color--important` | Status color for an 'important' alert
+`--px-alert-message-color--warning` | Status color for a 'warning' alert
+`--px-alert-message-color--error` | Status color for an 'error' alert
+`--px-alert-message-color--information` | Status color for an 'information' alert
+`--px-alert-message-dismiss-icon-color` | Color of the dismiss icon
 
 @element px-alert-message
 @blurb Element providing solution to no problem in particular.
@@ -46,23 +46,15 @@ Custom property | Description | Default
   <template>
     <style include="px-alert-message-styles"></style>
 
-    <div id="alert" class="alert-message flex flex--left flex--middle">
+    <div id="alert" class="alert-message shadow-notification flex flex--left flex--stretch">
       <template is="dom-if" if="{{ !_isTrue(type, 'more') }}">
-        <div class="severity">
-          <div id="icon" class$="{{ type }}">
-            <template is="dom-if" if="{{ !_isTrue(type, 'custom') }}">
-              <div class="svg-canvas">
-                <!-- Added "important" ico, only svg icon-->
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="svg-triangle">
-                  <polygon points="0,27 15,0 30,27"/>
-                </svg>
-              </div>
-              <span class="number"></span>
-            </template>
-            <template is="dom-if" if="{{ _isTrue(type, 'custom') }}">
-              <content></content>
-            </template>
-          </div>
+        <div class$="severity flex flex--center {{type}}">
+          <template is="dom-if" if="{{ !_isTrue(type, 'custom') }}">
+            <px-alert-label id="icon" type="{{type}}" label="{{_getLabel(type)}}" badge></px-alert-label>
+          </template>
+          <template is="dom-if" if="{{ _isTrue(type, 'custom') }}">
+            <content></content>
+          </template>
         </div>
       </template>
       <div class="messageColumn flex--column">
@@ -356,6 +348,12 @@ Custom property | Description | Default
     } else {
       return ''; // future custom button actions
     }
+  },
+  _getLabel: function(type) {
+    if(type === 'important') return '1';
+    if(type === 'warning') return '2';
+    if(type === 'error') return '3';
+    if(type === 'information') return '4';
   }
 
 });

@@ -4,6 +4,7 @@ v1.0.0
 * use app-localize-behavior for localization
 * pull in fix from v0.9.7
 * simplify sass files
+* component redesign
 
 v0.9.7
 ==================

@@ -1,6 +1,5 @@
 <!-- Common imports -->
 <link rel="import" href="../../polymer/polymer.html" />
-<link rel="import" href="../../px-polymer-font-awesome/polymer-font-awesome.html" />
 
 <!-- Common demo imports -->
 <link rel="import" href="../../px-demo/px-demo-header.html" />
@@ -11,7 +10,7 @@
 <link rel="import" href="../../px-demo/px-demo-interactive.html" />
 <link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
 
-<!-- Imports for this componnent -->
+<!-- Imports for this component -->
 <link rel="import" href="../../px-demo/css/px-demo-styles.html" />
 <link rel="import" href="../px-alert-message.html" />
 
@@ -74,35 +73,11 @@
 
     properties: {
 
-      /**
-       * Note: The actual data/values for `props` are placed in `this.demoProps`
-       * to create a static reference that Polymer shouldn't overwrite.
-       *
-       * On object containing all the properties the user can configure for this
-       * demo. Usually a pretty similar copy of the component's `properties` block
-       * with some additional sugar added to describe what kind of input the
-       * user will be shown and how that input should be configured.
-       *
-       * Note that `value` for each property is the default that will be set
-       * unless a config from `configs` is applied by default.
-       *
-       * @property demoProps
-       * @type {Object}
-       */
       props: {
         type: Object,
         value: function(){ return this.demoProps; }
       },
 
-      /**
-       * An array of pre-configured `props` that can be used to provide the user
-       * with a set of common examples. These configs will be made available
-       * as a set of tabs the user can click that will automatically change
-       * the `props` to specific values.
-       *
-       * @property demoProps
-       * @type {Array}
-       */
       configs: {
         type: Array,
         value: function(){
@@ -115,7 +90,7 @@
               action: "",
               language: "en" },
 
-            { configName: "Long Message",
+            { configName: "Long message",
               type: "error",
               messageTitle: "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking the 'Show More' link.",
               message: "We understand that sometimes long messages are needed but it is not a best practice to have more than three lines of text in the alert message.",
@@ -131,7 +106,7 @@
               action: "https://www.predix.io/",
               language: "en" },
 
-            { configName: "More Messages",
+            { configName: "More messages",
               type: "more",
               messageTitle: "",
               message: "15",
@@ -149,9 +124,6 @@
     }
     },
 
-    /**
-     * A reference for `this.props`. Read the documentation there.
-     */
     demoProps: {
       type: {
         type: String,

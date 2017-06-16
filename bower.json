@@ -27,15 +27,16 @@
   ],
   "dependencies": {
     "polymer": "^1.6.1",
+    "app-localize-behavior": "^1.0.2",
+    "px-alert-label": "^2.0.0"
+  },
+  "devDependencies": {
     "px-theme": "^3.0.0",
     "px-buttons-design": "^2.0.0",
     "px-actionable-text-icons": "^2.0.0",
-    "px-meta-buttons-design": "^1.0.0",
     "px-polymer-font-awesome": "^2.0.0",
-    "app-localize-behavior": "^1.0.2"
-  },
-  "devDependencies": {
     "px-starter-kit-design": "^1.0.0",
-    "px-demo": "^2.0.0"
+    "px-demo": "^2.0.0",
+    "px-shadows-design": "^1.0.0"
   }
 }
