@@ -25,8 +25,14 @@ $actionable: true;
 @import "px-shadows-design/_objects.shadows.scss";
 
 @keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+    left: 4rem;
+  }
+  to {
+    opacity: 1;
+    left: 0;
+  }
 }
 
 @keyframes fadeout {
@@ -60,16 +66,17 @@ $actionable: true;
   margin: $inuit-base-spacing-unit--tiny;
   padding: $inuit-base-spacing-unit--small;
   min-height: $inuit-base-spacing-unit--small * 6;
-  animation: fadein .5s;
+  animation: fadein .4s cubic-bezier(.78,.13,.16,.87);
   word-wrap: break-word;
   word-break: break-word;
   background-color: var(--px-alert-message-background-color, white);
   opacity: 1;
+  position: relative;
   button, a {
       outline: none;
   }
   &.fade-out {
-    animation: fadeout .5s;
+    animation: fadeout .4s cubic-bezier(.78,.13,.16,.87);
     max-height: 0px;
   }
   .messageColumn {
@@ -112,6 +119,7 @@ $actionable: true;
       text-align: center;
       font-size: 1.4rem;
       margin-left:  $inuit-base-spacing-unit--large;
+      margin-top:  $inuit-base-spacing-unit--tiny;
     }
     &.collapsedMessage{
       overflow: hidden;
