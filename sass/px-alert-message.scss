@@ -17,11 +17,10 @@
 
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
-@import "px-viewport-design/_base.viewport.scss";
 $inuit-enable-btn--bare: true;
 @import "px-buttons-design/_objects.buttons.scss";
 $actionable: true;
-@import "px-actionable-text-icons/_objects.actionable.scss";
+@import "px-actionable-design/_objects.actionable.scss";
 @import "px-shadows-design/_objects.shadows.scss";
 
 @keyframes fadein {
@@ -148,5 +147,3 @@ $actionable: true;
 }
 
 // Trumps
-@import "px-spacing-responsive-design/_trumps.spacing-responsive.scss";
-@import "px-widths-responsive-design/_trumps.widths-responsive.scss";

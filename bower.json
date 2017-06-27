@@ -33,9 +33,12 @@
   "devDependencies": {
     "px-theme": "^3.0.0",
     "px-buttons-design": "^2.0.0",
-    "px-actionable-text-icons": "^2.0.0",
+    "px-actionable-design": "^2.0.0",
     "px-polymer-font-awesome": "^2.0.0",
-    "px-starter-kit-design": "^1.0.0",
+    "px-normalize-design": "^1.0.0",
+    "px-box-sizing-design": "^1.0.0",
+    "px-helpers-design": "^1.0.0",
+    "px-flexbox-design": "^1.0.0",
     "px-demo": "^2.0.0",
     "px-shadows-design": "^1.0.0"
   }
