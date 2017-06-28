@@ -35,7 +35,7 @@ Custom property | Description
 `--px-alert-message-dismiss-icon-color` | Color of the dismiss icon
 
 @element px-alert-message
-@blurb Element providing solution to no problem in particular.
+@blurb Alert message
 @homepage index.html
 @demo demo.html
 -->
@@ -59,7 +59,7 @@ Custom property | Description
       </template>
       <div class="messageColumn flex--column">
         <div class$="{{type}} message collapsedMessage" id="message">
-          <span>{{ messageTitle }}</span>
+          <span class="title">{{ messageTitle }}</span>
           <span>{{ message }}</span>
         </div>
         <span id="showMoreButton" class="actionable visuallyhidden">[[localize(_showBtnText)]]</span>
@@ -91,12 +91,6 @@ Custom property | Description
     behaviors: [
        Polymer.AppLocalizeBehavior
     ],
-    /**
-     * Properties block, expose attribute values to the DOM via 'reflect'
-     *
-     * @property properties
-     * @type Object
-     */
     properties: {
     /**
        * A valid IETF language tag as a string that `px-localize-behavior` will
@@ -135,6 +129,7 @@ Custom property | Description
     * - 'warning'- orange diamond labeled 2
     * - 'error' - yellow square labeled 3
     * - 'information' - blue circle labeled 4
+    * - 'unknown' - gray circle labeled 5
     * - 'custom' - allows a developer to specify HTML including images in place of the icon
     * - 'more' - allows for a message indicating that there are more messages in the queue. See https://www.predix-ui.com/px-alert-message/px-alert-message/demo.html for an example
     *
@@ -354,6 +349,7 @@ Custom property | Description
     if(type === 'warning') return '2';
     if(type === 'error') return '3';
     if(type === 'information') return '4';
+    if(type === 'unknown') return '5';
   }
 
 });

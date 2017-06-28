@@ -59,6 +59,8 @@ $actionable: true;
   --px-alert-label-text-color--warning: black;
   --px-alert-label-background-color--information: white;
   --px-alert-label-text-color--information: black;
+  --px-alert-label-background-color--unknown: white;
+  --px-alert-label-text-color--unknown: black;
 }
 .alert-message {
   width: $inuit-base-spacing-unit--small * 40;
@@ -104,11 +106,13 @@ $actionable: true;
     &.error {
       background-color: var(--px-alert-message-color--error, yellow);
     }
+    &.unknown {
+      background-color: var(--px-alert-message-color--unknown, gray);
+    }
   }
 
   .message {
     color: var(--px-alert-message-text-color, black);
-    transition: max-height 1s ease-in-out; /* this isn't working for some reason */
     line-height: $inuit-base-line-height;
     font-size: $inuit-base-font-size;
     padding: 0;
@@ -128,7 +132,7 @@ $actionable: true;
       -webkit-line-clamp: 3;                     /* number of lines to show */
       max-height: $inuit-base-line-height * 3;   /* fallback */
     }
-    span:first-child {
+    .title {
       font-weight: bold;
     }
   }
