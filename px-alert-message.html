@@ -257,7 +257,13 @@ Custom property | Description | Default
   _hide: function(event) {
     if (event.target.classList.contains('fade-out')) {
       event.target.classList.add('hidden');
-      this.fire('px-alert-message-hidden');
+      /**
+      * Event fired when an alert message is hidden.
+      * The event.target will contain a reference to the px-alert-message
+      * component that has been dismissed.
+      * @event px-alert-message-hidden
+      */
+      this.fire('px-alert-message-hidden', event.target);
     }
   },
   /**

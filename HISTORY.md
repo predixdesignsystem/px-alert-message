@@ -1,3 +1,7 @@
+v0.9.8
+==================
+* add hide event to docs
+
 v0.9.7
 ==================
 * fix svg size for important to fix show more/less
