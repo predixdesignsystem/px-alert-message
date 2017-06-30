@@ -216,13 +216,13 @@ Custom property | Description
      }
   },
   attached: function() {
-    this.listen(this, 'animationend', '_hide');
+    this.listen(this.$.alert, 'animationend', '_hide');
     this.listen(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this._checkMessageLength();
     this.listen(this.$.showMoreButton, 'tap', '_toggleExpansion');
   },
   detached: function() {
-    this.unlisten(this, 'animationend', '_hide');
+    this.unlisten(this.$.alert, 'animationend', '_hide');
     this.unlisten(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this.unlisten(this.$.showMoreButton, 'tap', '_toggleExpansion');
   },
