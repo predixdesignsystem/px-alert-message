@@ -22,8 +22,7 @@
     "gulpfile.js",
     "monogram-wdmk.png",
     "README.md",
-    "wct.conf.json",
-    "px-alert-message.png"
+    "wct.conf.json"
   ],
   "dependencies": {
     "polymer": "^1.9.0",

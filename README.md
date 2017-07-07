@@ -1,11 +1,9 @@
 #Px-Alert-Message [![Build Status](https://travis-ci.org/PredixDev/px-alert-message.svg?branch=master)](https://travis-ci.org/PredixDev/px-alert-message)
 -----------------------------------------------
 
-[![px-alert-message demo](px-alert-message.png?raw=true)](https://github.com/PredixDev/px-alert-message)
-
 ## Overview
 
-Px-Alert-Message is a Predix UI component that appears in a queue within the message container.
+Px-alert-message is a Predix UI component that appears in a queue within the message container.
 
 ## Usage
 
