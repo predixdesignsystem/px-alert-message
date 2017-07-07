@@ -1,4 +1,4 @@
-# Px-Alert-Message [![Build Status](https://travis-ci.org/PredixDev/px-alert-message.svg?branch=master)](https://travis-ci.org/PredixDev/px-alert-message)
+# px-alert-message [![Build Status](https://travis-ci.org/PredixDev/px-alert-message.svg?branch=master)](https://travis-ci.org/PredixDev/px-alert-message)
 -----------------------------------------------
 
 ## Overview
