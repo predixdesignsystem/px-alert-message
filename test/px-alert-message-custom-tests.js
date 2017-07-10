@@ -16,49 +16,6 @@ describe('Alert action buttons update correctly', function() {
     });
   });
 
-  it('action button reflects the "action" property  ok', function() {
-    var alertMessageEl = fixture('PxBasicAlertMessage');
-    alertMessageEl.action = "acknowledge";
-
-    alertMessageEl.addEventListener('app-localize-resources-loaded', function() {
-      flush(function(){
-        var btn = alertMessageEl.querySelector('.action button');
-        assert.equal(btn.textContent, "OK");
-        assert.equal(alertMessageEl.resources.en.OK, "OK");
-      });
-    });
-    alertMessageEl.loadResources('../locales.json');
-  });
-
-  it('action button reflects the "action" property  open', function() {
-    var alertMessageEl = fixture('PxBasicAlertMessage');
-    alertMessageEl.action = "https://www.predix.io/";
-
-    alertMessageEl.addEventListener('app-localize-resources-loaded', function() {
-      flush(function(){
-        var btn = alertMessageEl.querySelector('.action button');
-        assert.equal(btn.textContent, "Open");
-      });
-    });
-    alertMessageEl.loadResources('../locales.json');
-  });
-
-});
-
-// localisation tests
-describe('Multiple language zh-cn', function() {
-
-  it('if language="zh-cn" ', function() {
-    var multipleLanguageAlert = fixture('PxMultipleLanguageAlert');
-    multipleLanguageAlert.addEventListener('app-localize-resources-loaded', function() {
-      var moreBtnMessage = multipleLanguageAlert.querySelector('#showMoreButton');
-      assert.equal(moreBtnMessage.textContent, "显示更多");
-    });
-
-    multipleLanguageAlert.loadResources('../locales.json');
-
-  });
-
 });
 
 describe('Properties and attributes in sync for a declarative defined element', function(){
