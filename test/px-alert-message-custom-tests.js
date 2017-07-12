@@ -10,7 +10,7 @@ describe('Alert action buttons update correctly', function() {
     var alertMessageEl = fixture('PxBasicAlertMessage');
     alertMessageEl.action = "dismiss";
     flush(function(){
-      var icon = alertMessageEl.querySelector('.action .dismiss > iron-icon');
+      var icon = alertMessageEl.querySelector('.action .dismiss > px-icon');
       expect(icon).to.exist;
       done();
     });

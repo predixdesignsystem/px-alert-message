@@ -142,10 +142,13 @@ $actionable: true;
     .dismiss {
       color: var(--px-alert-message-dismiss-icon-color, gray);
       outline: none;
-      --iron-icon-height: $inuit-base-font-size;
-      --iron-icon-width: $inuit-base-font-size;
       margin-bottom: calculateRem(2px);
       margin-left: calculateRem(4px);
+
+      px-icon {
+        --iron-icon-height: $inuit-base-font-size;
+        --iron-icon-width: $inuit-base-font-size;
+      }
     }
   }
 }
