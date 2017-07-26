@@ -46,8 +46,12 @@
               message-title="{{props.messageTitle.value}}"
               message="{{props.message.value}}"
               auto-dismiss="{{props.autoDismiss.value}}"
-              action="{{props.action.value}}">
+              action="{{props.action.value}}"
+              hide-severity="{{props.hideSeverity.value}}"
+              hide-badge="{{props.hideBadge.value}}">
           </px-alert-message>
+
+          <br/><br/><a href="demo.html">Full-screen demo with several px-alert-messages in a queue.</a>
 
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -83,12 +87,7 @@
         value: function(){
           return [
             { configName: "Basic",
-              type: "information",
-              messageTitle: "Well done!",
-              message: "You successfully completed a difficult task.",
-              autoDismiss: "8000",
-              action: "",
-              language: "en" },
+              configReset: true },
 
             { configName: "Long message",
               type: "error",
@@ -129,7 +128,13 @@
         type: String,
         defaultValue: 'information',
         inputType: 'dropdown',
-        inputChoices: ['important', 'warning', 'error', 'information', 'unknown', 'more']
+        inputChoices: ['important', 'warning', 'error', 'information', 'unknown', 'custom', 'more']
+      },
+      action: {
+        type: String,
+        defaultValue: 'dismiss',
+        inputType: 'dropdown',
+        inputChoices: ['dismiss', 'acknowledge', 'https://www.predix.io/', 'https://www.google.com/']
       },
       messageTitle: {
         type: String,
@@ -149,11 +154,15 @@
         inputType: 'number',
         inputPlaceholder: '0'
       },
-      action: {
-        type: String,
-        defaultValue: 'dismiss',
-        inputType: 'dropdown',
-        inputChoices: ['dismiss', 'acknowledge', 'https://www.predix.io/', 'https://www.google.com/']
+      hideSeverity: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+      hideBadge: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
       }
     },
 

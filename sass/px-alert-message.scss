@@ -127,7 +127,6 @@ $actionable: true;
     &.collapsedMessage{
       overflow: hidden;
       text-overflow: ellipsis;
-      display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;                     /* number of lines to show */
       max-height: $inuit-base-line-height * 3;   /* fallback */

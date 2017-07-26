@@ -22,6 +22,12 @@
         language="en">
     </px-alert-message>
 
+With custom icon instead of the default severity badges:
+
+    <px-alert-message type="information" message-title="Oops!" hide-badge>
+        <px-icon icon="px-fea:analysis" style="color:white"></px-icon>
+    </px-alert-message>
+
 ### Styling
 The following custom properties are available for styling:
 
@@ -51,11 +57,11 @@ Custom property | Description
       <template is="dom-if" if="{{ !_isTrue(type, 'more') }}">
         <div class$="severity flex flex--center {{type}}">
           <template is="dom-if" if="{{ !_isTrue(type, 'custom') }}">
-            <px-alert-label id="icon" type="{{type}}" label="{{_getLabel(type)}}" badge></px-alert-label>
+            <template is="dom-if" if="{{ !hideBadge }}">
+              <px-alert-label id="icon" type="{{type}}" label="{{_getLabel(type, hideSeverity)}}" badge></px-alert-label>
+            </template>
           </template>
-          <template is="dom-if" if="{{ _isTrue(type, 'custom') }}">
-            <content></content>
-          </template>
+          <content></content>
         </div>
       </template>
       <div class="messageColumn flex--column">
@@ -125,14 +131,14 @@ Custom property | Description
         }
       },
     /**
-    * Defines the alert level, reflected in the icon:
+    * Defines the alert level, reflected in the badge. See [full-screen demo](demo/demo.html) for examples of each.
     * - 'important' - red triangle labeled 1
     * - 'warning'- orange diamond labeled 2
     * - 'error' - yellow square labeled 3
     * - 'information' - blue circle labeled 4
     * - 'unknown' - gray circle labeled 5
-    * - 'custom' - allows a developer to specify HTML including images in place of the icon
-    * - 'more' - allows for a message indicating that there are more messages in the queue. See https://www.predix-ui.com/px-alert-message/px-alert-message/demo.html for an example
+    * - 'custom' - white background, no badge
+    * - 'more' - allows for a message indicating that there are more messages in the queue
     *
     * @default information
     *
@@ -179,6 +185,24 @@ Custom property | Description
     action: {
       type: String,
       reflect: true
+    },
+    /**
+    * If set to true, the white cutout severity badge will not be displayed in the left
+    * side of the alert message. The `type` property can still be used to dictate
+    * a background color, and a custom icon can be passed in as a child of the alert.
+    * See [full-screen demo](demo/demo.html) for examples.
+    */
+    hideBadge: {
+      type: Boolean,
+      value: false
+    },
+    /**
+    * If set to true, the default numeric indicators will not be displayed
+    * for the badges in the left side of the alert.
+    */
+    hideSeverity: {
+      type: Boolean,
+      value: false
     },
     /**
     * An object to store ID of timer in order to clear.
@@ -351,7 +375,8 @@ Custom property | Description
       return ''; // future custom button actions
     }
   },
-  _getLabel: function(type) {
+  _getLabel: function(type, hideSeverity) {
+    if(hideSeverity) return;
     if(type === 'important') return '1';
     if(type === 'warning') return '2';
     if(type === 'error') return '3';

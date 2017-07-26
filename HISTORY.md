@@ -1,5 +1,10 @@
+v1.0.1
+==================
+* added flags to hide severity or badge
+* added more examples and usage for custom alerts
+
 v1.0.0
-======
+==================
 * update dependencies, colors, and icons for design refresh
 * use app-localize-behavior for localization
 * pull in fix from v0.9.7

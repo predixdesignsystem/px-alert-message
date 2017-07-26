@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>px-alert-message Demo</title>
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  <script src="../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
   <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-  <link rel="import" href="../px-theme/px-theme-styles.html">
+  <link rel="import" href="../../px-theme/px-theme-styles.html">
   <style include="px-theme-styles" is="custom-style"></style>
 
-  <link rel="import" href="px-alert-message.html" />
+  <link rel="import" href="../px-alert-message.html" />
 
   <style media="screen">
     .alert-message-container {
@@ -36,7 +36,7 @@
   </p>
 
   <p>
-    Also see the <a href="index.html">documentation</a> and the <a href="test/fixture.html">UI test fixture</a>.
+    Also see the <a href="../index.html">documentation</a> and the <a href="../test/fixture.html">UI test fixture</a>.
   </p>
 
   <div class="alert-message-container">
@@ -44,21 +44,22 @@
     <px-alert-message type="important" message-title="Heads up!" message="This definitely needs your attention.">
     </px-alert-message>
 
-    <px-alert-message type="warning" message-title="Oh snap!" message="Change a few things up." action="dismiss">
+    <px-alert-message type="warning" message-title="Oh snap!" message="Change a few things up." action="dismiss" auto-dismiss="5000">
     </px-alert-message>
 
     <px-alert-message type="error" message-title="Warning!" message="Something isn't quite right" action="acknowledge">
     </px-alert-message>
 
-    <px-alert-message type="information" message-title="Well done!" message="You successfully completed a difficult task." auto-dismiss="5000">
-    </px-alert-message>
-
-    <px-alert-message type="information" message-title="This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'." message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
+    <px-alert-message type="information" hide-severity message-title="This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'." message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
         action="https://www.predix.io/">
     </px-alert-message>
 
-    <px-alert-message type="custom" message-title="Custom Alert" message="The icon to the left is defined by placing content between the px-alert-message tags. If applicable it is possible to have various file types." action="https://www.predix.io/">
+    <px-alert-message type="custom" hide-badge message-title="Custom Alert" message="The icon to the left is defined by placing an img tag between the px-alert-message tags. It is possible to have various file types.">
       <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;" />
+    </px-alert-message>
+
+    <px-alert-message type="information" hide-badge message-title="Custom Icon" message="The icon to the left is defined by placing a px-icon tag between the px-alert-message tags.">
+      <px-icon icon="px-fea:analysis" style="color: white;"></px-icon>
     </px-alert-message>
 
     <px-alert-message type="more" message="15" action="dismiss">
