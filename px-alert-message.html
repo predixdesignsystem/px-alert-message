@@ -75,11 +75,11 @@ Custom property | Description
         <div class="action">
           <template is="dom-if" if="{{ _isTrue(action, 'dismiss') }}">
             <button class="btn btn--bare dismiss" on-click="_dismiss">
-              <px-icon icon="pxm:close"></px-icon>
+              <px-icon icon="px-nav:close"></px-icon>
             </button>
           </template>
           <template is="dom-if" if="{{ !_isTrue(action, 'dismiss') }}">
-            <button class="btn" on-click="_action">[[localize(_actionText)]]</button>
+            <button class="btn btn--tertiary" on-click="_action">[[localize(_actionText)]]</button>
           </template>
         </div>
       </template>

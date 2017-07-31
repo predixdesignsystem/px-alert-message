@@ -18,6 +18,7 @@
 // Base
 @import "px-flexbox-design/_base.flexbox.scss";
 $inuit-enable-btn--bare: true;
+$inuit-enable-btn--tertiary: true;
 @import "px-buttons-design/_objects.buttons.scss";
 $actionable: true;
 @import "px-actionable-design/_objects.actionable.scss";

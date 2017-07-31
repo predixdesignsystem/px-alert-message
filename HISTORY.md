@@ -1,3 +1,7 @@
+v1.0.2
+==================
+* fix dismiss icon, change button style
+
 v1.0.1
 ==================
 * added flags to hide severity or badge
