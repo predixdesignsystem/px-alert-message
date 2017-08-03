@@ -64,12 +64,14 @@ Custom property | Description
           <content></content>
         </div>
       </template>
-      <div class="messageColumn flex--column">
-        <div class$="{{type}} message collapsedMessage" id="message">
-          <span class="title">{{ messageTitle }}</span>
-          <span>{{ message }}</span>
+      <div class="message-column flex flex--middle">
+        <div class="message-container">
+          <div class$="{{type}} message collapsed-message" id="message">
+            <span class="title">{{ messageTitle }}</span>
+            <span>{{ message }}</span>
+          </div>
+          <span id="showMoreButton" class="actionable visuallyhidden">[[localize(_showBtnText)]]</span>
         </div>
-        <span id="showMoreButton" class="actionable visuallyhidden">[[localize(_showBtnText)]]</span>
       </div>
       <template is="dom-if" if="{{ action }}">
         <div class="action">
@@ -341,14 +343,14 @@ Custom property | Description
    */
   _showMore: function() {
     this._showBtnText = this.localize('Show Less');
-    this.toggleClass('collapsedMessage', false, this.$.message);
+    this.toggleClass('collapsed-message', false, this.$.message);
   },
   /**
    * run when 'show less' button is clicked to truncate message again
    */
   _showLess: function() {
     this._showBtnText = this.localize('Show More');
-    this.toggleClass('collapsedMessage', true, this.$.message);
+    this.toggleClass('collapsed-message', true, this.$.message);
   },
   /**
    * run when 'actionText' is clicked.

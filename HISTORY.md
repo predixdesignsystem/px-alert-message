@@ -1,3 +1,7 @@
+v1.0.3
+==================
+* fix alignment bug
+
 v1.0.2
 ==================
 * fix dismiss icon, change button style
