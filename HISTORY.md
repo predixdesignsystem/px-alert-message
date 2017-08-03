@@ -1,6 +1,10 @@
-v1.0.4
+v1.0.5
 ==================
 * update demo to use unique name
+
+v1.0.4
+==================
+* Updated font size and default number of lines to show
 
 v1.0.3
 ==================
