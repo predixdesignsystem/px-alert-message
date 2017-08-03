@@ -1,3 +1,7 @@
+v1.0.4
+==================
+* update demo to use unique name
+
 v1.0.3
 ==================
 * fix alignment bug
