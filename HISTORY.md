@@ -1,4 +1,4 @@
-v1.0.3
+v1.0.4
 ==================
 * Updated font size and default number of lines to show
 
