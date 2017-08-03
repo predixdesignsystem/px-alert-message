@@ -117,8 +117,8 @@ $actionable: true;
 
 .message {
   color: var(--px-alert-message-text-color, black);
-  line-height: $inuit-base-line-height;
-  font-size: $inuit-base-font-size;
+  line-height: calculateRem(16px);
+  font-size: calculateRem(12px);
   padding: 0;
   margin: 0;
 
@@ -131,12 +131,16 @@ $actionable: true;
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;                     /* number of lines to show */
-    max-height: $inuit-base-line-height * 3;   /* fallback */
+    -webkit-line-clamp: 2;                /* number of lines to show */
+    max-height: calculateRem(16px) * 2;   /* fallback */
   }
   .title {
     font-weight: bold;
   }
+}
+.show-more {
+  line-height: calculateRem(16px);
+  font-size: calculateRem(12px);
 }
 
 .message-container {

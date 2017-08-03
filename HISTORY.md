@@ -1,5 +1,9 @@
 v1.0.3
 ==================
+* Updated font size and default number of lines to show
+
+v1.0.3
+==================
 * fix alignment bug
 
 v1.0.2
