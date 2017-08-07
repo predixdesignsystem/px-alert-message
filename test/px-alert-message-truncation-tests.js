@@ -17,10 +17,10 @@ describe('Truncation shortens message', function() {
       expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
   });
 
-  it(' if message has a max height of around 60px', function() {
+  it(' if message has a max height of around 32px', function() {
       var longTitleAlert = fixture('PxLongTitleAlert');
       var MessageDiv = longTitleAlert.querySelector('#message');
-      assert.closeTo(parseInt(window.getComputedStyle(MessageDiv,null).getPropertyValue("max-height")),60,3,'they are close');
+      assert.closeTo(parseInt(window.getComputedStyle(MessageDiv,null).getPropertyValue("max-height")),32,3,'they are close');
   });
 
   it(' if longTitleAlert truncates properly', function() {
@@ -90,10 +90,10 @@ describe('Message collapses after click', function() {
     },500);
   });
   it('reapplies the collapsedMessage class from longTitleAlert', function() {
-      expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
+      expect(longTitleAlert.querySelector('#message').classList.contains('collapsed-message')).equal(true);
   });
   it('reapplies the collapsedMessage class from longMessageAlert', function() {
-      expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(true);
+      expect(longMessageAlert.querySelector('#message').classList.contains('collapsed-message')).equal(true);
   });
 
   it('say "show more" instead of "show less"', function() {
