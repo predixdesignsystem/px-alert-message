@@ -1,3 +1,8 @@
+v1.0.8
+==================
+* Fix comment block for analyzer
+
+
 v1.0.7
 ==================
 * fix unit tests
