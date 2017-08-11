@@ -1,20 +1,29 @@
 describe('Truncation shortens message', function() {
-  it('"show more" btn is hidden on basic alert', function() {
+  it('"show more" btn is hidden when alert title and message fit', function() {
     var basicAlert = fixture('PxBasicAlertMessage');
     var moreBtn = basicAlert.querySelector('#showMoreButton');
-    expect(moreBtn.classList.contains('visuallyhidden')).equal(true);
+    expect(moreBtn.hasAttribute('hidden')).equal(true);
   });
 
-  it('show more" btn is not hidden on longTitleAlert alert', function() {
+  it('`overset` property is false when alert title and message fit', function() {
+    var basicAlert = fixture('PxBasicAlertMessage');
+    expect(basicAlert.overset).equal(false);
+  });
+
+  it('show more" btn is visible when the alert title and message are too long and do not fit', function() {
     var longTitleAlert = fixture('PxLongTitleAlert');
     var moreBtn = longTitleAlert.querySelector('#showMoreButton');
-    expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
+    expect(moreBtn.hasAttribute('hidden')).equal(false);
   });
 
-  it('show more" btn is not hidden on longMessageAlert alert', function() {
-      var longMessageAlert = fixture('PxLongTitleAlert');
-      var moreBtn = longMessageAlert.querySelector('#showMoreButton');
-      expect(moreBtn.classList.contains('visuallyhidden')).equal(false);
+  it('`overset` property is true when the alert title and message are too long and do not fit', function() {
+    var longTitleAlert = fixture('PxLongTitleAlert');
+    expect(longTitleAlert.overset).equal(true);
+  });
+
+  it('`overset` property is true when the title is too long and does not fit', function() {
+    var longTitleAlert = fixture('PxLongTitleAlert');
+    expect(longTitleAlert.overset).equal(true);
   });
 
   it(' if message has a max height of around 32px', function() {
@@ -34,83 +43,97 @@ describe('Truncation shortens message', function() {
       var MessageDiv = longMessageAlert.querySelector('#message');
       expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
   });
-
 });
 
-
-describe('Message expands after click', function() {
-  var longTitleAlert = document.querySelector('#longTitleAlertStateful');
-  var longMessageAlert = document.querySelector('#longMessageAlertStateful');
-  before(function(done){
-    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-    moreBtnTitle.click();
-    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-    moreBtnMessage.click();
-    //wait for message to expand
-    setTimeout(function(){
-      done();
-    },1000);
-  });
-  it('if the collapsedMessage class is removed from longTitleAlert', function() {
-    expect(longTitleAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
-  });
-  it('if the collapsedMessage class is removed from longMessageAlert', function() {
-    expect(longMessageAlert.querySelector('#message').classList.contains('collapsedMessage')).equal(false);
-  });
-  it('if the "show more" says "show less"', function() {
-    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-    assert.equal(moreBtnTitle.textContent, "Show Less");
-  });
-  it('if the "show more" says "show less"', function() {
-    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-    assert.equal(moreBtnMessage.textContent, "Show Less");
-  });
-  it(' if longTitleAlert expands properly', function() {
-    var MessageDiv = longTitleAlert.querySelector('#message');
-    assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
-  });
-  it('expands longMessageAlert properly', function() {
-    var MessageDiv = longMessageAlert.querySelector('#message');
-    assert.equal(MessageDiv.scrollHeight, MessageDiv.clientHeight);
-  });
-});
-
-describe('Message collapses after click', function() {
-  var longTitleAlert = document.querySelector('#longTitleAlertStateful');
-  var longMessageAlert = document.querySelector('#longMessageAlertStateful');
-
-  before(function(done){
-    var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-    moreBtnTitle.click();
-    var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-    moreBtnMessage.click();
-    //wait for message to expand
-    setTimeout(function(){
-      done();
-    },500);
-  });
-  it('reapplies the collapsedMessage class from longTitleAlert', function() {
-      expect(longTitleAlert.querySelector('#message').classList.contains('collapsed-message')).equal(true);
-  });
-  it('reapplies the collapsedMessage class from longMessageAlert', function() {
-      expect(longMessageAlert.querySelector('#message').classList.contains('collapsed-message')).equal(true);
+describe('Truncated message', function() {
+  it('has the collapsed-message class initially, hiding the overset text', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    expect(message.classList.contains('collapsed-message')).to.equal(true);
   });
 
-  it('say "show more" instead of "show less"', function() {
-      var moreBtnTitle = longTitleAlert.querySelector('#showMoreButton');
-      assert.equal(moreBtnTitle.textContent, "Show More");
-  });
-  it('say "show more" instead of "show less"', function() {
-      var moreBtnMessage = longMessageAlert.querySelector('#showMoreButton');
-      assert.equal(moreBtnMessage.textContent, "Show More");
-  });
-  it(' if longTitleAlert truncates properly', function() {
-      var MessageDiv = longTitleAlert.querySelector('#message');
-      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
-  });
-  it('truncates longMessageAlert properly', function() {
-      var MessageDiv = longMessageAlert.querySelector('#message');
-      expect(MessageDiv.scrollHeight >= MessageDiv.clientHeight).equal(true);
+  it('removes the collapsed-message class when it is opened, showing the overset text', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click();
+    expect(message.classList.contains('collapsed-message')).to.equal(false);
   });
 
+  it('re-applies the collapsed-message class when it is closed after being opened', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click(); // First open it
+    moreBtn.click(); // Then close it
+    expect(message.classList.contains('collapsed-message')).to.equal(true);
+  });
+
+  it('displays the "Show More" button when it is collapsed', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    expect(moreBtn.textContent).to.equal('Show More');
+  });
+
+  it('displays the "Show Less" button when it is opened', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click();
+    expect(moreBtn.textContent).to.equal('Show Less');
+  });
+
+  it('sets `expanded` property to false when it is collapsed', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    expect(longAlert.expanded).to.equal(false);
+  });
+
+  it('sets `expanded` property to true when it is opened', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click()
+    expect(longAlert.expanded).to.equal(true);
+  });
+
+  it('opens the message when the `expanded` property is set via JavaScript', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    longAlert.expanded = true;
+    expect(message.classList.contains('collapsed-message')).to.equal(false);
+  });
+
+  it('closes the message when the `expanded` property is set via JavaScript', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click();
+    longAlert.expanded = false;
+    expect(message.classList.contains('collapsed-message')).to.equal(true);
+  });
+
+  it('collapses itself when the title changes', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click();
+    longAlert.messageTitle = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco';
+    expect(message.classList.contains('collapsed-message')).to.equal(true);
+  });
+
+  it('collapses itself when the message changes', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click();
+    longAlert.message = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco';
+    expect(message.classList.contains('collapsed-message')).to.equal(true);
+  });
+
+  it('collapses itself when the type changes', function() {
+    var longAlert = fixture('PxLongTitleAlert');
+    var message = Polymer.dom(longAlert.root).querySelector('#message');
+    var moreBtn = longTitleAlert.querySelector('#showMoreButton');
+    moreBtn.click();
+    longAlert.type = 'warning';
+    expect(message.classList.contains('collapsed-message')).to.equal(true);
+  });
 });

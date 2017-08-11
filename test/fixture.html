@@ -34,6 +34,31 @@
       </template>
     </test-fixture>
 
+    <test-fixture id="PxDismissAlertMessage">
+      <template>
+        <px-alert-message
+          id="basicAlert"
+          type="error"
+          message-title="Well done!"
+          action="dismiss"
+          message="You successfully read this.">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxDisableAutoShowAlertMessage">
+      <template>
+        <px-alert-message
+          id="basicAlert"
+          type="error"
+          message-title="Well done!"
+          action="dismiss"
+          disable-auto-show
+          message="You successfully read this.">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
     <test-fixture id="PxAutoDismissAlert">
       <template>
         <px-alert-message
@@ -43,6 +68,18 @@
           message="This definitely needs your attention."
           action="https://www.gesoftware.com/predix"
           auto-dismiss="1500">
+        </px-alert-message>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="PxAutoDismissAlertShort">
+      <template>
+        <px-alert-message
+          type="information"
+          message-title="Heads up!"
+          message="This definitely needs your attention."
+          action="https://www.gesoftware.com/predix"
+          auto-dismiss="200">
         </px-alert-message>
       </template>
     </test-fixture>
