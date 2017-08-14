@@ -62,25 +62,46 @@ $actionable: true;
   --px-alert-label-text-color--information: black;
   --px-alert-label-background-color--unknown: white;
   --px-alert-label-text-color--unknown: black;
+  --px-btn-min-width: 0
 }
+[hidden] {
+  visibility: hidden;
+  display: none;
+}
+
 .alert-message {
+  visibility: hidden;
+  display: none;
   width: $inuit-base-spacing-unit--small * 40;
   margin: $inuit-base-spacing-unit--tiny;
   padding: $inuit-base-spacing-unit--small;
   min-height: $inuit-base-spacing-unit--small * 6;
-  animation: fadein .4s cubic-bezier(.78,.13,.16,.87);
   word-wrap: break-word;
   word-break: break-word;
   background-color: var(--px-alert-message-background-color, white);
-  opacity: 1;
   position: relative;
+  min-height: 0px;
   button, a {
       outline: none;
   }
-  &.fade-out {
-    animation: fadeout .4s cubic-bezier(.78,.13,.16,.87);
-    max-height: 0px;
-  }
+  opacity: 0;
+  max-height: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.alert-message--visible {
+  visibility: visible;
+  display: flex;
+  opacity: 1;
+  max-height: none;
+  padding-top: $inuit-base-spacing-unit--small;
+  padding-bottom: $inuit-base-spacing-unit--small;
+}
+.fade-in {
+  animation: fadein .4s cubic-bezier(.78,.13,.16,.87);
+}
+.fade-out {
+  animation: fadeout .4s cubic-bezier(.78,.13,.16,.87);
 }
 
 .message-column {
@@ -122,17 +143,18 @@ $actionable: true;
   padding: 0;
   margin: 0;
 
-  &.more {
-    font-size: 1.4rem;
-    display: flex;
-    justify-content: center;
-  }
   &.collapsed-message{
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;                /* number of lines to show */
     max-height: calculateRem(16px) * 2;   /* fallback */
+  }
+  &.more {
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
   }
   .title {
     font-weight: bold;

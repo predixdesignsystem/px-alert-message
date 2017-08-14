@@ -42,6 +42,7 @@
       <px-demo-component>
 
           <px-alert-message
+              visible="{{props.visible.value}}"
               type="{{props.type.value}}"
               message-title="{{props.messageTitle.value}}"
               message="{{props.message.value}}"
@@ -90,6 +91,7 @@
               configReset: true },
 
             { configName: "Long message",
+              visible: true,
               type: "error",
               messageTitle: "This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking the 'Show More' link.",
               message: "We understand that sometimes long messages are needed but it is not a best practice to have more than three lines of text in the alert message.",
@@ -98,6 +100,7 @@
               language: "en" },
 
             { configName: "Action",
+              visible: true,
               type: "important",
               messageTitle: "Oh snap!",
               message: "Change a few things up.",
@@ -106,6 +109,7 @@
               language: "en" },
 
             { configName: "More messages",
+              visible: true,
               type: "more",
               messageTitle: "",
               message: "15",
@@ -124,6 +128,11 @@
     },
 
     demoProps: {
+      visible: {
+        type: Boolean,
+        defaultValue: true,
+        inputType: 'toggle'
+      },
       type: {
         type: String,
         defaultValue: 'information',

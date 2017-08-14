@@ -46,7 +46,7 @@ Custom property | Description
   <template>
     <style include="px-alert-message-styles"></style>
 
-    <div id="alert" class="alert-message shadow-notification flex flex--left flex--stretch">
+    <div id="alert" class="alert-message shadow-notification flex flex--left flex--stretch" on-animationend="_handleAnimationEnd">
       <template is="dom-if" if="{{ !_isTrue(type, 'more') }}">
         <div class$="severity flex flex--center {{type}}">
           <template is="dom-if" if="{{ !_isTrue(type, 'custom') }}">
@@ -59,22 +59,22 @@ Custom property | Description
       </template>
       <div class="message-column flex flex--middle">
         <div class="message-container">
-          <div class$="{{type}} message collapsed-message" id="message">
+          <div class$="[[_getMessageClassNames(type, expanded)]]" id="message">
             <span class="title">{{ messageTitle }}</span>
             <span>{{ message }}</span>
           </div>
-          <span id="showMoreButton" class="actionable visuallyhidden show-more">[[localize(_showBtnText)]]</span>
+          <span id="showMoreButton" class$="[[_getShowMoreClassNames(overset)]]" hidden$="[[!overset]]">[[_showBtnText]]</span>
         </div>
       </div>
       <template is="dom-if" if="{{ action }}">
         <div class="action">
           <template is="dom-if" if="{{ _isTrue(action, 'dismiss') }}">
-            <button class="btn btn--bare dismiss" on-click="_dismiss">
+            <button id="dismissButton" class="btn btn--bare dismiss" on-click="_action">
               <px-icon icon="px-nav:close"></px-icon>
             </button>
           </template>
           <template is="dom-if" if="{{ !_isTrue(action, 'dismiss') }}">
-            <button class="btn btn--tertiary" on-click="_action">[[localize(_actionText)]]</button>
+            <button id="actionButton" class="btn btn--tertiary" on-click="_action">[[_actionText]]</button>
           </template>
         </div>
       </template>
@@ -126,49 +126,45 @@ Custom property | Description
         }
       },
     /**
-    * Defines the alert level, reflected in the badge. See [full-screen demo](demo/demo.html) for examples of each.
-    * - 'important' - red triangle labeled 1
-    * - 'warning'- orange diamond labeled 2
-    * - 'error' - yellow square labeled 3
-    * - 'information' - blue circle labeled 4
-    * - 'unknown' - gray circle labeled 5
-    * - 'custom' - white background, no badge
-    * - 'more' - allows for a message indicating that there are more messages in the queue
-    *
-    * @default information
-    *
-    */
+     * Defines the alert level, reflected in the badge. See
+     * [full-screen demo](demo/demo.html) for examples of each.
+     *
+     * The following options are available:
+     *
+     * - 'important' - red triangle labeled 1
+     * - 'warning'- orange diamond labeled 2
+     * - 'error' - yellow square labeled 3
+     * - 'information' - blue circle labeled 4
+     * - 'unknown' - gray circle labeled 5
+     * - 'custom' - white background, no badge
+     * - 'more' - allows for a message indicating that there are more messages in the queue
+     *
+     * @default information
+     */
     type: {
       type: String,
       reflect: true,
       value: 'information'
     },
     /**
-    * The title of the message, displayed in bold.
-    *
-    */
+     * The title of the alert message, displayed in bold.
+     */
     messageTitle: {
       type: String,
-      reflect: true,
       observer: '_checkMessageLength'
     },
     /**
-    * The message body.
-    *
-    */
+     * The body of the alert message.
+     */
     message: {
       type: String,
       observer: '_checkMessageLength'
     },
     /**
-    * Automatically dismisses the alert message after a specified amount of time.
-    *
-    * Unit: milliseconds
-    *
-    */
+     * Automatically dismisses the alert message after a specified amount of time.
+     */
     autoDismiss: {
       type: Number,
-      reflect: true,
       observer: 'setAutoDismiss'
     },
     /**
@@ -200,70 +196,120 @@ Custom property | Description
       value: false
     },
     /**
-    * An object to store ID of timer in order to clear.
-    * @type Object
-    */
-    _timeouts: {
-      type: Object,
-      value: function() {
-        return {};
-      }
-    },
-    /**
-    * computed property. Displays the value of _setActionText() inside the action button
-    * @private
-    */
+     * Gets the text for the action buttons.
+     */
     _actionText: {
       type: String,
-      computed: '_setActionText(action)'
+      computed: '_computeActionText(action, language, resources)'
     },
     /**
-     * checks whether the _showMore() if false or _showLess() if true functions are called.
-     * @type Boolean
-     * @default false
-     */
-    _expandText: {
-      type: Boolean,
-      value: false
-    },
-    /**
-     * stores the value to be displayed in the show more/show less action text
-     * @type String
+     * Stores the value to be displayed in the show more/show less action text
      */
      _showBtnText: {
        type: String,
-       value: "Show More"
+       computed: '_computeShowBtnText(expanded, language, resources)'
+     },
+     /**
+      * When `true` the alert message is visible. Otherwise, the alert message
+      * will be hidden. Listen for updates to determine if the user has
+      * dismissed the message or it was auto dismissed. Set the value to
+      * show or hide the message programatically.
+      */
+     visible: {
+       type: Boolean,
+       value: false,
+       notify: true,
+       observer: '_handleVisibleChanged'
+     },
+     /**
+      * Set to `true` to disable showing the alert message when it is first
+      * attached to the DOM. The alert message can be shown by toggling
+      * the `visible` attribute.
+      */
+     disableAutoShow: {
+       type: Boolean,
+       value: false
+     },
+     /**
+      * If the alert `messageTitle` and `message` do not fit in the container,
+      * the message is partially hidden. When the user taps the "Show More" or
+      * "Show Less" button this property will be updated. Set the value to
+      * expand or collapse the message programatically.
+      * Set to `true` to expand the full
+      * message. Will be automatically set when the user taps the Show More
+      * or Show Less buttons.
+      */
+     expanded: {
+       type: Boolean,
+       notify: true,
+       value: false
+     },
+     /**
+      * Read-only property set to `true` when the message text does not fit
+      * and the message will be expandable.
+      */
+     overset: {
+       type: Boolean,
+       value: false,
+       readOnly: true,
+       notify: true
      }
   },
+  observers: [
+    '_checkMessageLength(language, resources, type)'
+  ],
+  created: function() {
+    this._pendingDismiss = null;
+  },
   attached: function() {
-    this.listen(this, 'animationend', '_hide');
     this.listen(this, 'app-localize-resources-loaded', '_checkMessageLength');
-    this._checkMessageLength();
     this.listen(this.$.showMoreButton, 'tap', '_toggleExpansion');
+    if (!this.disableAutoShow) {
+      this.visible = true;
+    }
   },
   detached: function() {
-    this.unlisten(this, 'animationend', '_hide');
     this.unlisten(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this.unlisten(this.$.showMoreButton, 'tap', '_toggleExpansion');
+  },
+  _getMessageClassNames: function(type, expanded) {
+    var classNames = 'message ' + type;
+    if (!expanded) {
+      classNames += ' collapsed-message';
+    }
+    return classNames;
+  },
+  _getShowMoreClassNames: function(overset) {
+    var classNames = 'actionable show-more';
+    if (!overset) {
+      classNames += ' visuallyhidden';
+    }
+    return classNames;
   },
   /**
    * Clear timer if needed and set the time to the autoDismiss property
    *
    */
   setAutoDismiss: function(dismissAfter) {
-    this._show();
-    // if timer is set already, clear it
-    if (this._timeouts) {
-      clearTimeout(this._timeouts);
-      this._timeouts = {};
+    if (this._pendingDismissTask) {
+      // Clear the current timer
+      this.cancelAsync(this._pendingDismissTask);
     }
-    if (dismissAfter > 0) {
-      // store ID value of timer in order to clear later
-      this.set('_timeouts', setTimeout(function() {
-        this._dismiss();
-      }.bind(this), dismissAfter));
+
+    if (typeof dismissAfter === 'number' && dismissAfter > 0 && this.visible) {
+      this._pendingDismissTask = this.async(function() {
+        this._pendingDismissTask = null;
+        this.visible = false;
+        this.fire('px-alert-message-action-auto-dismissed');
+      }, dismissAfter);
     }
   },
+  /**
+   * Fired when the alert message is auto dismissed after the `dismissAfter`
+   * timer ends.
+   *
+   * @event px-alert-message-action-auto-dismissed
+   */
   /**
    * helper method for calculating dom-if conditions
    */
@@ -271,77 +317,35 @@ Custom property | Description
     return a === b;
   },
   /**
-   * add fade-out class to this.$.alert
-   *
-   */
-  _dismiss: function() {
-    this.$.alert.classList.add('fade-out');
-  },
-  /**
-   * add hidden class to event.target
-   *
-   */
-  _hide: function(event) {
-    if (event.target.classList.contains('fade-out')) {
-      event.target.classList.add('hidden');
-      /**
-      * Event fired when an alert message is hidden.
-      * The event.target will contain a reference to the px-alert-message
-      * component that has been dismissed.
-      * @event px-alert-message-hidden
-      */
-      this.fire('px-alert-message-hidden');
-    }
-  },
-  /**
-   * remove fade-out and hidden class from this.$.alert
-   *
-   */
-  _show: function() {
-    this.$.alert.classList.remove('fade-out');
-    this.$.alert.classList.remove('hidden');
-  },
-  /**
    * called when the 'show more' action text is clicked
-   *
    */
   _toggleExpansion: function() {
-    this._expandText = !this._expandText;
-    if (this._expandText) {
-      this._showMore();
-    } else {
-      this._showLess();
-    }
+    this.expanded = !this.expanded;
   },
   /**
-   * Checking to see if the combined message length of title and message exceed the max height of the parent div.
+   * Checking to see if the combined message length of title and message exceed
+   * the max height of the parent div.
    */
   _checkMessageLength: function() {
-    var messageDiv = this.$.message;
+    this.debounce('check-message-length', function() {
+      if (this.expanded) {
+        // When the message changes, we should collapse the alert message
+        this.expanded = false;
+      }
 
-    if(this.type === 'more') {
-      return;
-    }
-    if(messageDiv.scrollHeight <= messageDiv.clientHeight) {
-      this.toggleClass('visuallyhidden', true, this.$.showMoreButton);
-    }
-    else {
-      this.toggleClass('visuallyhidden', false, this.$.showMoreButton);
-    }
-  },
-  /**
-   * run when 'show more' button is clicked to show full message
-   */
-  _showMore: function() {
-    this._showBtnText = this.localize('Show Less');
-    this.toggleClass('collapsed-message', false, this.$.message);
-  },
-  /**
-   * run when 'show less' button is clicked to truncate message again
-   */
-  _showLess: function() {
-    this._showBtnText = this.localize('Show More');
-    this.toggleClass('collapsed-message', true, this.$.message);
+      var messageDiv = this.$.message;
+
+      if (this.type === 'more') {
+        this._setOverset(false);
+        return;
+      }
+      if (messageDiv.scrollHeight <= messageDiv.clientHeight) {
+        this._setOverset(false);
+      }
+      else {
+        this._setOverset(true);
+      }
+    }, 1);
   },
   /**
    * run when 'actionText' is clicked.
@@ -352,20 +356,38 @@ Custom property | Description
     if (this.action.indexOf('http') != -1) {
       window.open(this.action);
     } else if (this.action === 'dismiss' || this.action === 'acknowledge') {
-      this._dismiss();
+      this.visible = false;
     }
+    this.fire('px-alert-message-action-triggered', {
+      action: this.action
+    });
   },
   /**
-   * Sets the text of action buttons based on what the action property is
+   * Fired when the user triggers the alert message action (see the `action`
+   * property documentation for more information.)
    *
+   * The event's `detail.action` property will be set to the chosen action for
+   * the alert message instance.
+   *
+   * @event px-alert-message-action-triggered
    */
-  _setActionText: function(action) {
+  /**
+   * Sets the text of action buttons based on what the action property is.
+   */
+  _computeActionText: function(action) {
     if (action === 'acknowledge') {
-      return 'OK';
+      return this.localize('OK');
     } else if (action.indexOf('http') != -1) {
-      return 'Open';
+      return this.localize('Open');
     } else {
       return ''; // future custom button actions
+    }
+  },
+  _computeShowBtnText: function(isExpanded) {
+    if (isExpanded) {
+      return this.localize('Show Less');
+    } else {
+      return this.localize('Show More');
     }
   },
   _getLabel: function(type, hideSeverity) {
@@ -375,7 +397,41 @@ Custom property | Description
     if(type === 'error') return '3';
     if(type === 'information') return '4';
     if(type === 'unknown') return '5';
+  },
+  _handleVisibleChanged: function(isVisible) {
+    var alert = Polymer.dom(this.root).querySelector('#alert');
+    if (alert === null) {
+      return;
+    }
+    if (isVisible && !alert.classList.contains('alert-message--visible')) {
+      alert.classList.add('alert-message--visible');
+      alert.classList.add('fade-in');
+      this._checkMessageLength();
+      this.setAutoDismiss(this.autoDismiss || null);
+    }
+    else if (!isVisible && alert.classList.contains('alert-message--visible')) {
+      this.expanded = false;
+      alert.classList.add('fade-out');
+    }
+  },
+  _handleAnimationEnd: function(evt) {
+    var target = Polymer.dom(evt).rootTarget;
+    if (target && target === this.$.alert) {
+      if (target.classList.contains('fade-out')) {
+        target.classList.remove('alert-message--visible');
+        target.classList.remove('fade-out');
+        this.fire('px-alert-message-hidden');
+      }
+      if (target.classList.contains('fade-in')) {
+        target.classList.remove('fade-in');
+      }
+    }
   }
-
+  /**
+   * Fired fired when an alert message is hidden. The event.target will contain
+   * a reference to the px-alert-message component that has been dismissed.
+   *
+   * @event px-alert-message-hidden
+   */
 });
 </script>
