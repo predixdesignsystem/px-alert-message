@@ -1,7 +1,10 @@
+v1.0.9
+==================
+* remove number input from demo (IE compatibility)
+
 v1.0.8
 ==================
 * Fix comment block for analyzer
-
 
 v1.0.7
 ==================
