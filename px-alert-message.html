@@ -327,23 +327,25 @@ Custom property | Description
    * the max height of the parent div.
    */
   _checkMessageLength: function() {
-    if (this.expanded) {
-      // When the message changes, we should collapse the alert message
-      this.expanded = false;
-    }
+    this.debounce('check-message-length', function() {
+      if (this.expanded) {
+        // When the message changes, we should collapse the alert message
+        this.expanded = false;
+      }
 
-    var messageDiv = this.$.message;
+      var messageDiv = this.$.message;
 
-    if (this.type === 'more') {
-      this._setOverset(false);
-      return;
-    }
-    if (messageDiv.scrollHeight <= messageDiv.clientHeight) {
-      this._setOverset(false);
-    }
-    else {
-      this._setOverset(true);
-    }
+      if (this.type === 'more') {
+        this._setOverset(false);
+        return;
+      }
+      if (messageDiv.scrollHeight <= messageDiv.clientHeight) {
+        this._setOverset(false);
+      }
+      else {
+        this._setOverset(true);
+      }
+    }, 1);
   },
   /**
    * run when 'actionText' is clicked.
