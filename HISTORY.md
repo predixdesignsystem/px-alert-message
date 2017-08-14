@@ -1,3 +1,15 @@
+v1.1.0
+==================
+* The 1.0.x alert message API allowed a message to be shown only once, when it
+was attached to the DOM. This release adds the `visible` property, which the
+developer can toggle to show/hide the same alert message without detaching
+and re-attaching it to the DOM.
+* Adds `expanded` property which can be used to collapse or un-collapse the
+overset text in the alert message
+* Adds the read-only `overset` property which can be used to observe when the
+alert message text does not fit and the user will be presented with a
+Show More/Show Less button.
+
 v1.0.9
 ==================
 * remove number input from demo (IE compatibility)
