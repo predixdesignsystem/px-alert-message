@@ -74,7 +74,6 @@ $actionable: true;
   display: none;
   width: $inuit-base-spacing-unit--small * 40;
   margin: $inuit-base-spacing-unit--tiny;
-  padding: $inuit-base-spacing-unit--small;
   min-height: $inuit-base-spacing-unit--small * 6;
   word-wrap: break-word;
   word-break: break-word;
@@ -86,16 +85,13 @@ $actionable: true;
   }
   opacity: 0;
   max-height: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding: 0;
 }
 .alert-message--visible {
   visibility: visible;
   display: flex;
   opacity: 1;
   max-height: none;
-  padding-top: $inuit-base-spacing-unit--small;
-  padding-bottom: $inuit-base-spacing-unit--small;
 }
 .fade-in {
   animation: fadein .4s cubic-bezier(.78,.13,.16,.87);
@@ -108,16 +104,18 @@ $actionable: true;
   display: flex;
   align-items: center;
   flex: 2;
-  margin-left: $inuit-base-spacing-unit--small;
-  margin-right: $inuit-base-spacing-unit--small;
+  margin: $inuit-base-spacing-unit--small;
 }
 
 .severity {
   min-height: 4rem;
   width: 4rem;
-  margin-left: -0.6666rem; //10px
-  margin-top: -0.6666rem;
-  margin-bottom: -0.6666rem;
+  padding: {
+    top: 1rem;
+    right: $inuit-base-spacing-unit--small;
+    bottom: $inuit-base-spacing-unit--small;
+    left: $inuit-base-spacing-unit--small;
+  };
   padding-top: 1rem;
   &.important {
     background-color: var(--px-alert-message-color--important, red);
@@ -172,7 +170,9 @@ $actionable: true;
 .action {
   width: auto;
   cursor: pointer;
-  margin-top: calculateRem(4px);
+  padding-top: calculateRem(4px);
+  margin: $inuit-base-spacing-unit--small;
+
   .dismiss {
     color: var(--px-alert-message-dismiss-icon-color, gray);
     outline: none;
@@ -183,6 +183,5 @@ $actionable: true;
     }
   }
 }
-
 
 // Trumps
