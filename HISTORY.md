@@ -1,3 +1,7 @@
+v1.1.1
+==================
+* fix relative link in demo
+
 v1.1.0
 ==================
 * The 1.0.x alert message API allowed a message to be shown only once, when it
