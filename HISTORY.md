@@ -1,3 +1,7 @@
+v1.1.2
+==================
+* add device flags
+
 v1.1.1
 ==================
 * fix relative link in demo
