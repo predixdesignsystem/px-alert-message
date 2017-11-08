@@ -5,3 +5,6 @@ bower_components
 .idea
 reports
 css/noprefix
+bower_components-*/
+bower-*.json
+monogram-wdmk.png

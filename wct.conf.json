@@ -35,6 +35,6 @@
     }
   },
   "suites": [
-    "test/fixture.html"
+    "test/index.html"
   ]
 }
