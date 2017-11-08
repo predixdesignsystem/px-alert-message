@@ -7,10 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>px-alert-message Demo</title>
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
   <link rel="import" href="../../px-theme/px-theme-styles.html">
-  <style include="px-theme-styles" is="custom-style"></style>
 
   <link rel="import" href="../px-alert-message.html" />
 
@@ -27,6 +26,9 @@
 </head>
 
 <body>
+  <custom-style>
+    <style include="px-theme-styles" is="custom-style"></style>
+  </custom-style>
 
   <h3>Demo</h3>
 

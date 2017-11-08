@@ -54,7 +54,7 @@ Custom property | Description
               <px-alert-label id="icon" type="{{type}}" label="{{_getLabel(type, hideSeverity)}}" badge></px-alert-label>
             </template>
           </template>
-          <content></content>
+          <slot></slot>
         </div>
       </template>
       <div class="message-column flex flex--middle">
@@ -377,7 +377,7 @@ Custom property | Description
   _computeActionText: function(action) {
     if (action === 'acknowledge') {
       return this.localize('OK');
-    } else if (action.indexOf('http') != -1) {
+    } else if (action !== undefined && action.indexOf('http') != -1) {
       return this.localize('Open');
     } else {
       return ''; // future custom button actions
