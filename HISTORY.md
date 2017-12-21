@@ -1,3 +1,7 @@
+v1.2.2
+==================
+* clean up docs
+
 v1.2.1
 ==================
 * fix url for fullscreen demo

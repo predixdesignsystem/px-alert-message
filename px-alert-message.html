@@ -126,18 +126,17 @@ Custom property | Description
         }
       },
     /**
-     * Defines the alert level, reflected in the badge. See
-     * [full-screen demo](demo/demo.html) for examples of each.
+     * Defines the alert level, reflected in the badge.
      *
      * The following options are available:
      *
-     * - 'important' - red triangle labeled 1
-     * - 'warning'- orange diamond labeled 2
-     * - 'error' - yellow square labeled 3
-     * - 'information' - blue circle labeled 4
-     * - 'unknown' - gray circle labeled 5
-     * - 'custom' - white background, no badge
-     * - 'more' - allows for a message indicating that there are more messages in the queue
+     * - `important` - red triangle labeled 1
+     * - `warning`- orange diamond labeled 2
+     * - `error` - yellow square labeled 3
+     * - `information` - blue circle labeled 4
+     * - `unknown` - gray circle labeled 5
+     * - `custom` - white background, no badge
+     * - `more` - allows for a message indicating that there are more messages in the queue
      *
      * @default information
      */
@@ -169,9 +168,9 @@ Custom property | Description
     },
     /**
     * User interaction on the right hand side of the message box:
-    * - 'dismiss' - displays (x) to dismiss
-    * - 'acknowledge' - displays (OK) to dismiss
-    * - 'URL' - string containing http url to be opened, displays (Open).
+    * - `dismiss` - displays (x) to dismiss
+    * - `acknowledge` - displays (OK) to dismiss
+    * - `URL` - string containing http url to be opened, displays (Open).
     */
     action: {
       type: String,
@@ -181,7 +180,6 @@ Custom property | Description
     * If set to true, the white cutout severity badge will not be displayed in the left
     * side of the alert message. The `type` property can still be used to dictate
     * a background color, and a custom icon can be passed in as a child of the alert.
-    * See [full-screen demo](demo/demo.html) for examples.
     */
     hideBadge: {
       type: Boolean,
