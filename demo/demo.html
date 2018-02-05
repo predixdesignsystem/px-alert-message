@@ -22,6 +22,13 @@
       height: 100vh;
       overflow-y: scroll;
     }
+    table {
+      border-collapse: collapse;
+      border-spacing: 0px;
+    }
+    td {
+      border: 1px solid lightgray;
+    }
   </style>
 </head>
 
@@ -62,6 +69,23 @@
 
     <px-alert-message type="information" hide-badge message-title="Custom Icon" message="The icon to the left is defined by placing a px-icon tag between the px-alert-message tags.">
       <px-icon icon="px-fea:analysis" style="color: white;"></px-icon>
+    </px-alert-message>
+
+    <px-alert-message type="information">
+      <table slot="content">
+          <tr>
+            <td>Header</td>
+            <td>Header</td>
+            <td>Header</td>
+            <td>Header</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>5</td>
+            <td>6</td>
+            <td>17</td>
+          </tr>
+        </table>
     </px-alert-message>
 
     <px-alert-message type="more" message="15" action="dismiss">

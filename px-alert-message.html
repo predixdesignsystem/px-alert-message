@@ -21,7 +21,15 @@
 With custom icon instead of the default severity badges:
 
     <px-alert-message type="information" message-title="Oops!" hide-badge>
-        <px-icon icon="px-fea:analysis" style="color:white"></px-icon>
+      <px-icon icon="px-fea:analysis" style="color:white"></px-icon>
+    </px-alert-message>
+
+With custom content instead of the title/message:
+
+    <px-alert-message type="information">
+      <table slot="content">
+        ...
+      </table>
     </px-alert-message>
 
 ### Styling
@@ -59,10 +67,12 @@ Custom property | Description
       </template>
       <div class="message-column flex flex--middle">
         <div class="message-container">
-          <div class$="[[_getMessageClassNames(type, expanded)]]" id="message">
-            <span class="title">{{ messageTitle }}</span>
-            <span>{{ message }}</span>
-          </div>
+          <slot name="content">
+            <div class$="[[_getMessageClassNames(type, expanded)]]" id="message">
+              <span class="title">{{ messageTitle }}</span>
+              <span>{{ message }}</span>
+            </div>
+          </slot>
           <span id="showMoreButton" class$="[[_getShowMoreClassNames(overset)]]" hidden$="[[!overset]]">[[_showBtnText]]</span>
         </div>
       </div>

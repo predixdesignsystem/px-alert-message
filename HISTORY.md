@@ -1,3 +1,7 @@
+v1.3.0
+==================
+* add slot for custom content inside messages
+
 v1.2.2
 ==================
 * clean up docs
