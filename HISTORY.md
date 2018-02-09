@@ -1,3 +1,7 @@
+v1.3.1
+==================
+* Fix demo for IE
+
 v1.3.0
 ==================
 * add slot for custom content inside messages
