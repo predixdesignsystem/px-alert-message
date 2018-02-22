@@ -1,3 +1,7 @@
+v1.3.3
+==================
+* fix `language` comments in api doc
+
 v1.3.2
 ==================
 * reduce icon-set imports

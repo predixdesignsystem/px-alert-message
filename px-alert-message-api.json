@@ -30,7 +30,7 @@
         {
           "name": "language",
           "type": "string",
-          "description": "A valid IETF language tag as a string that `px-localize-behavior` will\nuse to localize this component. Refer to px-localize-behavior for currently supported languages.\n\nSee https://github.com/PolymerElements/app-localize-behavior for API\ndocumentation and more information.",
+          "description": "A valid IETF language tag as a string that `app-localize-behavior` will\nuse to localize this component.\n\nSee https://github.com/PolymerElements/app-localize-behavior for API\ndocumentation and more information.",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -873,7 +873,7 @@
       "attributes": [
         {
           "name": "language",
-          "description": "A valid IETF language tag as a string that `px-localize-behavior` will\nuse to localize this component. Refer to px-localize-behavior for currently supported languages.\n\nSee https://github.com/PolymerElements/app-localize-behavior for API\ndocumentation and more information.",
+          "description": "A valid IETF language tag as a string that `app-localize-behavior` will\nuse to localize this component.\n\nSee https://github.com/PolymerElements/app-localize-behavior for API\ndocumentation and more information.",
           "sourceRange": {
             "start": {
               "line": 113,
