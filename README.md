@@ -1,5 +1,6 @@
-# px-alert-message [![Build Status](https://travis-ci.org/PredixDev/px-alert-message.svg?branch=master)](https://travis-ci.org/PredixDev/px-alert-message)
------------------------------------------------
+# px-alert-message [![Build Status](https://travis-ci.org/predixdesignsystem/px-alert-message.svg?branch=master)](https://travis-ci.org/predixdesignsystem/px-alert-message)
+
+---
 
 ## Overview
 
@@ -8,6 +9,7 @@ Px-alert-message is a Predix UI component that appears in a queue within the mes
 ## Usage
 
 ### Prerequisites
+
 1. node.js
 2. npm
 3. bower
@@ -45,7 +47,7 @@ Finally, use the component in your application:
 
 ## Documentation
 
-Read the full API and view the demo [here](https://predixdev.github.io/px-alert-message).
+Read the full API and view the demo [here](https://www.predix-ui.com/#/elements/px-alert-message).
 
 ## Local Development
 
@@ -69,17 +71,14 @@ Navigate to the root of that server (e.g. http://localhost:8080/) in a browser t
 
 By default gulp serve is configured to enable LiveReload and will be watching for modifications in your root directory as well as `/css`.
 
-
 ### Extending behavior
 
 See Polymer composition patterns
 
-GE Coding Style Guide
----------------------
+## GE Coding Style Guide
 
 [GE JS Developer's Guide](https://github.com/GeneralElectric/javascript)
 
-
 ### Known Issues
 
-Please use [Github Issues](https://github.com/PredixDev/px-alert-message/issues) to submit any bugs you might find.
+Please use [Github Issues](https://github.com/predixdesignsystem/px-alert-message/issues) to submit any bugs you might find.
