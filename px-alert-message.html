@@ -269,7 +269,7 @@ Custom property | Description
        value: false
      },
      /**
-      * If the `expanded` property is set then expandedOnOpen is set to true
+      * If the `expanded` property is set then _expandedOnOpen is set to true
       * to ensure the alert opens in expanded form when it first loads.
       */
      _expandedOnOpen: {
@@ -299,7 +299,7 @@ Custom property | Description
     if (!this.disableAutoShow) {
       this.visible = true;
     }
-    this.expandedOnOpen = this.expanded;
+    this._expandedOnOpen = this.expanded;
  },
   detached: function() {
     this.unlisten(this, 'app-localize-resources-loaded', '_checkMessageLength');
@@ -361,12 +361,12 @@ Custom property | Description
    */
   _checkMessageLength: function() {
     this.debounce('check-message-length', function() {        
-      if (this.expanded && !this.expandedOnOpen) {
+      if (this.expanded && !this._expandedOnOpen) {
         // When the message changes, we should collapse the alert message
         this.expanded = false;
         // Reset the expand on open property
       }
-      this.expandedOnOpen = false;
+      this._expandedOnOpen = false;
 
       var messageDiv = this.$.message;
 

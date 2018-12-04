@@ -406,7 +406,7 @@
         {
           "name": "_expandedOnOpen",
           "type": "boolean",
-          "description": "If the `expanded` property is set then expandedOnOpen is set to true\nto ensure the alert opens in expanded form when it first loads.",
+          "description": "If the `expanded` property is set then _expandedOnOpen is set to true\nto ensure the alert opens in expanded form when it first loads.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
