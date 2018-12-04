@@ -25,12 +25,16 @@ limitations under the License.
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
+  <link rel="import" href="../../px-demo/px-demo-header.html" />
   <link rel="import" href="../../px-theme/px-theme-styles.html">
   <link rel="import" href="../../px-icon-set/px-icon-set-feature.html">
 
   <link rel="import" href="../px-alert-message.html" />
 
   <style media="screen">
+    body {
+      margin: 0;
+    }
     .alert-message-container {
       position: fixed;
       top: 15px;
@@ -54,33 +58,33 @@ limitations under the License.
     <style include="px-theme-styles" is="custom-style"></style>
   </custom-style>
 
-  <h3>Demo</h3>
-
-
-  <p>
-    Although related, examples are /not/ the same as the test fixtures. Tests are tests, examples are examples.
-  </p>
-
-  <p>
-    Also see the <a href="../index.html">documentation</a> and the <a href="../test/fixture.html">UI test fixture</a>.
-  </p>
+  <px-demo-header
+    module-name="px-alert-message : DEMO"
+    description="Alert Messages appear in a queue within the message container. Each message consists of an icon, title,
+        body, and action. See Alert Icons for more on the default icons available –- a custom icon can also be defined.
+        The title appears in bold, whereas the message body text does not. The action on the right will appear
+        as an “X” for dismissing the alert, an “OK” button for acknowledging it, or an “Open” button if a URL is specified.
+        If Auto Dismiss is enabled, the alert will disappear on its own after a configurable delay period. The
+        text on the alert messages should be kept short, ideally around three lines."
+    tablet desktop>
+  </px-demo-header>
 
   <div class="alert-message-container">
     <!-- instance 1, "predix" theme -->
     <px-alert-message type="important" message-title="Heads up!" message="This definitely needs your attention.">
     </px-alert-message>
 
-    <px-alert-message type="warning" message-title="Oh snap!" message="Change a few things up." action="dismiss" auto-dismiss="5000">
+    <px-alert-message type="warning" message-title="This message will auto dismiss!" message="Change a few things up." action="dismiss" auto-dismiss="5000">
     </px-alert-message>
 
     <px-alert-message type="error" message-title="Warning!" message="Something isn't quite right" action="acknowledge">
     </px-alert-message>
 
-    <px-alert-message type="information" hide-severity message-title="This message title is too long. For the user to be able to see this entire message they will need to expand it by clicking 'Show More'." message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
+    <px-alert-message type="information" hide-severity message-title="This message title is too long. The user will need to expand it by clicking 'Show More'." message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
         action="https://www.predix.io/">
     </px-alert-message>
 
-    <px-alert-message type="custom" hide-badge message-title="Custom Alert" message="The icon to the left is defined by placing an img tag between the px-alert-message tags. It is possible to have various file types.">
+    <px-alert-message type="custom" expanded hide-badge message-title="Expanded Message. The expanded property has been set to show the complete message when alert is raised." message="The icon to the left is defined by placing an img tag between the px-alert-message tags. It is possible to have various file types.">
       <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;" />
     </px-alert-message>
 

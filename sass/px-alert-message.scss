@@ -47,7 +47,7 @@ $actionable: true;
     max-height: $inuit-base-spacing-unit--small * 10;
     min-height: 0px;
   }
-  to   {
+  to {
     opacity: 0;
     max-height: 0px;
     min-height: 0px;
@@ -68,7 +68,7 @@ $actionable: true;
   --px-alert-label-text-color--information: black;
   --px-alert-label-background-color--unknown: white;
   --px-alert-label-text-color--unknown: black;
-  --px-btn-min-width: 0
+  --px-btn-min-width: 0;
 }
 [hidden] {
   visibility: hidden;
@@ -87,8 +87,9 @@ $actionable: true;
   background-color: var(--px-alert-message-background-color, white);
   position: relative;
   min-height: 0px;
-  button, a {
-      outline: none;
+  button,
+  a {
+    outline: none;
   }
   opacity: 0;
   max-height: 0px;
@@ -104,10 +105,10 @@ $actionable: true;
   padding-bottom: $inuit-base-spacing-unit--small;
 }
 .fade-in {
-  animation: fadein .4s cubic-bezier(.78,.13,.16,.87);
+  animation: fadein 0.4s cubic-bezier(0.78, 0.13, 0.16, 0.87);
 }
 .fade-out {
-  animation: fadeout .4s cubic-bezier(.78,.13,.16,.87);
+  animation: fadeout 0.4s cubic-bezier(0.78, 0.13, 0.16, 0.87);
 }
 
 .message-column {
@@ -149,12 +150,12 @@ $actionable: true;
   padding: 0;
   margin: 0;
 
-  &.collapsed-message{
+  &.collapsed-message {
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;                /* number of lines to show */
-    max-height: calculateRem(16px) * 2;   /* fallback */
+    -webkit-line-clamp: 2; /* number of lines to show */
+    max-height: calculateRem(16px) * 2; /* fallback */
   }
   &.more {
     font-size: 1.4rem;
@@ -164,6 +165,7 @@ $actionable: true;
   }
   .title {
     font-weight: bold;
+    display: block;
   }
 }
 .show-more {
@@ -184,11 +186,10 @@ $actionable: true;
     outline: none;
 
     px-icon {
-      --iron-icon-height: calculateRem(20px);
-      --iron-icon-width: calculateRem(20px);
+      --iron-icon-height: var(calculateRem(20px), 20px);
+      --iron-icon-width: var(calculateRem(20px), 20px);
     }
   }
 }
-
 
 // Trumps
