@@ -2,7 +2,7 @@
   "name": "px-alert-message",
   "author": "General Electric",
   "description": "A Px component providing message notifications",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "extName": null,
   "repository": {
     "type": "git",
