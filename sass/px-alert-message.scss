@@ -143,6 +143,11 @@ $actionable: true;
   }
 }
 
+:host-context([dir='rtl']) .severity {
+  margin-left: 0;
+  margin-right: -0.6666rem;
+}
+
 .message {
   color: var(--px-alert-message-text-color, black);
   line-height: calculateRem(16px);
