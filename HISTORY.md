@@ -1,3 +1,7 @@
+v1.3.4
+==================
+* fix RTL margin-right issue
+
 v1.3.3
 ==================
 * fix `language` comments in api doc
