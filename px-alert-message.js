@@ -1,4 +1,4 @@
-<!--
+/*
 Copyright (c) 2018, General Electric
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,16 +12,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
--->
-
-<link rel="import" href="../polymer/polymer.html"/>
-<link rel="import" href="../px-icon-set/px-icon-set-navigation.html"/>
-<link rel="import" href="../px-icon-set/px-icon.html"/>
-<link rel="import" href="../app-localize-behavior/app-localize-behavior.html"/>
-<link rel="import" href="../px-alert-label/px-alert-label.html"/>
-<link rel="import" href="css/px-alert-message-styles.html"/>
-
-<!--
+*/
+/**
 
 ### Usage
 
@@ -65,17 +57,32 @@ Custom property | Description
 @blurb Alert message
 @homepage index.html
 @demo demo.html
--->
-<dom-module id="px-alert-message">
-  <template>
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
+
+import 'px-icon-set/px-icon-set-navigation.js';
+import 'px-icon-set/px-icon.js';
+import { AppLocalizeBehavior } from '@polymer/app-localize-behavior/app-localize-behavior.js';
+import 'px-alert-label/px-alert-label.js';
+import './css/px-alert-message-styles.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
+Polymer({
+  _template: html`
     <style include="px-alert-message-styles"></style>
 
     <div id="alert" class="alert-message shadow-notification flex flex--left flex--stretch" on-animationend="_handleAnimationEnd">
       <template is="dom-if" if="{{ !_isTrue(type, 'more') }}">
-        <div class$="severity flex flex--center {{type}}">
+        <div class\$="severity flex flex--center {{type}}">
           <template is="dom-if" if="{{ !_isTrue(type, 'custom') }}">
             <template is="dom-if" if="{{ !hideBadge }}">
-              <px-alert-label id="icon" type="{{type}}" label="{{_getLabel(type, hideSeverity)}}" badge></px-alert-label>
+              <px-alert-label id="icon" type="{{type}}" label="{{_getLabel(type, hideSeverity)}}" badge=""></px-alert-label>
             </template>
           </template>
           <slot></slot>
@@ -84,12 +91,12 @@ Custom property | Description
       <div class="message-column flex flex--middle">
         <div class="message-container">
           <slot name="content">
-            <div class$="[[_getMessageClassNames(type, expanded)]]" id="message">
+            <div class\$="[[_getMessageClassNames(type, expanded)]]" id="message">
               <span class="title">{{ messageTitle }}</span>
               <span>{{ message }}</span>
             </div>
           </slot>
-          <span id="showMoreButton" class$="[[_getShowMoreClassNames(overset)]]" hidden$="[[!overset]]">[[_showBtnText]]</span>
+          <span id="showMoreButton" class\$="[[_getShowMoreClassNames(overset)]]" hidden\$="[[!overset]]">[[_showBtnText]]</span>
         </div>
       </div>
       <template is="dom-if" if="{{ action }}">
@@ -106,193 +113,194 @@ Custom property | Description
       </template>
 
     </div>
-  </template>
-</dom-module>
+`,
 
-<script>
-  Polymer({
+  is: 'px-alert-message',
 
-    is: 'px-alert-message',
+  /**
+  * Use extension of app-localize-behavior to implement localization.
+  */
+  behaviors: [
+     AppLocalizeBehavior
+  ],
+
+  properties: {
+  /**
+     * A valid IETF language tag as a string that `app-localize-behavior` will
+     * use to localize this component.
+     *
+     * See https://github.com/PolymerElements/app-localize-behavior for API
+     * documentation and more information.
+     */
+    language: {
+      type: String,
+      value: 'en'
+    },
     /**
-    * Use extension of app-localize-behavior to implement localization.
+    * Use the key for localization if value for  language is missing. Should
+    * always be true for  our components
     */
-    behaviors: [
-       Polymer.AppLocalizeBehavior
-    ],
-    properties: {
-    /**
-       * A valid IETF language tag as a string that `app-localize-behavior` will
-       * use to localize this component.
-       *
-       * See https://github.com/PolymerElements/app-localize-behavior for API
-       * documentation and more information.
-       */
-      language: {
-        type: String,
-        value: 'en'
-      },
-      /**
-      * Use the key for localization if value for  language is missing. Should
-      * always be true for  our components
-      */
-      useKeyIfMissing: {
-        type: Boolean,
-        value: true
-      },
-      resources: {
-        type: Object,
-        value: function() {
-          return {
-            'en': {
-              "Show More": "Show More",
-              "OK": "OK",
-              "Open": "Open"
-            }
+    useKeyIfMissing: {
+      type: Boolean,
+      value: true
+    },
+    resources: {
+      type: Object,
+      value: function() {
+        return {
+          'en': {
+            "Show More": "Show More",
+            "OK": "OK",
+            "Open": "Open"
           }
         }
-      },
-    /**
-     * Defines the alert level, reflected in the badge.
-     *
-     * The following options are available:
-     *
-     * - `important` - red triangle labeled 1
-     * - `warning`- orange diamond labeled 2
-     * - `error` - yellow square labeled 3
-     * - `information` - blue circle labeled 4
-     * - `unknown` - gray circle labeled 5
-     * - `custom` - white background, no badge
-     * - `more` - allows for a message indicating that there are more messages in the queue
-     *
-     * @default information
-     */
-    type: {
-      type: String,
-      reflect: true,
-      value: 'information'
+      }
     },
-    /**
-     * The title of the alert message, displayed in bold.
-     */
-    messageTitle: {
-      type: String,
-      observer: '_checkMessageLength'
-    },
-    /**
-     * The body of the alert message.
-     */
-    message: {
-      type: String,
-      observer: '_checkMessageLength'
-    },
-    /**
-     * Automatically dismisses the alert message after a specified amount of time.
-     */
-    autoDismiss: {
-      type: Number,
-      observer: 'setAutoDismiss'
-    },
-    /**
-    * User interaction on the right hand side of the message box:
-    * - `dismiss` - displays (x) to dismiss
-    * - `acknowledge` - displays (OK) to dismiss
-    * - `URL` - string containing http url to be opened, displays (Open).
-    */
-    action: {
-      type: String,
-      reflect: true
-    },
-    /**
-    * If set to true, the white cutout severity badge will not be displayed in the left
-    * side of the alert message. The `type` property can still be used to dictate
-    * a background color, and a custom icon can be passed in as a child of the alert.
-    */
-    hideBadge: {
-      type: Boolean,
-      value: false
-    },
-    /**
-    * If set to true, the default numeric indicators will not be displayed
-    * for the badges in the left side of the alert.
-    */
-    hideSeverity: {
-      type: Boolean,
-      value: false
-    },
-    /**
-     * Gets the text for the action buttons.
-     */
-    _actionText: {
-      type: String,
-      computed: '_computeActionText(action, language, resources)'
-    },
-    /**
-     * Stores the value to be displayed in the show more/show less action text
-     */
-     _showBtnText: {
-       type: String,
-       computed: '_computeShowBtnText(expanded, language, resources)'
-     },
-     /**
-      * When `true` the alert message is visible. Otherwise, the alert message
-      * will be hidden. Listen for updates to determine if the user has
-      * dismissed the message or it was auto dismissed. Set the value to
-      * show or hide the message programatically.
-      */
-     visible: {
-       type: Boolean,
-       value: false,
-       notify: true,
-       observer: '_handleVisibleChanged'
-     },
-     /**
-      * Set to `true` to disable showing the alert message when it is first
-      * attached to the DOM. The alert message can be shown by toggling
-      * the `visible` attribute.
-      */
-     disableAutoShow: {
-       type: Boolean,
-       value: false
-     },
-     /**
-      * If the alert `messageTitle` and `message` do not fit in the container,
-      * the message is partially hidden. When the user taps the "Show More" or
-      * "Show Less" button this property will be updated. Set the value to
-      * expand or collapse the message programatically.
-      * Set to `true` to expand the full
-      * message. Will be automatically set when the user taps the Show More
-      * or Show Less buttons.
-      */
-     expanded: {
-       type: Boolean,
-       notify: true,
-       value: false
-     },
-     /**
-      * If the `expanded` property is set then _expandedOnOpen is set to true
-      * to ensure the alert opens in expanded form when it first loads.
-      */
-     _expandedOnOpen: {
-       type: Boolean,
-       value: false
-     },
-     /**
-      * Read-only property set to `true` when the message text does not fit
-      * and the message will be expandable.
-      */
-     overset: {
-       type: Boolean,
-       value: false,
-       readOnly: true,
-       notify: true
-     }
+  /**
+   * Defines the alert level, reflected in the badge.
+   *
+   * The following options are available:
+   *
+   * - `important` - red triangle labeled 1
+   * - `warning`- orange diamond labeled 2
+   * - `error` - yellow square labeled 3
+   * - `information` - blue circle labeled 4
+   * - `unknown` - gray circle labeled 5
+   * - `custom` - white background, no badge
+   * - `more` - allows for a message indicating that there are more messages in the queue
+   *
+   * @default information
+   */
+  type: {
+    type: String,
+    reflect: true,
+    value: 'information'
   },
+  /**
+   * The title of the alert message, displayed in bold.
+   */
+  messageTitle: {
+    type: String,
+    observer: '_checkMessageLength'
+  },
+  /**
+   * The body of the alert message.
+   */
+  message: {
+    type: String,
+    observer: '_checkMessageLength'
+  },
+  /**
+   * Automatically dismisses the alert message after a specified amount of time.
+   */
+  autoDismiss: {
+    type: Number,
+    observer: 'setAutoDismiss'
+  },
+  /**
+  * User interaction on the right hand side of the message box:
+  * - `dismiss` - displays (x) to dismiss
+  * - `acknowledge` - displays (OK) to dismiss
+  * - `URL` - string containing http url to be opened, displays (Open).
+  */
+  action: {
+    type: String,
+    reflect: true
+  },
+  /**
+  * If set to true, the white cutout severity badge will not be displayed in the left
+  * side of the alert message. The `type` property can still be used to dictate
+  * a background color, and a custom icon can be passed in as a child of the alert.
+  */
+  hideBadge: {
+    type: Boolean,
+    value: false
+  },
+  /**
+  * If set to true, the default numeric indicators will not be displayed
+  * for the badges in the left side of the alert.
+  */
+  hideSeverity: {
+    type: Boolean,
+    value: false
+  },
+  /**
+   * Gets the text for the action buttons.
+   */
+  _actionText: {
+    type: String,
+    computed: '_computeActionText(action, language, resources)'
+  },
+  /**
+   * Stores the value to be displayed in the show more/show less action text
+   */
+   _showBtnText: {
+     type: String,
+     computed: '_computeShowBtnText(expanded, language, resources)'
+   },
+   /**
+    * When `true` the alert message is visible. Otherwise, the alert message
+    * will be hidden. Listen for updates to determine if the user has
+    * dismissed the message or it was auto dismissed. Set the value to
+    * show or hide the message programatically.
+    */
+   visible: {
+     type: Boolean,
+     value: false,
+     notify: true,
+     observer: '_handleVisibleChanged'
+   },
+   /**
+    * Set to `true` to disable showing the alert message when it is first
+    * attached to the DOM. The alert message can be shown by toggling
+    * the `visible` attribute.
+    */
+   disableAutoShow: {
+     type: Boolean,
+     value: false
+   },
+   /**
+    * If the alert `messageTitle` and `message` do not fit in the container,
+    * the message is partially hidden. When the user taps the "Show More" or
+    * "Show Less" button this property will be updated. Set the value to
+    * expand or collapse the message programatically.
+    * Set to `true` to expand the full
+    * message. Will be automatically set when the user taps the Show More
+    * or Show Less buttons.
+    */
+   expanded: {
+     type: Boolean,
+     notify: true,
+     value: false
+   },
+   /**
+    * If the `expanded` property is set then _expandedOnOpen is set to true
+    * to ensure the alert opens in expanded form when it first loads.
+    */
+   _expandedOnOpen: {
+     type: Boolean,
+     value: false
+   },
+   /**
+    * Read-only property set to `true` when the message text does not fit
+    * and the message will be expandable.
+    */
+   overset: {
+     type: Boolean,
+     value: false,
+     readOnly: true,
+     notify: true
+   }
+},
+
   observers: [
     '_checkMessageLength(language, resources, type)'
   ],
+
   created: function() {
     this._pendingDismiss = null;
   },
+
   attached: function() {
     this.listen(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this.listen(this.$.showMoreButton, 'tap', '_toggleExpansion');
@@ -301,10 +309,12 @@ Custom property | Description
     }
     this._expandedOnOpen = this.expanded;
  },
+
   detached: function() {
     this.unlisten(this, 'app-localize-resources-loaded', '_checkMessageLength');
     this.unlisten(this.$.showMoreButton, 'tap', '_toggleExpansion');
   },
+
   _getMessageClassNames: function(type, expanded) {
     var classNames = 'message ' + type;
     if (!expanded) {
@@ -312,6 +322,7 @@ Custom property | Description
     }
     return classNames;
   },
+
   _getShowMoreClassNames: function(overset) {
     var classNames = 'actionable show-more';
     if (!overset) {
@@ -319,6 +330,7 @@ Custom property | Description
     }
     return classNames;
   },
+
   /**
    * Clear timer if needed and set the time to the autoDismiss property
    *
@@ -337,6 +349,7 @@ Custom property | Description
       }, dismissAfter);
     }
   },
+
   /**
    * Fired when the alert message is auto dismissed after the `dismissAfter`
    * timer ends.
@@ -349,12 +362,14 @@ Custom property | Description
   _isTrue: function(a, b) {
     return a === b;
   },
+
   /**
    * called when the 'show more' action text is clicked
    */
   _toggleExpansion: function() {
     this.expanded = !this.expanded;
   },
+
   /**
    * Checking to see if the combined message length of title and message exceed
    * the max height of the parent div.
@@ -382,6 +397,7 @@ Custom property | Description
       }
     }, 1);
   },
+
   /**
    * run when 'actionText' is clicked.
    * If action property is a URL then open it.
@@ -397,6 +413,7 @@ Custom property | Description
       action: this.action
     });
   },
+
   /**
    * Fired when the user triggers the alert message action (see the `action`
    * property documentation for more information.)
@@ -418,6 +435,7 @@ Custom property | Description
       return ''; // future custom button actions
     }
   },
+
   _computeShowBtnText: function(isExpanded) {
     if (isExpanded) {
       return this.localize('Show Less');
@@ -425,6 +443,7 @@ Custom property | Description
       return this.localize('Show More');
     }
   },
+
   _getLabel: function(type, hideSeverity) {
     if(hideSeverity) return;
     if(type === 'important') return '1';
@@ -433,8 +452,9 @@ Custom property | Description
     if(type === 'information') return '4';
     if(type === 'unknown') return '5';
   },
+
   _handleVisibleChanged: function(isVisible) {
-    var alert = Polymer.dom(this.root).querySelector('#alert');
+    var alert = dom(this.root).querySelector('#alert');
     if (alert === null) {
       return;
     }
@@ -449,8 +469,9 @@ Custom property | Description
       alert.classList.add('fade-out');
     }
   },
+
   _handleAnimationEnd: function(evt) {
-    var target = Polymer.dom(evt).rootTarget;
+    var target = dom(evt).rootTarget;
     if (target && target === this.$.alert) {
       if (target.classList.contains('fade-out')) {
         target.classList.remove('alert-message--visible');
@@ -469,4 +490,3 @@ Custom property | Description
    * @event px-alert-message-hidden
    */
 });
-</script>

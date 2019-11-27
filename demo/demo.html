@@ -23,15 +23,26 @@ limitations under the License.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>px-alert-message Demo</title>
   <!-- Requires Webcomponents.js polyfill is provided by the page for browsers that don't support html imports -->
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
   <!-- Import custom element. Note: see comment about relative paths to dependencies in the *.html file referenced below -->
-  <link rel="import" href="../../px-demo/px-demo-header.html" />
-  <link rel="import" href="../../px-theme/px-theme-styles.html">
-  <link rel="import" href="../../px-icon-set/px-icon-set-feature.html">
+  <script type="module" src="../../px-demo/px-demo-header.js"></script>
+  <script type="module" src="../../px-theme/px-theme-styles.js"></script>
+  <script type="module" src="../../px-icon-set/px-icon-set-feature.js"></script>
 
-  <link rel="import" href="../px-alert-message.html" />
+  <script type="module" src="../px-alert-message.js"></script>
 
-  <style media="screen">
+  <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<style media="screen">
     body {
       margin: 0;
     }
@@ -50,26 +61,41 @@ limitations under the License.
     td {
       border: 1px solid lightgray;
     }
-  </style>
+  </style>`;
+
+document.head.appendChild($_documentContainer.content);
+</script>
 </head>
 
 <body>
-  <custom-style>
-    <style include="px-theme-styles" is="custom-style"></style>
-  </custom-style>
+  <script type="module">
+const $_documentContainer = document.createElement('template');
 
-  <px-demo-header
-    module-name="px-alert-message : DEMO"
-    description="Alert Messages appear in a queue within the message container. Each message consists of an icon, title,
+$_documentContainer.innerHTML = `<custom-style>
+    <style include="px-theme-styles" is="custom-style"></style>
+  </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<px-demo-header module-name="px-alert-message : DEMO" description="Alert Messages appear in a queue within the message container. Each message consists of an icon, title,
         body, and action. See Alert Icons for more on the default icons available –- a custom icon can also be defined.
         The title appears in bold, whereas the message body text does not. The action on the right will appear
         as an “X” for dismissing the alert, an “OK” button for acknowledging it, or an “Open” button if a URL is specified.
         If Auto Dismiss is enabled, the alert will disappear on its own after a configurable delay period. The
-        text on the alert messages should be kept short, ideally around three lines."
-    tablet desktop>
-  </px-demo-header>
+        text on the alert messages should be kept short, ideally around three lines." tablet="" desktop="">
+  </px-demo-header>`;
 
-  <div class="alert-message-container">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+  <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="alert-message-container">
     <!-- instance 1, "predix" theme -->
     <px-alert-message type="important" message-title="Heads up!" message="This definitely needs your attention.">
     </px-alert-message>
@@ -80,21 +106,20 @@ limitations under the License.
     <px-alert-message type="error" message-title="Warning!" message="Something isn't quite right" action="acknowledge">
     </px-alert-message>
 
-    <px-alert-message type="information" hide-severity message-title="This message title is too long. The user will need to expand it by clicking 'Show More'." message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message."
-        action="https://www.predix.io/">
+    <px-alert-message type="information" hide-severity="" message-title="This message title is too long. The user will need to expand it by clicking 'Show More'." message="We understand that sometimes long messages are needed but it is not a best practice to have more then three lines of text in the alert message." action="https://www.predix.io/">
     </px-alert-message>
 
-    <px-alert-message type="custom" expanded hide-badge message-title="Expanded Message. The expanded property has been set to show the complete message when alert is raised." message="The icon to the left is defined by placing an img tag between the px-alert-message tags. It is possible to have various file types.">
-      <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;" />
+    <px-alert-message type="custom" expanded="" hide-badge="" message-title="Expanded Message. The expanded property has been set to show the complete message when alert is raised." message="The icon to the left is defined by placing an img tag between the px-alert-message tags. It is possible to have various file types.">
+      <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;">
     </px-alert-message>
 
-    <px-alert-message type="information" hide-badge message-title="Custom Icon" message="The icon to the left is defined by placing a px-icon tag between the px-alert-message tags.">
+    <px-alert-message type="information" hide-badge="" message-title="Custom Icon" message="The icon to the left is defined by placing a px-icon tag between the px-alert-message tags.">
       <px-icon icon="px-fea:analysis" style="color: white;"></px-icon>
     </px-alert-message>
 
     <px-alert-message type="information">
       <table slot="content">
-          <tr>
+          <tbody><tr>
             <td>Header</td>
             <td>Header</td>
             <td>Header</td>
@@ -106,12 +131,15 @@ limitations under the License.
             <td>6</td>
             <td>17</td>
           </tr>
-        </table>
+        </tbody></table>
     </px-alert-message>
 
     <px-alert-message type="more" message="15" action="dismiss">
     </px-alert-message>
-  </div>
+  </div>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 </body>
 
 </html>

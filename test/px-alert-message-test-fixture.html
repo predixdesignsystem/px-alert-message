@@ -20,139 +20,166 @@ limitations under the License.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Web Component Test : Fixture for px-alert-message</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <link rel="import" href="../px-alert-message.html" />
-    <link rel="import" href="../bower_components/px-theme/px-theme-styles.html"/>
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
+    <script type="module" src="../px-alert-message.js"></script>
+    <script type="module" src="../../px-theme/px-theme-styles.js"></script>
   </head>
 
   <body>
-    <custom-style>
+    <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
       <style include="px-theme-styles" is="custom-style"></style>
-    </custom-style>
+    </custom-style>`;
 
-    <test-fixture id="PxBasicAlertMessage">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxBasicAlertMessage">
       <template>
-        <px-alert-message
-          id="basicAlert"
-          type="error"
-          message-title="Well done!"
-          message="You successfully read this.">
+        <px-alert-message id="basicAlert" type="error" message-title="Well done!" message="You successfully read this.">
         </px-alert-message>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="PxDismissAlertMessage">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxDismissAlertMessage">
       <template>
-        <px-alert-message
-          id="basicAlert"
-          type="error"
-          message-title="Well done!"
-          action="dismiss"
-          message="You successfully read this.">
+        <px-alert-message id="basicAlert" type="error" message-title="Well done!" action="dismiss" message="You successfully read this.">
         </px-alert-message>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="PxDisableAutoShowAlertMessage">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxDisableAutoShowAlertMessage">
       <template>
-        <px-alert-message
-          id="basicAlert"
-          type="error"
-          message-title="Well done!"
-          action="dismiss"
-          disable-auto-show
-          message="You successfully read this.">
+        <px-alert-message id="basicAlert" type="error" message-title="Well done!" action="dismiss" disable-auto-show="" message="You successfully read this.">
         </px-alert-message>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="PxAutoDismissAlert">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxAutoDismissAlert">
       <template>
-        <px-alert-message
-          id="autoDismissAlert"
-          type="information"
-          message-title="Heads up!"
-          message="This definitely needs your attention."
-          action="https://www.gesoftware.com/predix"
-          auto-dismiss="1500">
+        <px-alert-message id="autoDismissAlert" type="information" message-title="Heads up!" message="This definitely needs your attention." action="https://www.gesoftware.com/predix" auto-dismiss="1500">
         </px-alert-message>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="PxAutoDismissAlertShort">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxAutoDismissAlertShort">
       <template>
-        <px-alert-message
-          type="information"
-          message-title="Heads up!"
-          message="This definitely needs your attention."
-          action="https://www.gesoftware.com/predix"
-          auto-dismiss="200">
+        <px-alert-message type="information" message-title="Heads up!" message="This definitely needs your attention." action="https://www.gesoftware.com/predix" auto-dismiss="200">
         </px-alert-message>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="PxMultipleLanguageAlert">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxMultipleLanguageAlert">
       <template>
-        <px-alert-message
-          id='multipleLanguageAlert'
-          type="custom"
-          language="zh-cn"
-          message-title="Custom Alert"
-          message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
-          action="https://www.gesoftware.com/predix">
-          <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png"/>
+        <px-alert-message id="multipleLanguageAlert" type="custom" language="zh-cn" message-title="Custom Alert" message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags." action="https://www.gesoftware.com/predix">
+          <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png">
         </px-alert-message>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="PxLongTitleAlert">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxLongTitleAlert">
       <template>
-        <px-alert-message
-          id='longTitleAlert'
-          type="information"
-          message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do."
-          message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
-          action="https://www.gesoftware.com/predix">
+        <px-alert-message id="longTitleAlert" type="information" message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do." message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur" action="https://www.gesoftware.com/predix">
         </px-alert-message>
       </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <test-fixture id="PxLongTitleAlertExpanded">
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<test-fixture id="PxLongTitleAlertExpanded">
         <template>
-            <px-alert-message id='longTitleAlertExpanded' type="custom" expanded hide-badge message-title="Expanded Message. The expanded property has been set to show the complete message when alert is raised." message="The icon to the left is defined by placing an img tag between the px-alert-message tags. It is possible to have various file types.">
-                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;" />
+            <px-alert-message id="longTitleAlertExpanded" type="custom" expanded="" hide-badge="" message-title="Expanded Message. The expanded property has been set to show the complete message when alert is raised." message="The icon to the left is defined by placing an img tag between the px-alert-message tags. It is possible to have various file types.">
+                <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;">
             </px-alert-message>
         </template>
-    </test-fixture>
+    </test-fixture>`;
 
-    <px-alert-message
-      id='longTitleAlertStateful'
-      type="information"
-      message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do."
-      message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur"
-      action="https://www.gesoftware.com/predix">
-    </px-alert-message>
+document.body.appendChild($_documentContainer.content);
+</script>
 
-    <px-alert-message
-        id='longMessageAlertStateful'
-        type="custom"
-        message-title="Custom Alert"
-        message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags."
-        action="https://www.gesoftware.com/predix">
-        <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;" />
-    </px-alert-message>
+    <script type="module">
+const $_documentContainer = document.createElement('template');
 
-    <px-alert-message
-        id="autoDismissAlertStateful"
-        type="information"
-        message-title="Heads up!"
-        message="This definitely needs your attention."
-        action="https://www.gesoftware.com/predix"
-        auto-dismiss="1500">
-    </px-alert-message>
+$_documentContainer.innerHTML = `<px-alert-message id="longTitleAlertStateful" type="information" message-title="Heads up! Locavore thunder-cats occupy, man bun neutra microdosing bush longTitleAlert. Locavore thunder-cats occupy and something will do." message="This definitely needs your attention. Lorem Ipsum dolor sit amet consectetur" action="https://www.gesoftware.com/predix">
+    </px-alert-message>`;
 
-    <script src="px-alert-message-custom-tests.js"></script>
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<px-alert-message id="longMessageAlertStateful" type="custom" message-title="Custom Alert" message="The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags.The icon to the left is defined by placing content within the inner/outer px-alert-message tags px -alert- message tags px- aler t-message tags px- alert- message tags." action="https://www.gesoftware.com/predix">
+        <img src="http://img2.wikia.nocookie.net/__cb20101017002729/logopedia/images/1/19/500px-General_Electric_logo_svg.png" style="height:40px;width:40px;">
+    </px-alert-message>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<px-alert-message id="autoDismissAlertStateful" type="information" message-title="Heads up!" message="This definitely needs your attention." action="https://www.gesoftware.com/predix" auto-dismiss="1500">
+    </px-alert-message>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+
+    <script src="./px-alert-message-custom-tests.js"></script>
     <script src="px-alert-message-truncation-tests.js"></script>
     <script src="px-alert-message-dismiss-tests.js"></script>
   </body>
