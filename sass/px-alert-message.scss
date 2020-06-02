@@ -142,10 +142,16 @@ $actionable: true;
     background-color: var(--px-alert-message-color--unknown, gray);
   }
 }
-
-:host-context([dir='rtl']) .severity {
+.severity:dir(rtl) {
   margin-left: 0;
   margin-right: -0.6666rem;
+}
+
+@supports (not (-ms-ime-align: auto)) {
+  :host-context([dir="rtl"]) .severity {
+    margin-left: 0;
+    margin-right: -0.6666rem;
+  }
 }
 
 .message {
