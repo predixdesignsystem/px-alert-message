@@ -1,3 +1,8 @@
+v1.3.6
+==================
+* fix extra space in front of severity on Edge
+* make RTL mirgin-right fix works on Edge and Firefox
+
 v1.3.5
 ==================
 * fix RTL margin-right issue
